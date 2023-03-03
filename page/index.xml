@@ -6,22 +6,25 @@
         <description>Recent content in Pages on 荼锦</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://TuJin07.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://TuJin07.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于</title>
+        <link>https://TuJin07.github.io/%E5%85%B3%E4%BA%8E/</link>
+        <pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://TuJin07.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <description>&lt;p&gt;在校学生（应该很快就不是了），主要技术栈面向后端、分布式计算、Golang 等方向。平时或多或少有写技术博客的习惯，个人的博客笔记系统也经历了几版调整，目前决定使用GitHub Pages作为载体。&lt;/p&gt;
+&lt;p&gt;本站是从曾经的在云服务器部署的同名网站上迁移过来的，目前还有部分之前的文章没有整理上传。主要刊载上述技术栈领域相关的技术文章，偶尔会有些迷思和生活感悟。&lt;/p&gt;
+&lt;p&gt;更新频率视创作心潮而定，如果本站有笔者所作的文章能对你有所帮助，则深感荣幸。联系方式请见网站侧边栏图标。&lt;/p&gt;
+&lt;p&gt;祝好。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>归档</title>
         <link>https://TuJin07.github.io/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
         <guid>https://TuJin07.github.io/archives/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>关于</title>
-        <link>https://TuJin07.github.io/%E5%85%B3%E4%BA%8E/</link>
-        <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://TuJin07.github.io/%E5%85%B3%E4%BA%8E/</guid>
-        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
-</description>
         </item>
         <item>
         <title>链接</title>

@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='重现课上演示的基于 Nginx 的负载均衡实验（部分工具可根据实际情况进行调整），验证 Nginx 支持的不同负载均衡策略。'>
+<title>基于 Nginx 实现的负载均衡策略</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='基于 Nginx 实现的负载均衡策略'>
+<meta property='og:description' content='重现课上演示的基于 Nginx 的负载均衡实验（部分工具可根据实际情况进行调整），验证 Nginx 支持的不同负载均衡策略。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Nginx' /><meta property='article:tag' content='负载均衡' /><meta property='article:published_time' content='2022-02-04T18:11:52&#43;00:00'/><meta property='article:modified_time' content='2022-02-04T18:11:52&#43;00:00'/><meta property='og:image' content='https://TuJin07.github.io/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover.jpeg' />
+<meta name="twitter:title" content="基于 Nginx 实现的负载均衡策略">
+<meta name="twitter:description" content="重现课上演示的基于 Nginx 的负载均衡实验（部分工具可根据实际情况进行调整），验证 Nginx 支持的不同负载均衡策略。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#题目要求">题目要求</a></li>
+    <li><a href="#作业背景">作业背景</a>
+      <ol>
+        <li><a href="#正向代理">正向代理</a></li>
+        <li><a href="#反向代理">反向代理</a></li>
+        <li><a href="#负载均衡策略">负载均衡策略</a></li>
+      </ol>
+    </li>
+    <li><a href="#linux-下相关的软件安装">Linux 下相关的软件安装</a>
+      <ol>
+        <li><a href="#系统环境">系统环境</a></li>
+        <li><a href="#安装-nodejs">安装 Node.js</a>
+          <ol>
+            <li><a href="#下载源代码">下载源代码</a></li>
+            <li><a href="#解压编译包">解压编译包</a></li>
+            <li><a href="#配置软链接">配置软链接</a></li>
+            <li><a href="#检查安装结果">检查安装结果</a></li>
+          </ol>
+        </li>
+        <li><a href="#安装-nginx">安装 Nginx</a>
+          <ol>
+            <li><a href="#安装前的准备">安装前的准备</a></li>
+            <li><a href="#安装-nginx-1">安装 Nginx</a></li>
+            <li><a href="#启动-nginx">启动 Nginx</a></li>
+          </ol>
+        </li>
+        <li><a href="#安装-curl">安装 CURL</a>
+          <ol>
+            <li><a href="#安装">安装</a></li>
+            <li><a href="#检验">检验</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#nginx-支持的负载均衡策略实验">Nginx 支持的负载均衡策略实验</a>
+      <ol>
+        <li><a href="#测试前准备">测试前准备</a>
+          <ol>
+            <li><a href="#创建监听不同端口的服务器">创建监听不同端口的服务器</a></li>
+            <li><a href="#配置-nginx">配置 Nginx</a></li>
+          </ol>
+        </li>
+        <li><a href="#尝试并验证不同的负载均衡策略">尝试并验证不同的负载均衡策略</a>
+          <ol>
+            <li><a href="#轮询">轮询</a></li>
+            <li><a href="#固定权重值">固定权重值</a></li>
+            <li><a href="#ip-哈希">IP 哈希</a></li>
+            <li><a href="#最小连接数">最小连接数</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/">
+                <img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover_hubbcff01d8523d34c7e0c058aaa3c8f24_1400464_800x0_resize_q75_box.jpeg"
+                        srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover_hubbcff01d8523d34c7e0c058aaa3c8f24_1400464_800x0_resize_q75_box.jpeg 800w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover_hubbcff01d8523d34c7e0c058aaa3c8f24_1400464_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post 基于 Nginx 实现的负载均衡策略" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" style="background-color: #2a9d8f; color: #fff;">
+                实验报告
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/">基于 Nginx 实现的负载均衡策略</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            重现课上演示的基于 Nginx 的负载均衡实验（部分工具可根据实际情况进行调整），验证 Nginx 支持的不同负载均衡策略。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 04, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="基于-nginx-的负载均衡策略">基于 Nginx 的负载均衡策略</h1>
+<h2 id="题目要求">题目要求</h2>
+<p>重现课上演示的基于 Nginx 的负载均衡实验（部分工具可根据实际情况进行调整），验证 Nginx 支持的不同负载均衡策略。</p>
+<p>结果写成一篇实验报告，假定读者为技术小白。</p>
+<h2 id="作业背景">作业背景</h2>
+<h3 id="正向代理">正向代理</h3>
+<p>正向代理最大的特点是，客户端非常明确要访问的目的地址，服务器代理客户端，替客户端发出请求。</p>
+<h3 id="反向代理">反向代理</h3>
+<p>随着请求量的爆发式增长，单服务器已经难以负荷，引入了服务器集群。</p>
+<p>此时，来自不同客户端的所有请求实际上都发到了代理服务器处，再由代理服务器按照一定的规则将请求分发给各个服务器。这就是反向代理，反向代理隐藏了服务器的信息，它代理的是服务器端，代其接收请求。</p>
+<p>换句话说，反向代理的过程中，客户端并不知道具体是哪台服务器处理了自己的请求。如此一来，既提高了访问速度，又为安全性提供了保证。</p>
+<h3 id="负载均衡策略">负载均衡策略</h3>
+<p>在这之中，反向代理需要考虑的问题是，如何进行均衡分工，控制流量，避免出现局部节点负载过大的问题。通俗的讲，就是如何为每台服务器合理的分配请求，使其整体具有更高的工作效率和资源利用率，这就是负载均衡策略。</p>
+<p>负载均衡策略通常有如下几种。</p>
+<ul>
+<li>随机：随机为后台服务器分配请求。</li>
+<li>轮询：按顺序，轮流为后台服务器分配请求。</li>
+<li>固定权重值：为不同的后台服务器设定不同权重，以权重为后台服务器分配请求。</li>
+<li>IP 哈希：通过对来访 IP 地址进行哈希映射，作为选择后台服务器的依据。</li>
+<li>最少 TCP 连接数：依据与后台服务器建立的 TCP 连接数数量，优先为连接数量小的后台服务器分配请求。</li>
+<li>最小响应时间：后端服务器的响应时间来分配请求，响应时间短的优先分配。</li>
+<li>基于各服务器负载的动态均衡算法：实时基于各后台服务器的 CPU 占用率、内存占用率等信息，动态计算权重，为负载较轻的服务器优先分配请求。由于算法复杂，占用开销大，实际情况一般不采用。</li>
+</ul>
+<p>本次作业中，主要基于 Nginx 测试并验证轮询、固定权重值、IP 哈希、最少 TCP 连接数 4 中负载均衡策略。</p>
+<h2 id="linux-下相关的软件安装">Linux 下相关的软件安装</h2>
+<h3 id="系统环境">系统环境</h3>
+<p>本次作业在搭载 <em>CentOS 8.2</em> 操作系统的云服务器上完成，相关软件安装及配置均在对应的 Linux 环境下完成。云服务器 IP 地址为 8.130.15.218 。</p>
+<p>本次作业中需要用到的软件：</p>
+<ul>
+<li><em>Xshell</em>，用于连接远程服务器的工具软件，如在本地进行实验则无需。</li>
+<li><em>Nginx</em>，Web 服务器软件，本次作业中基于该软件实现反向代理与负载均衡。</li>
+<li><em>Node.js</em>，一个开源且跨平台的 JavaScript 运行时环境。封装了 <em>Chrome V8</em> 引擎，提供多种可调用的 API。<em>Node.js</em> 提供了 JavaScript 能在服务器运行的运行时环境。</li>
+<li><em>CURL</em>，使用各种类型的请求向服务器与服务器之间传输数据。</li>
+</ul>
+<h3 id="安装-nodejs">安装 Node.js</h3>
+<h4 id="下载源代码">下载源代码</h4>
+<p>前往 <a class="link" href="http://nodejs.cn/download/"  target="_blank" rel="noopener"
+    >Node.js 官网</a>，选择合适的 Linux 版本编译包。获取下载链接，通过 <code>wget </code> 命令在 Linux 中下载。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wget -c https://npmmirror.com/mirrors/node/v16.13.2/node-v16.13.2-linux-x64.tar.xz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入命令，回车，稍等片刻即可完成下载。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119194135474.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119194135474_hu54087147ce94df9053b9f7224ad87713_67021_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119194135474_hu54087147ce94df9053b9f7224ad87713_67021_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<h4 id="解压编译包">解压编译包</h4>
+<p>将下载后的 <code>node-v16.13.2-linux-x64.tar.xz</code> 解压到当前目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar -xvf node-v16.13.2-linux-x64.tar.xz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为方便后续操作，重命名为 <code>nodejs</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mv node-v16.13.2-linux-x64 nodejs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>移动文件夹至 <code>/usr/local/bin/</code> 目录下，该目录通常存放用户的可执行文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mv /root/nodejs/ /usr/local/bin/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置软链接">配置软链接</h4>
+<p>使 <code>nodejs</code> 可以全局使用，配置软链接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ln -s /usr/local/bin/nodejs/bin/node /usr/bin/
+</span></span><span class="line"><span class="cl">ln -s /usr/local/bin/nodejs/bin/npm /usr/bin/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="检查安装结果">检查安装结果</h4>
+<p>使用以下命令，访问 <code>node</code> 与 <code>npm</code>，若返回版本信息则说明安装完成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node -v
+</span></span><span class="line"><span class="cl">npm -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回信息如下。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119200447377.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119200447377_hu64f074e561af3c58c998700b862cc6c0_86693_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119200447377_hu64f074e561af3c58c998700b862cc6c0_86693_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<p>至此，Node.js 的安装完成。</p>
+<h3 id="安装-nginx">安装 Nginx</h3>
+<p><em>Linux</em> 环境下，通过 <em>yum</em> 命令可以简单快捷完成对 Nginx 的安装。</p>
+<h4 id="安装前的准备">安装前的准备</h4>
+<p>检查本机是否已经安装了 Nginx。输入以下命令，并回车。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">which nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这条指令可以找到服务器上安装的 Nginx 位置，如果没有安装过，则会提示找不到相关路径。如下图红框部分所示，我的服务器显示未找到 Ngnix 的相关路径。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119164955533.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119164955533_hud5c2502af0a6bf4496453cdd3ee5967f_85720_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119164955533_hud5c2502af0a6bf4496453cdd3ee5967f_85720_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 3"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<h4 id="安装-nginx-1">安装 Nginx</h4>
+<p>输入以下命令并回车，等待下载最新版本的 Nginx，并在安装前提示是否确定时输入 <code>y</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，会提示 <code>complete!</code>，此时，默认下的安装目录为 <code>/user/sbin/nginx</code>。再次通过 <code>which nginx </code> 指令，可以查询到安装位置，如图。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119165020411.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119165020411_hu6b9399bef840aed89b9b07e41ccc6924_72701_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119165020411_hu6b9399bef840aed89b9b07e41ccc6924_72701_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 4"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<p>通过以下命令检车 Nginx 版本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nginx -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="启动-nginx">启动 Nginx</h4>
+<p>Nginx 安装完成后并不会自启动，通过以下命令启动 Nginx。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl start nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时，类似地，重启与停止 Nginx 的命令如下。</p>
+<p>重启 Nginx。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl restart nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>停止 Nginx。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl stop nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果服务器中已经安装启用了 Apache 等类似 Web 服务器软件，先将其停用，避免互相影响。</p>
+</blockquote>
+<p>启动 Nginx，启动成功则不会返回任何信息，没有响应就是最好的响应。在浏览器中输入你的服务器 IP 地址，出现以下欢迎页面，则表明 Nginx 已启动成功。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119170535231.png"
+	width="2476"
+	height="1392"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119170535231_hu3e436b953ca4c9ba9ab67df6c290e440_127851_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119170535231_hu3e436b953ca4c9ba9ab67df6c290e440_127851_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 5"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+></p>
+<p>至此，Nginx 的安装和启用完成。</p>
+<h3 id="安装-curl">安装 CURL</h3>
+<h4 id="安装">安装</h4>
+<blockquote>
+<p>CURL 不一定要在 Linux，也就是我们本次作业中使用的服务器上安装，在其它 PC 机中安装 CURL，再通过 CURL 访问服务器一样可以达到验证的效果。</p>
+</blockquote>
+<p>在 CentOS 上安装，以 root 用户身份输入以下命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install curl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="检验">检验</h4>
+<p>要确认 CURL 是否安装，输入以下命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rpm -qa | grep curl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119205200812.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119205200812_hu0c62d85a67ddb49c7ffd401013395fde_77209_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119205200812_hu0c62d85a67ddb49c7ffd401013395fde_77209_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 6"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<h2 id="nginx-支持的负载均衡策略实验">Nginx 支持的负载均衡策略实验</h2>
+<h3 id="测试前准备">测试前准备</h3>
+<h4 id="创建监听不同端口的服务器">创建监听不同端口的服务器</h4>
+<h5 id="创建-javascript-源文件">创建 JavaScript 源文件</h5>
+<p>移动至 <code>/home/code/</code> 目录下，新建 4 个 <code>JavaScript</code> 文件，以其中一个文件 <code>webserver1.js</code> 为例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&#34;Hello world from Server One.\n&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">2321</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;running at http://127.0.0.1:2321&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写入如上代码，其中，<code>server.listen(2321)</code> 表明当前正在坚挺的端口为 2321 端口，<code>res.write(&quot;Hello world from Server One.&quot;)</code> 对应着在访问本机地址的 2321 端口后，会在页面上显示相应的信息。</p>
+<p>类似地，创建的 4 个 <code>js</code> 文件分别模拟了监听本机 2321 ~ 2324 四个端口的服务器。通过 Nginx 的负载均衡分发，四个端口服务器均有可能被访问，届时具体访问到了哪个服务器，从页面返回的信息即可了解。</p>
+<h5 id="运行-javascript-源文件">运行 JavaScript 源文件</h5>
+<p>通过 Node.js 运行上述文件，命令如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node webserver1.js
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行后会打印 &ldquo;running at http://127.0.0.1:2321&rdquo;，如图。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212017011.png"
+	width="1129"
+	height="650"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212017011_hu3da3df1b8f08085d559d1b27c9e86b9e_45765_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212017011_hu3da3df1b8f08085d559d1b27c9e86b9e_45765_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 7"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>此时，通过浏览器访问对应端口，即可访问对应的服务器。（我的云服务器 IP 地址为 8.130.15.218）</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212123186.png"
+	width="832"
+	height="402"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212123186_hua33f92c6f1da09b8611515083d7f2b6a_16027_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119212123186_hua33f92c6f1da09b8611515083d7f2b6a_16027_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 8"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="206"
+		data-flex-basis="496px"
+	
+></p>
+<p>依次启动其余服务器。</p>
+<h4 id="配置-nginx">配置 Nginx</h4>
+<p><code>/etc</code> 目录时 <em>Linux</em> 下专用于存放配置文件的目录。</p>
+<p>通过以下命令，进入到 Nginx 的配置文件目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /etc/nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>ls</code> 命令，将该目录下的文件列出。其中的 <code>nginx.conf</code> 就是我们的目标配置文件。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119171408982.png"
+	width="1129"
+	height="643"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119171408982_hue22bb32186e473e6e1e29eba1b439f11_72077_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119171408982_hue22bb32186e473e6e1e29eba1b439f11_72077_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 9"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="421px"
+	
+></p>
+<p>通过以下命令，用 vim 打开 <code>nginx.conf</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim nginx.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改其中内容，添加修改如下部分代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"> <span class="k">upstream</span> <span class="s">myservers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2321</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2322</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2323</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2324</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span>       <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span>       <span class="s">[::]:80</span> <span class="s">default_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span>  <span class="s">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">root</span>         <span class="s">/usr/share/nginx/html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Load configuration files for the default server block.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kn">include</span> <span class="s">/etc/nginx/default.d/*.conf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_pass</span> <span class="s">http://myservers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kn">error_page</span> <span class="mi">404</span> <span class="s">/404.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">location</span> <span class="p">=</span> <span class="s">/40x.html</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">error_page</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="s">/50x.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">location</span> <span class="p">=</span> <span class="s">/50x.html</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>upstream</code> 是用于定义服务器组的模块，同时也可以配置负载均衡功能。<code>location/</code> 则根据 URL 来决定怎么处理用户请求，如转发请求给其他服务器处理，或者查找本地文件进行处理。</p>
+<p>上述配置文件中，将上文中我们配置的 4 个服务器添加到了名为 <code>myservers</code> 的 <code>upstream</code> 模块中，且在 <code>location/</code> 中定义了将访问进行转发至 <code>myservers</code>。</p>
+<p>此时，在浏览器中访问 8.130.15.218:80，即云服务器主机的 80 端口，成功跳转至后端服务器组。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119214115173.png"
+	width="673"
+	height="311"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119214115173_hu1975b473e991d99ea3c22e950e17c742_14019_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220119214115173_hu1975b473e991d99ea3c22e950e17c742_14019_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 10"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="216"
+		data-flex-basis="519px"
+	
+></p>
+<h3 id="尝试并验证不同的负载均衡策略">尝试并验证不同的负载均衡策略</h3>
+<h4 id="轮询">轮询</h4>
+<p>如上文进行 Nginx 的配置，采用的就是轮询的负载均衡策略。通过如下命令，重复使用 CURL 对本机 IP 地址的 80 端口进行 20 次访问。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for i in {1..20}; do curl 127.0.0.1:80; done
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到结果如图。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120194548892.png"
+	width="1129"
+	height="650"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120194548892_hu96974d3e4cf1357ed91ba417b15dceb1_54330_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120194548892_hu96974d3e4cf1357ed91ba417b15dceb1_54330_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 11"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>如图，20 次访问中，4 个后台服务器是按顺序被轮询访问的。</p>
+<h4 id="固定权重值">固定权重值</h4>
+<p>可以在 Nginx 配置页面为每台服务器指定权重值。如下所示，为服务器 1，2 分配权值 40，服务器 3，4 分配权值 10 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">    <span class="k">upstream</span> <span class="s">myservers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    	<span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2321</span> <span class="s">weight=40</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2322</span> <span class="s">weight=40</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2323</span> <span class="s">weight=10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2324</span> <span class="s">weight=10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存，重启 Nginx，使用 CURL 访问，得到结果如下。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195023430.png"
+	width="1129"
+	height="650"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195023430_huc1d2781e12259262c5d17c80299e6a4a_56719_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195023430_huc1d2781e12259262c5d17c80299e6a4a_56719_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 12"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>从 20 次访问结果可以卡出，后台服务器被访问的次数基本符合权值分配。</p>
+<h4 id="ip-哈希">IP 哈希</h4>
+<p>如下所示，可以对每个请求按访问 IP 的 Hash 结果分配。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">    <span class="k">upstream</span> <span class="s">myservers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">ip_hash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    	<span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2321</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2322</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2323</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2324</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 CURL 进行 20 次访问，得到结果如下。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195413269.png"
+	width="1129"
+	height="650"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195413269_hu1e8f56e553cec9721842f9d37b39af9e_58648_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120195413269_hu1e8f56e553cec9721842f9d37b39af9e_58648_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 13"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>可见，每次登录后都访问服务器 1，原因在于我们采用的是同一个 IP 地址对该端口进行多次访问，每次进行哈希运算后分配的到的后端服务器都相同。</p>
+<h4 id="最小连接数">最小连接数</h4>
+<p>如下图所示，配置后 Nginx 会根据当前后台服务器的连接数来分配访问请求，连接数较小的会优先被分配。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">    <span class="k">upstream</span> <span class="s">myservers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">least_conn</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    	<span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2321</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2322</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2323</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">2324</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>20 次访问结果如下。</p>
+<p><img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120201133495.png"
+	width="1129"
+	height="650"
+	srcset="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120201133495_hu790c4041b3f6859f1d47a561c9aad48e_60520_480x0_resize_box_3.png 480w, /p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/image-20220120201133495_hu790c4041b3f6859f1d47a561c9aad48e_60520_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 14"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>与轮询结果相同，推测是通过 CURL 访问仅建立连接而不释放连接或即时释放连接，导致没有体现出按最小连接数分配的特点。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/nginx/">Nginx</a>
+        
+            <a href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/cover.15439c68560ee33444d59aa2dc29c0f0_hu213652e9e8afc24335433dfd45f3b0e2_5684916_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 基于消息队列实现的分布式随机信号分析系统"
+                        
+                        data-hash="md5-FUOcaFYO4zRE1Zqi3CnA8A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于消息队列实现的分布式随机信号分析系统</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                <img src="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.7210c0bbc52d559bd03581952c2fd4ca_hu60a335ca4c55178541a8b7f6f0b682b3_1463971_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C&#43;&#43;程序设计课程总结"
+                        
+                        data-hash="md5-chDAu8UtVZvQNYGVLC/Uyg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43;程序设计课程总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.21ce7e32e039dc67a02a0355feee0442_hud909cb1be98356b124c5a237e088aad3_1604452_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 微机原理与接口技术课程总结"
+                        
+                        data-hash="md5-Ic5&#43;MuA53GegKgNV/u4EQg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">微机原理与接口技术课程总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover.4949488bd6b92f4e1bffecd21ea2ef6f_huc13785305f2408b6fafb21eff69213c9_3568700_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 地图路由(Map Routing)"
+                        
+                        data-hash="md5-SUlIi9a5L04b/&#43;zSHqLvbw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">地图路由(Map Routing)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/cover.31f26ee997fedf080e52d2a1eae2592f_hu20ccea9eb23f4fac4fbcfe2eebe08c1d_11962038_250x150_fill_q75_box_smart1.JPG" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 排序算法的实验性能比较"
+                        
+                        data-hash="md5-MfJu6Zf&#43;3wgOUtKh6uJZLw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">排序算法的实验性能比较</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>

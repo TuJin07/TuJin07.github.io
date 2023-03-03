@@ -1,0 +1,3529 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本学期课程微机原理与接口技术的一些重点与考点，供复习翻看以及便捷查询。'>
+<title>微机原理与接口技术课程总结</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='微机原理与接口技术课程总结'>
+<meta property='og:description' content='本学期课程微机原理与接口技术的一些重点与考点，供复习翻看以及便捷查询。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='微机原理' /><meta property='article:tag' content='课程总结' /><meta property='article:published_time' content='2022-02-28T19:32:52&#43;00:00'/><meta property='article:modified_time' content='2022-02-28T19:32:52&#43;00:00'/><meta property='og:image' content='https://TuJin07.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.jpg' />
+<meta name="twitter:title" content="微机原理与接口技术课程总结">
+<meta name="twitter:description" content="本学期课程微机原理与接口技术的一些重点与考点，供复习翻看以及便捷查询。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#intel-单核处理器">Intel 单核处理器</a>
+      <ol>
+        <li><a href="#8086-寄存器结构">8086 寄存器结构</a>
+          <ol>
+            <li><a href="#段寄存器">段寄存器</a></li>
+            <li><a href="#数据寄存器">数据寄存器</a></li>
+            <li><a href="#控制寄存器">控制寄存器</a></li>
+            <li><a href="#指针寄存器--变址寄存器">指针寄存器 &amp; 变址寄存器</a></li>
+            <li><a href="#标志寄存器">标志寄存器</a></li>
+          </ol>
+        </li>
+        <li><a href="#双体内存">双体内存</a></li>
+        <li><a href="#8086-引脚">8086 引脚</a></li>
+      </ol>
+    </li>
+    <li><a href="#汇编">汇编</a>
+      <ol>
+        <li><a href="#汇编中的常见指令">汇编中的常见指令</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#汇编中的过程定义与使用函数">汇编中的过程定义与使用（函数）</a></li>
+        <li><a href="#寻址方式">寻址方式</a>
+          <ol>
+            <li><a href="#题目-一">题目 一</a></li>
+            <li><a href="#题目-二">题目 二</a></li>
+          </ol>
+        </li>
+        <li><a href="#条件处理">条件处理</a>
+          <ol>
+            <li><a href="#逻辑运算">逻辑运算</a></li>
+            <li><a href="#比较指令">比较指令</a></li>
+            <li><a href="#跳转指令">跳转指令</a></li>
+            <li><a href="#举几个例子">举几个例子</a></li>
+          </ol>
+        </li>
+        <li><a href="#汇编中的不常见指令">汇编中的不常见指令</a>
+          <ol>
+            <li><a href="#移位指令">移位指令</a></li>
+            <li><a href="#乘除">乘除</a></li>
+          </ol>
+        </li>
+        <li><a href="#堆栈--高级过程">堆栈 &amp; 高级过程</a></li>
+        <li><a href="#in--out">IN &amp; OUT</a></li>
+        <li><a href="#作业">作业</a></li>
+      </ol>
+    </li>
+    <li><a href="#总线">总线</a>
+      <ol>
+        <li><a href="#aen-信号--dma控制器">AEN 信号 &amp; DMA控制器</a></li>
+        <li><a href="#总线驱动与控制">总线驱动与控制</a>
+          <ol>
+            <li><a href="#驱动器选择">驱动器选择</a></li>
+            <li><a href="#双向驱动三态门选通条件">双向驱动（三态门）选通条件</a></li>
+          </ol>
+        </li>
+        <li><a href="#作业-1">作业</a></li>
+      </ol>
+    </li>
+    <li><a href="#存储技术">存储技术</a>
+      <ol>
+        <li><a href="#全地址译码--部分地址译码">全地址译码 / 部分地址译码</a>
+          <ol>
+            <li><a href="#全地址译码电路">全地址译码电路</a></li>
+            <li><a href="#部分地址译码电路">部分地址译码电路</a></li>
+          </ol>
+        </li>
+        <li><a href="#多片-sram-构成-8088-内存">多片 SRAM 构成 8088 内存</a>
+          <ol>
+            <li><a href="#字拓展">字拓展</a></li>
+            <li><a href="#位拓展">位拓展</a></li>
+            <li><a href="#汇编读数据">汇编读数据</a></li>
+            <li><a href="#作业-2">作业</a></li>
+          </ol>
+        </li>
+        <li><a href="#rom-作译码器">ROM 作译码器</a></li>
+        <li><a href="#ram-设计题目">RAM 设计题目</a></li>
+        <li><a href="#rom-只读存储器">ROM 只读存储器</a>
+          <ol>
+            <li><a href="#简单举个例子">简单举个例子</a></li>
+            <li><a href="#eeprom-电可擦除只读存储器构成主存">EEPROM 电可擦除只读存储器构成主存</a></li>
+          </ol>
+        </li>
+        <li><a href="#作业-3">作业</a></li>
+      </ol>
+    </li>
+    <li><a href="#io-技术">I/O 技术</a>
+      <ol>
+        <li><a href="#汇编中的-io-指令">汇编中的 I/O 指令</a>
+          <ol>
+            <li><a href="#向外设读入数据">向外设读入数据</a></li>
+            <li><a href="#向外设写出数据">向外设写出数据</a></li>
+          </ol>
+        </li>
+        <li><a href="#基本输入--输出方法">基本输入 / 输出方法</a>
+          <ol>
+            <li><a href="#无条件传送方式">无条件传送方式</a></li>
+            <li><a href="#查询方式">查询方式</a></li>
+            <li><a href="#中断方式">中断方式</a></li>
+          </ol>
+        </li>
+        <li><a href="#可编程中断控制器-8259">可编程中断控制器 8259</a>
+          <ol>
+            <li><a href="#外部引脚">外部引脚</a></li>
+            <li><a href="#内部寄存器">内部寄存器</a></li>
+            <li><a href="#一个例子说明-8259-的工作方式">一个例子说明 8259 的工作方式</a></li>
+            <li><a href="#一个例子并不能说完-8259-的工作方式">一个例子并不能说完 8259 的工作方式</a></li>
+            <li><a href="#优先级">优先级</a></li>
+            <li><a href="#级联">级联</a></li>
+            <li><a href="#8259-编程使用">8259 编程使用</a></li>
+          </ol>
+        </li>
+        <li><a href="#dma-控制器">DMA 控制器</a></li>
+        <li><a href="#作业-4">作业</a></li>
+      </ol>
+    </li>
+    <li><a href="#常用接口器件">常用接口器件</a>
+      <ol>
+        <li><a href="#三态门--锁存器用作接口器件">三态门 &amp; 锁存器用作接口器件</a></li>
+        <li><a href="#具有发出中断能力的输入输出接口">具有发出中断能力的输入输出接口</a>
+          <ol>
+            <li><a href="#单向中断接口">单向中断接口</a></li>
+            <li><a href="#双向中断接口">双向中断接口</a></li>
+          </ol>
+        </li>
+        <li><a href="#8255-可编程并行接口">8255 可编程并行接口</a>
+          <ol>
+            <li><a href="#8255-的三种工作方式">8255 的三种工作方式</a></li>
+            <li><a href="#8255-的引脚接口">8255 的引脚接口</a></li>
+            <li><a href="#8255-的控制字与状态字">8255 的控制字与状态字</a></li>
+            <li><a href="#状态字">状态字</a></li>
+            <li><a href="#8255-的寻址--连接到总线">8255 的寻址 &amp; 连接到总线</a></li>
+            <li><a href="#应用题举例">应用题举例</a></li>
+            <li><a href="#电路图与时序">电路图与时序</a></li>
+            <li><a href="#c-口工作方式的选择">C 口工作方式的选择</a></li>
+            <li><a href="#汇编代码实现访问打印机接口">汇编代码实现访问打印机接口</a></li>
+          </ol>
+        </li>
+        <li><a href="#作业-5">作业</a></li>
+        <li><a href="#8253-可编程定时器">8253 可编程定时器</a>
+          <ol>
+            <li><a href="#芯片功能">芯片功能</a></li>
+            <li><a href="#片引脚">片引脚</a></li>
+            <li><a href="#计数器引脚">计数器引脚</a></li>
+            <li><a href="#工作方式">工作方式</a></li>
+            <li><a href="#控制字">控制字</a></li>
+            <li><a href="#8253-寻址与连接">8253 寻址与连接</a></li>
+            <li><a href="#8253-的初始化与使用">8253 的初始化与使用</a></li>
+            <li><a href="#喜闻乐见的串联">喜闻乐见的串联</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#基于总线的-io-接口设计">基于总线的 I/O 接口设计</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+                <img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover_hud909cb1be98356b124c5a237e088aad3_1604452_800x0_resize_q75_box.jpg"
+                        srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover_hud909cb1be98356b124c5a237e088aad3_1604452_800x0_resize_q75_box.jpg 800w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover_hud909cb1be98356b124c5a237e088aad3_1604452_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="465" 
+                        loading="lazy"
+                        alt="Featured image of post 微机原理与接口技术课程总结" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" style="background-color: #2a9d8f; color: #fff;">
+                实验报告
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">微机原理与接口技术课程总结</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本学期课程微机原理与接口技术的一些重点与考点，供复习翻看以及便捷查询。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 14 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="微机原理与接口技术">微机原理与接口技术</h1>
+<p>本笔记基于 <em>CS Lee&rsquo;s Notes</em>，提取记录其中一些个人认为的重点、考点以及需要记忆的点，供重复翻看。</p>
+<h2 id="intel-单核处理器">Intel 单核处理器</h2>
+<h3 id="8086-寄存器结构">8086 寄存器结构</h3>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106155431501.png"
+	width="548"
+	height="518"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106155431501_hu3698f502105de3901816d5e4cd2d38ea_95193_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106155431501_hu3698f502105de3901816d5e4cd2d38ea_95193_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106155431501"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="105"
+		data-flex-basis="253px"
+	
+></p>
+<h4 id="段寄存器">段寄存器</h4>
+<p>寄存器的作用如其名，唯一值得注意的是附加段寄存器。默认访问数据采用 DS，需要跨段访问数据时，指定 ES 来访问数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	AX,	ES:[BX]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="数据寄存器">数据寄存器</h4>
+<p>一般随便用，用于存储数据。记记几个特殊作用。</p>
+<ul>
+<li>AX：某些指令如乘法指令，包含隐含寻址（默认乘数在 AX），抑或是最后结果存放在 AX 等。</li>
+<li>BX：可以用作指针寄存器，配和 DS 作为默认段寄存器。</li>
+<li>CX：用于 LOOP 指令循环时 CX 记录剩余循环次数。</li>
+<li>四者都可以拆分成两个 8bit 寄存器使用，如 AX 可以拆为 AL与 AH。</li>
+</ul>
+<h4 id="控制寄存器">控制寄存器</h4>
+<p>IP 用于寄存下一条指令的内存地址，结合 CS（代码段寄存器）实现代码段的寻址。</p>
+<p>标志寄存器下面单独讲。</p>
+<h4 id="指针寄存器--变址寄存器">指针寄存器 &amp; 变址寄存器</h4>
+<p>SP 标记栈顶位置，结合 SS（堆栈段寄存器）共同维护堆栈，实现栈顶的寻址以及出入栈操作。</p>
+<p>BP 同样用来访问栈，与 SP 固定指向栈顶不同，用来随机访问栈中任意元素。</p>
+<blockquote>
+<p><strong>8086 中的栈</strong></p>
+<ul>
+<li>
+<p>栈顶小地址，栈底大地址，记忆上可以想象成一个高塔形状，必然是顶小底大才能稳。</p>
+</li>
+<li>
+<p>16bit 的 CPU，栈中每个数据都为 16bit。</p>
+</li>
+</ul>
+</blockquote>
+<p>SI 与 DI 都用来访问一般的数据，默认寄存器 DS。结合上文所说的 BX，这三者可以通过间接寻址对内存的数据段进行访问。</p>
+<blockquote>
+<p>SI 与 DI 这两个寄存器名字分别为源变址寄存器与目的变址寄存器，只是为了程序员编程时方便分类使用，如源数据指针采用 SI，目的数据指针采用 DI，实际作用上二者没有本质区别，怎么用都可以。</p>
+</blockquote>
+<h4 id="标志寄存器">标志寄存器</h4>
+<p>这里只挑几个重要的记录下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106162304334.png"
+	width="646"
+	height="380"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106162304334_hu81cd6f2661636ca6567bb71eaf42e731_71712_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106162304334_hu81cd6f2661636ca6567bb71eaf42e731_71712_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106162304334"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="408px"
+	
+></p>
+<h6 id="运算结果相关">运算结果相关</h6>
+<ul>
+<li><strong>CF</strong>，Carry Flag，加法中最高位有向更高位进位，或减法中最高位有向更高位借位，置 1 。</li>
+<li>PF，Parity Flag，奇偶标志位，结果中 1 为偶数个置 1 。</li>
+<li>SP，Sign Flag，符号标志位，映射结果最高位。</li>
+<li><strong>ZF</strong>，Zero Flag，结果为 0 置为 1 。</li>
+<li><strong>OF</strong>，Overflow，运算结果溢出置为 1 ，对于有符号数，<em>OF = C~n~ XOR C~n-1~</em>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mov al,	+127
+</span></span><span class="line"><span class="cl">add al,	1 		; OF = 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mov al,	-128
+</span></span><span class="line"><span class="cl">sub al,	1 		; OF = 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mov al,	-128 	; AL = 10000000b
+</span></span><span class="line"><span class="cl">neg al 			; AL = 10000000b, OF = 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mov al,	+127 	; AL = 01111111b
+</span></span><span class="line"><span class="cl">neg al 			; AL = 10000001b, OF = 0	这里是 0，lsc标错
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="运算结果无关">运算结果无关</h6>
+<ul>
+<li><strong>IF</strong>，中断允许标志位，开中断为 1 。</li>
+</ul>
+<h3 id="双体内存">双体内存</h3>
+<p>8086 采用双体内存结构。其地址线共计 A~0~ ~ A~19~ 合 20 根，以满足最大 <em>1MByte</em> 的内存寻址。</p>
+<blockquote>
+<p>1MB = 2^20^Byte，以字节为基本单元，需要 20bit 来存储所有的地址可能。</p>
+</blockquote>
+<p>双体内存结构中，以字（16bit）作为基本单元，只需要 19bit 来存储所有地址可能。因此，采用 A~1~ ~ A~19~ 作为字的地址寻址，A~0~ 结合 !BHE（编辑所限，!指代上划线。）作为奇偶存储体选择信号。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>A~0~</th>
+<th>!BHE</th>
+<th>选中存储体</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>奇偶存储体</td>
+<td>读 16bit 的对齐数据</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>偶存储体</td>
+<td>读 8bit 的数据 / 16bit 的非对齐数据的前 8bit</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>奇存储体</td>
+<td>读 8bit 的数据 / 16bit 的非对齐数据的后 8bit</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>数据对齐</strong></p>
+<p>举个例子，16bit 的数据在内存中存储，起始存储单元为偶数地址单元则为数据对齐，占用一个总线周期可以完成读写；反之，需要通过两个总线周期。</p>
+</blockquote>
+<h3 id="8086-引脚">8086 引脚</h3>
+<p><strong>地址线与数据线复用</strong></p>
+<p>8086 中，地址线与数据线是复用的。低 16 位地址线与 16 位数据线复用，高 4 位地址线与状态信号复用。</p>
+<p><strong>中断信号线</strong></p>
+<p>这是一类引脚，分为三条线。</p>
+<ul>
+<li>NMI，不可屏蔽中断请求输入引脚。</li>
+<li>INTR，可屏蔽中断请求输入引脚。</li>
+<li>!INTA，中断应答引脚（最小模式）。</li>
+</ul>
+<p>在后面讲到 8259 的时候还会说到。</p>
+<blockquote>
+<p><strong>中断工作过程</strong></p>
+<p>中断向量：每一个中断源有的唯一标识，一个 8bit 的编号。由于 8bit 最多有 256 种组合，因此 8086 可以管理至多 256 个中断源。</p>
+<p>中断向量表：注意，这不是存放中断向量的表，这是保存中断后对应中断向量的处理程序位置的表。该表有 0 ~ 255 行，合 256 行，分别对应 256 个中断向量对应的处理程序位置。每一行占 4 Byte，记录中断处理程序的地址。前两个 Byte 表示段内偏移，后两个 Byte 表示段地址。</p>
+<p>CPU 需要执行中断时，首先保护现场，然后获得中断向量，根据此向量去查中断向量表，获取对应的中断程序地址，置于 PI 与 CS 寄存器内，开始处理中断程序。</p>
+</blockquote>
+<p><strong>执行读操作的周期分布</strong></p>
+<p>一般认为，忽略等待周期的情况下，执行一次读操纵需要 4 个 CPU 周期。</p>
+<ul>
+<li>T~1~：CPU 送地址至总线，稳定后 ALE 脉冲，告知有地址已稳定。</li>
+<li>T~2~：CPU 送 RD 信号，内存读入地址，寻找对应数据。</li>
+<li>T~3~：CPU 切换读数据模式，等待内存返回数据。</li>
+<li>T~4~：内存送数据至总线，CPU 读入数据。</li>
+</ul>
+<p><strong>最小模式与最大模式</strong></p>
+<p>最小模式可以令 8086 独立工作运行。最大模式可以结合其他芯片器件运行。</p>
+<ul>
+<li>最小模式下 CPU 的引脚接线（看懂就好，不用记）</li>
+</ul>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171655212.png"
+	width="933"
+	height="635"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171655212_hu80d022a29af3e774061ae3b3385b6aed_151312_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171655212_hu80d022a29af3e774061ae3b3385b6aed_151312_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106171655212"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="146"
+		data-flex-basis="352px"
+	
+></p>
+<ul>
+<li>最大模式下 CPU 的引脚接线（看懂就好，不用记）</li>
+</ul>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171723331.png"
+	width="965"
+	height="669"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171723331_hu7c930a687990e14ede21569dfa633e0e_164535_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106171723331_hu7c930a687990e14ede21569dfa633e0e_164535_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106171723331"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="346px"
+	
+></p>
+<p>74373：单向锁存器</p>
+<p>74245：双向锁存器</p>
+<h2 id="汇编">汇编</h2>
+<p><strong>汇编程序基础模板</strong></p>
+<p>借助个简要的模板，讲解下汇编代码的编写范例以及各字段作用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">STACK SEGMENT STACK		; 堆栈段定义
+</span></span><span class="line"><span class="cl">		DB 500 DUP(0)	; 定义500个Byte的空间（Define Byte），初始化为0
+</span></span><span class="line"><span class="cl">STACK ENDS
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DATA SEGMENT			; 数据段定义
+</span></span><span class="line"><span class="cl">		.......			; 数据定义
+</span></span><span class="line"><span class="cl">DATA ENDS
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CODE SEGMENT			; 代码段定义
+</span></span><span class="line"><span class="cl">ASSUME CS:CODE,DS:DATA,ES:DATA,SS:STACK	; 这段是告诉编译器的，数据段还是要自己初始化
+</span></span><span class="line"><span class="cl">START:	MOV AX,DATA		; 程序入口需要一个标记，这里是“start”，结尾要接 END START
+</span></span><span class="line"><span class="cl">		MOV DS,AX		; 这两行固定用来指定数据段
+</span></span><span class="line"><span class="cl">		.......			; 主程序代码
+</span></span><span class="line"><span class="cl">		MOV AH,4CH
+</span></span><span class="line"><span class="cl">		INT 21H			; 这两行用来关闭程序
+</span></span><span class="line"><span class="cl">CODE ENDS
+</span></span><span class="line"><span class="cl">END START				; 整个程序最后，用END后面指明程序入口点的位置
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>考试中应该不用你编写完整一个汇编程序（如果要的话当我没说），但基本的结构还是要了解的，也并不困难，框架就如上所示。</p>
+<p><strong>汇编中的算数运算符号</strong></p>
+<p>你在汇编程序中，是可以直接写算术符号的。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180000887.png"
+	width="888"
+	height="403"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180000887_hu0b87cf6745a290366128a8d754ccabf3_77592_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180000887_hu0b87cf6745a290366128a8d754ccabf3_77592_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106180000887"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="220"
+		data-flex-basis="528px"
+	
+></p>
+<p>这些算术符号并不会在编译后产生对应的汇编指令，编译器会帮你直接计算出结果，作为一个立即数的形式放到程序中。</p>
+<p><strong>数据类型</strong></p>
+<p>主要记住 DB，DW，DD 三种常见的即可。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180632666.png"
+	width="903"
+	height="585"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180632666_hu129c10cacd4f7fd4e0828bd3f427a25d_240686_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220106180632666_hu129c10cacd4f7fd4e0828bd3f427a25d_240686_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220106180632666"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="370px"
+	
+></p>
+<blockquote>
+<p><strong>PTR 操作符</strong></p>
+<p>用于不同的数据类型间转换。看懂下面的代码就可以，我认为应该不会考。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.data
+</span></span><span class="line"><span class="cl">myDouble DWORD 12345678h
+</span></span><span class="line"><span class="cl">.code
+</span></span><span class="line"><span class="cl">mov ax,myDouble ;错误
+</span></span><span class="line"><span class="cl">mov ax,WORD PTR myDouble ;ax = 5678h，取出低 16bit，小端存储
+</span></span><span class="line"><span class="cl">mov ax,WORD PTR [myDouble+2] ;ax = 1234h
+</span></span><span class="line"><span class="cl">mov bl,BYTE PTR myDouble ;bl = 78h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="汇编中的常见指令">汇编中的常见指令</h3>
+<h5 id="mov">MOV</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	AX,	DATA
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>天天用，注意几点即可。</p>
+<ul>
+<li>操作数尺寸一致，源是 16bit，目的也必须为 16bit。</li>
+<li>两个操作数不能同时为内存操作数。</li>
+</ul>
+<h5 id="xchg">XCHG</h5>
+<p>交换两个操作数内容，用的不多。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">XCHG AX, BX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同样，两个操作数不能同时为内存操作数。</p>
+<h5 id="add">ADD</h5>
+<p><em>AX + VAR -&gt; AX</em>，结果存放在目的操作数中（即本例中的 AX）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ADD	AX,	VAR
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="sub">SUB</h5>
+<p><em>AX - VAR -&gt; AX</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SUB AX, VAR
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="neg">NEG</h5>
+<p><em>-AX -&gt; AX</em>，求负，将操作符认为是一个补码，按位取反末位加一。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NEG AX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="jmp">JMP</h5>
+<p>无条件跳转。</p>
+<h5 id="loop">LOOP</h5>
+<p>执行 LOOP 指令前，**先对 CX 执行 -1，再判断 CX 是否为 0。**为零则结束循环。</p>
+<h3 id="汇编中的过程定义与使用函数">汇编中的过程定义与使用（函数）</h3>
+<p><strong>过程的定义</strong></p>
+<p>以如下模板定义一个过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SumOf PROC	; SumOf是你的过程名，注意过程没有传入的参数
+</span></span><span class="line"><span class="cl">add eax,ebx	; 主代码
+</span></span><span class="line"><span class="cl">add eax,ecx
+</span></span><span class="line"><span class="cl">ret			; return，过程结束前必要
+</span></span><span class="line"><span class="cl">SumOf ENDP	; 过程结束
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其实主函数本质上也是一个特殊过程。</p>
+</blockquote>
+<p><strong>例子：对整数数组求和</strong></p>
+<p>过程本体</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ArraySum PROC
+</span></span><span class="line"><span class="cl">	push esi 	; 保护寄存器ESI与ECX，压入栈中，ESI执行数组首地址
+</span></span><span class="line"><span class="cl">	push ecx
+</span></span><span class="line"><span class="cl">	mov eax,0 	; 设定EAX作为SUM，初始值置为0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">L1:	add eax,[esi] 	; 将ESI所指数组项加入到SUM
+</span></span><span class="line"><span class="cl">	add esi,4 		; 32bit 的汇编程序，一个整数占 32bit，所以移动到下一个元素需要 + 4
+</span></span><span class="line"><span class="cl">	loop L1			; 循环直至遍历结束数组（ECX = 0时）
+</span></span><span class="line"><span class="cl">	pop ecx 		; 恢复现场
+</span></span><span class="line"><span class="cl">	pop esi
+</span></span><span class="line"><span class="cl">	ret				; 返回，结果保存在 EAX
+</span></span><span class="line"><span class="cl">ArraySum ENDP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 main 中调用该过程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.data
+</span></span><span class="line"><span class="cl">	array DWORD 10000h,20000h,30000h,40000h,50000h
+</span></span><span class="line"><span class="cl">	theSum DWORD ?
+</span></span><span class="line"><span class="cl">.code
+</span></span><span class="line"><span class="cl">main PROC
+</span></span><span class="line"><span class="cl">	mov esi, OFFSET array 	; ESI初始化指向array首地址
+</span></span><span class="line"><span class="cl">	mov ecx, LENGTHOF array ; ECX初始化为数组长度
+</span></span><span class="line"><span class="cl">	call ArraySum			; 调用过程
+</span></span><span class="line"><span class="cl">mov theSum,eax 				; 用theSum存储返回在EAX中的结果
+</span></span><span class="line"><span class="cl">......
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="寻址方式">寻址方式</h3>
+<p>这里就直接按老师给的题目讲，掌握了就差不多了。</p>
+<h4 id="题目-一">题目 一</h4>
+<!-- raw HTML omitted -->
+<ol>
+<li>立即寻址，@DATA 在编译时会被编译器替换成对应地址的立即数。</li>
+<li>直接寻址，变量如 ARRAY 在编译时会替换成所指向的地址，通过 &lsquo;<input disabled="" type="checkbox"> &rsquo; 表示取该地址对应的数据，为直接寻址。</li>
+<li>直接寻址。</li>
+<li>立即寻址，OFFSET 在编译时就会被替换成对应地址的立即数。</li>
+<li>立即寻址。</li>
+<li>寄存器间接寻址，[寄存器] 表示取内存中寄存器存的对应地址的变量。</li>
+<li>立即寻址，注意数据段的定义，ARRAYSIZE 不是定义的变量，而是“等号伪指令”，在编译过程中就会被编译器替换为对应的数值。</li>
+<li>直接寻址，同 &lsquo;2&rsquo;。</li>
+<li>寄存器相对寻址，<code>ARRAY[SI]</code> 也可以表示为 <code>[ARRAY + SI]</code>，在 ARRAY 所指地址的基础上加上寄存器 SI 的偏移，共同构成目的地址，称为寄存器相对寻址。</li>
+<li>PC 相对寻址。</li>
+</ol>
+<h4 id="题目-二">题目 二</h4>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107133645377.png"
+	width="476"
+	height="260"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107133645377_hu754a971c977cf46c800955fa60bb861b_47899_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107133645377_hu754a971c977cf46c800955fa60bb861b_47899_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107133645377"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="439px"
+	
+></p>
+<ol>
+<li>立即寻址。</li>
+<li>寄存器寻址，直接用的寄存器内的值。</li>
+<li>寄存器间接寻址，寄存器内的值用作地址量，取内存中对应地址的值。</li>
+<li>直接寻址，TABLE 编译后转化为内存中的对应地址。</li>
+<li>寄存器相对寻址。</li>
+<li>寄存器相对寻址。</li>
+</ol>
+<p><strong>补充</strong></p>
+<blockquote>
+<p>这个东西不常见，了解下，知道原理即可。</p>
+</blockquote>
+<ul>
+<li>基址变址寻址</li>
+</ul>
+<p>一般用在二维数组，通过两个寄存器值相加（基址寄存器与变址寄存器）产生偏移地址。</p>
+<p><strong><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152516107.png"
+	width="947"
+	height="568"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152516107_hu2d29325ad475beb41610b1cac32999cf_139490_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152516107_hu2d29325ad475beb41610b1cac32999cf_139490_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107152516107"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="166"
+		data-flex-basis="400px"
+	
+></strong></p>
+<ul>
+<li>相对基址变址寻址</li>
+</ul>
+<p>也用在二维数组，和上一个的区别在于通过数组 tableB， 再添加一个偏移量，进行访问。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152755030.png"
+	width="854"
+	height="546"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152755030_hu450f8c2bf29a4ee0859c03c39ceda1b7_152885_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107152755030_hu450f8c2bf29a4ee0859c03c39ceda1b7_152885_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107152755030"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="375px"
+	
+></p>
+<h3 id="条件处理">条件处理</h3>
+<p>讲条件比较指令之前，简单说一下几条逻辑运算指令。比较指令就是在此基础上建立的。注意以下指令结果会会送到目的操作数，即例子中的 AL。</p>
+<h4 id="逻辑运算">逻辑运算</h4>
+<p><strong>AND</strong></p>
+<p>按位与，主要用于特定位清零，其余位保留。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AND	AL,	00000011b	; 只保留AL低两位
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>OR</strong></p>
+<p>按位或，特定位置一，其余位保留。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OR	AL,	11000000b	; 高两位置1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>XOR</strong></p>
+<p>异或，同为假异为真。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">XOR	AL,	BL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>NOT</strong></p>
+<p>非，按位取反，即求反码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NOT	AL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="比较指令">比较指令</h4>
+<p>比较指令不会回送目标操作数，但会改变对应标志位的结果。</p>
+<p><strong>TEST</strong></p>
+<p>功能与 AND 类似，不回送结果。常和 JZ 或 JNZ 搭配。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TEST AL, 00001001b	; 测试0位和3位是否同时为0
+</span></span><span class="line"><span class="cl">JZ	C1				; 结果为0，表明0位和3位同时为0，跳转C1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>CMP</strong></p>
+<p>与 SUB 类似，目的操作数 - 源操作数，不回送结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CMP	AL,	55H	; 比较AL与55H的大小
+</span></span><span class="line"><span class="cl">JA	C2		; 如果AL&gt;55H，则跳转C2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="跳转指令">跳转指令</h4>
+<p>实现的基础是通过上述逻辑运算和比较指令实现对CPU标志位的修改，跳转指令判断标志位的值，决定是否跳转。</p>
+<p><strong>按标志位的比较结果跳转</strong></p>
+<p>基本上记住前两个就行，第 3、4 个稍微留意一下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107135704191.png"
+	width="642"
+	height="440"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107135704191_hu1486a432383a4bf48a1eb1aebabbaaf1_138063_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107135704191_hu1486a432383a4bf48a1eb1aebabbaaf1_138063_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107135704191"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="350px"
+	
+></p>
+<p><strong>CMP 指令专用</strong></p>
+<p>重点记一下无符号数的，看起来有 8 条，实际上只用记 4 条。主要记一下 JA，JAE，JB，JBE。</p>
+<!-- raw HTML omitted -->
+<h4 id="举几个例子">举几个例子</h4>
+<ol>
+<li>AL中bit5（从零开始）为“1”时跳转到标号C1</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TEST AL, 00100000b
+</span></span><span class="line"><span class="cl">JNZ	C1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>AL中bit0、bit1、bit4任一位为1时跳转到C2</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TEST AL, 00010011b
+</span></span><span class="line"><span class="cl">JNZ C2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>AL中bit1、bit2、bit3全部为1时，跳转到C3</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AND	AL,	00001110b
+</span></span><span class="line"><span class="cl">CMP	AL,	00001110b
+</span></span><span class="line"><span class="cl">JZ	C3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="汇编中的不常见指令">汇编中的不常见指令</h3>
+<blockquote>
+<p>看一眼有个印象就好，感觉不需要特意记，特别是移位指令，想稍微记一下的话我也写了怎么记。</p>
+</blockquote>
+<h4 id="移位指令">移位指令</h4>
+<p>用的其实不多，但出现的时候你得学会看他是干嘛的。</p>
+<p>拆解一下，如何看出来移位指令的作用。首先，移位指令都占三个字符位，共计 8 种移位指令。从左往右我们一个个字符位说。</p>
+<p>第一个字符位</p>
+<ul>
+<li>S：Shift，意为移位，最朴素的移位，不循环。</li>
+<li>R：Rotate，意为循环，循环移位。</li>
+</ul>
+<p>第二个字符</p>
+<ul>
+<li>首字符为 S，不循环朴素的移位，接下来考虑新位的补全方式
+<ul>
+<li>H：逻辑移位，新多出的位总是填 0</li>
+<li>A：Arithmetic，算数移位，填充依据符号</li>
+</ul>
+</li>
+<li>首字符为R，循环移位，不考虑补全，考虑是否带进位
+<ul>
+<li>O：不带进位的循环移位</li>
+<li>C：带进位位的循环移位</li>
+</ul>
+</li>
+</ul>
+<p>第三个字符</p>
+<ul>
+<li>R：右移</li>
+<li>L：左移</li>
+</ul>
+<p>看到移位指令，每个字符逐个分析，哪怕忘了其中某个字符的意义，也可以基本得出其作用。</p>
+<h4 id="乘除">乘除</h4>
+<p><strong>MUL</strong></p>
+<p>8bit / 16bit / 32bit 无符号乘法，被乘数隐含在 AL / AX / EAX（根据乘法的位数是几位，寄存器也要对应位数）。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142410575.png"
+	width="643"
+	height="179"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142410575_hu5debcd853a597cb8369d1c2e92808f98_39427_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142410575_hu5debcd853a597cb8369d1c2e92808f98_39427_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107142410575"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="359"
+		data-flex-basis="862px"
+	
+></p>
+<p>注意下积存储的位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	AL, 5H
+</span></span><span class="line"><span class="cl">MOV	BL,	10H
+</span></span><span class="line"><span class="cl">MUL	BL		; AL*BL -&gt; AX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有符号乘法用 IMUL，乘数、被乘数、积都用补码来表示。用的不多。</p>
+<p><strong>DIV</strong></p>
+<p>8bit / 16bit / 32bit 无符号除法，被除数隐含在 AL / AX / EAX。注意，8bit / 16bit 等指的是除数的位数，被除数的位数为除数的位数*2 。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142812524.png"
+	width="590"
+	height="178"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142812524_huf49750118671266c083d2b60784c6bc8_34493_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107142812524_huf49750118671266c083d2b60784c6bc8_34493_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107142812524"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="331"
+		data-flex-basis="795px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV DX, 0
+</span></span><span class="line"><span class="cl">MOV AX, 8003H
+</span></span><span class="line"><span class="cl">MOV CX, 100H
+</span></span><span class="line"><span class="cl">DIV CX			; DX:AX / CX -&gt; AX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="堆栈--高级过程">堆栈 &amp; 高级过程</h3>
+<blockquote>
+<p>不一定考，但我个人觉得这一块可以做一个不大的考点。</p>
+</blockquote>
+<p>高级语言，如 C 语言中，调用函数时我们常常需要传入参数。C 语言中的一个函数，对应汇编语言中的一个过程，通过堆栈，我们可以将传入参数、函数内定义的局部变量都存储在堆栈之中。</p>
+<p><strong>传入参数</strong></p>
+<p>前面讲过两个指针寄存器，BP 与 SP，前者用于随机访问堆栈内的元素，后者用于指向栈顶位置。本例中，使用其对应的 32bit 版本，EBP 与 ESP。</p>
+<p>假设我们程序需要传入两个参数，一个是 5，另一个是 6，调用过程之前，会向栈中先压入第二个参数（6），再压入第一个参数（5），最后，压入程序的返回地址，此时 <strong>EBP 指向 返回地址</strong> 示意图如下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107145510237.png"
+	width="570"
+	height="246"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107145510237_hub7713a5bef481a2fa8b94e07561a0ff4_34824_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107145510237_hub7713a5bef481a2fa8b94e07561a0ff4_34824_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107145510237"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="231"
+		data-flex-basis="556px"
+	
+></p>
+<p>在汇编的过程中接收这两个参数的过程是这样的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AddTwo PROC
+</span></span><span class="line"><span class="cl">	push ebp			; 保护现场，EBP原来的内容入栈，ESP指向EBP的内容
+</span></span><span class="line"><span class="cl">	mov ebp,esp 		; ESP赋予EBP，后续过程执行中，可能涉及到堆栈的操作，影响ESP位置，
+</span></span><span class="line"><span class="cl">						; ESP赋值到EBP后可以保证EBP始终指向初始位置，通过EBP可以调用各项参数
+</span></span><span class="line"><span class="cl">	mov eax,[ebp + 12] 	; 读入第二个参数，位于[EBP+12]
+</span></span><span class="line"><span class="cl">	add eax,[ebp + 8] 	; 读入第一个参数，位于[EBP+8]
+</span></span><span class="line"><span class="cl">	pop ebp				; 恢复现场，出栈，此时ESP指向返回地址
+</span></span><span class="line"><span class="cl">	ret 8 				; 之前讲过程调用的时候，ret后面都没有接参数，是因为没有用到传入参数。
+</span></span><span class="line"><span class="cl">						; ret 8 指的是废除压入的两个参数（共占8个字节，所以是ret 8），
+</span></span><span class="line"><span class="cl">						; 具体实现是 ESP=ESP+8，此时指向图中EBP+16的位置，结束程序，释放空间
+</span></span><span class="line"><span class="cl">AddTwo ENDP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>创建局部变量</strong></p>
+<p>高级语言在函数中创建局部变量，也是存储在堆栈中的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Cpp" data-lang="Cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">x</span> <span class="o">=</span> <span class="sc">&#39;x&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编的过程中，新创建的局部变量，通过逐个入栈进行创建，通过EBP进行相对寻址访问。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107150943748.png"
+	width="837"
+	height="390"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107150943748_hu33432ef803a93d036c54861b57c8aa27_61369_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107150943748_hu33432ef803a93d036c54861b57c8aa27_61369_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107150943748"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="214"
+		data-flex-basis="515px"
+	
+></p>
+<p>如图所示，最初ESP指向返回地址的位置，EBP入栈，保护现场，同时ESP赋予EBP。接着按顺序创建局部变量，x，y，name，z 依次入栈，ESP最后指向 z ，栈顶位置。如果要访问局部变量，通过右表，对 EBP 进行一定的偏移访问。</p>
+<p>注意的是，为了对其，char 即便只占 1 Byte 长度，仍补全为 4 Byte（32位机）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MySub PROC
+</span></span><span class="line"><span class="cl">	push ebp
+</span></span><span class="line"><span class="cl">	mov ebp,esp
+</span></span><span class="line"><span class="cl">	sub esp,36							; 局部变量共占用长度为 36Byte，一次性将栈顶指针移动
+</span></span><span class="line"><span class="cl">	mov BYTE PTR [ebp-4],&#39;X&#39; 			; 创建 X
+</span></span><span class="line"><span class="cl">	mov DWORD PTR [ebp-8],10 			; 创建 Y
+</span></span><span class="line"><span class="cl">	mov BYTE PTR [ebp-28],&#39;B&#39; 			; 创建name，初始化name[0]
+</span></span><span class="line"><span class="cl">	mov DWORD PTR [ebp-32],3ff33333h 	; Z(high)
+</span></span><span class="line"><span class="cl">	mov DWORD PTR [ebp-36],33333333h 	; Z(low)
+</span></span><span class="line"><span class="cl">	…… ……
+</span></span><span class="line"><span class="cl">	mov esp,ebp 						; 栈顶重置为EBP位置，清除局部变量
+</span></span><span class="line"><span class="cl">	pop ebp
+</span></span><span class="line"><span class="cl">	ret
+</span></span><span class="line"><span class="cl">MySub ENDP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="in--out">IN &amp; OUT</h3>
+<p>专门用来访问外设，注意8086独立编址，IO地址只需要16bit即可表示。</p>
+<h3 id="作业">作业</h3>
+<p>第 3 章作业到这里就都可以做了。</p>
+<h2 id="总线">总线</h2>
+<p>概述和发展历程之类，这里就不多记录了，记录一些重要的考点。</p>
+<h3 id="aen-信号--dma控制器">AEN 信号 &amp; DMA控制器</h3>
+<p>搭配 DMA控制器 使用，AEN = 1 时，DMA控制器控制总线，反之 CPU 控制总线。</p>
+<p>DMA控制器通过 PCI 总线支持的多主控设备方式，实现不经过 CPU 实现设备与内存之间的直接数据传送。</p>
+<h3 id="总线驱动与控制">总线驱动与控制</h3>
+<p>这一块的考点一般都是驱动器选择，双向驱动选通条件（地址分析）。</p>
+<h4 id="驱动器选择">驱动器选择</h4>
+<h5 id="直流负载">直流负载</h5>
+<p>驱动门的直流参数有四个，<em>I~IH~, I~IL~, I~OH~, I~OL~</em>，简单而言，直流驱动门选择的逻辑就是</p>
+<ul>
+<li>输出的高电平电流 <em>I~OH~</em> 需要大于等于负载总的高电平输入电流 <em>SUM( I~IH~)</em></li>
+<li>输出的低电平电流 <em>I~OL~</em> 需要大于等于负载总的低电平输入电流 <em>SUM( I~IL~)</em></li>
+</ul>
+<p>驱动门的参数，前两行不说也会看，第三行表示驱动同类门的个数。通过上述两点计算，同时满足两点的最大数值。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107155710282.png"
+	width="737"
+	height="288"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107155710282_hu06e07934ea36d6657e7b492c6b941760_49465_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107155710282_hu06e07934ea36d6657e7b492c6b941760_49465_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107155710282"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="255"
+		data-flex-basis="614px"
+	
+></p>
+<h5 id="交流负载">交流负载</h5>
+<p>交流驱动门的依据是 C~P~，满足的条件需要为 <em>C~p~ &gt;= SUM( C~I~ ) + 其他电容</em>。</p>
+<p>一般题目中只考虑 SUM 的部分。</p>
+<h5 id="举个例子">举个例子</h5>
+<p>一般考察会结合直流和交流一起考察，举个例子，其实这类题很好做。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107160018394.png"
+	width="884"
+	height="455"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107160018394_hu30d659de2b4cdb4a942518262efbfd66_108296_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107160018394_hu30d659de2b4cdb4a942518262efbfd66_108296_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107160018394"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="466px"
+	
+></p>
+<h4 id="双向驱动三态门选通条件">双向驱动（三态门）选通条件</h4>
+<p>这个是本章重点，其中涉及到地址分析的更是后面几章的基础。三态门，简单而言就是连接在总线与外设之间的一个器件，正常情况下不导通，确保外设与总线之间不产生竞争现象。当 CPU 需要访问外设时，如向外设输送地址、输送数据，此时需要三态门 总线 -&gt; 外设 导通；当 CPU 从外设获取数据时，此时需要三态门 外设 -&gt; 总线导通。依据导通的条件，正确设计连线，这是必考题。</p>
+<p>具体的看 PPT 上 / lsc 笔记上的例子，这是个比较复杂的例子，弄懂这个， 基本后面涉及到三态门选通的题目都没有问题。给个图，题目和分析过程就不放了，PPT 或 笔记雨课堂里都有。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107161443375.png"
+	width="896"
+	height="618"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107161443375_hu3ea38ce0ec44e69653d1330e2052f506_93931_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107161443375_hu3ea38ce0ec44e69653d1330e2052f506_93931_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107161443375"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="347px"
+	
+></p>
+<h3 id="作业-1">作业</h3>
+<p>第四章可以做了。</p>
+<h2 id="存储技术">存储技术</h2>
+<p>本章是重点，考察内容包含SRAM的字拓展与位拓展，同时需要结合上一章的地址译码考察，要画电路图，写汇编程序等。</p>
+<h3 id="全地址译码--部分地址译码">全地址译码 / 部分地址译码</h3>
+<blockquote>
+<p>不算重点，但最好了解。</p>
+</blockquote>
+<p>首先，要知道本章重点在讲内存如何与 8086/8088 CPU 连接。内存，即 SRAM 芯片，将一块 SRAM 芯片与 CPU 相连，依据地址线连接的条数，有两种方式。举个例子，用一片 SRAM 连接到 8088 CPU，其所占地址空间为 F0000H ~ F1FFFH。</p>
+<h4 id="全地址译码电路">全地址译码电路</h4>
+<p>所有地址线都参与地址译码，连线多，但不浪费内存地址空间。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107193817754.png"
+	width="941"
+	height="649"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107193817754_hu10e7b970a4da7f1042510ad78571149b_72678_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107193817754_hu10e7b970a4da7f1042510ad78571149b_72678_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107193817754"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="347px"
+	
+></p>
+<p>如图，仅当地址范围为 F0000H ~ F1FFFH 时，会选中当前 SRAM。</p>
+<h4 id="部分地址译码电路">部分地址译码电路</h4>
+<p>部分高位地址线不连接，连线少，但浪费内存地址空间。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194029440.png"
+	width="1073"
+	height="652"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194029440_hu097d5234102cb6a683704fca312d66e6_111656_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194029440_hu097d5234102cb6a683704fca312d66e6_111656_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107194029440"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="164"
+		data-flex-basis="394px"
+	
+></p>
+<p>图上四种地址范围，都会选中该片 SRAM，所以造成了地址空间的浪费。</p>
+<h3 id="多片-sram-构成-8088-内存">多片 SRAM 构成 8088 内存</h3>
+<blockquote>
+<p>重点了。8088 的内存结构理解比较简单，换成 8086 要注意双体内存的特点。</p>
+</blockquote>
+<h4 id="字拓展">字拓展</h4>
+<p>字拓展，理解为将存储容量拓展。其实很简单，比如我有两片 2K*8bit 的 SRAM 芯片，我只插一片，可以有 2KB 的内存；如果我觉得还不够，我再插一片，我就拥有了 2*2KB 的内存。这就是字拓展。</p>
+<p>以下图为例，将两块 SRAM 分别占用不同的内存地址空间，就构成了字拓展。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194645949.png"
+	width="968"
+	height="698"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194645949_hua13b2d203515274b69b32b2cfefbb341_128166_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107194645949_hua13b2d203515274b69b32b2cfefbb341_128166_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107194645949"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="138"
+		data-flex-basis="332px"
+	
+></p>
+<h4 id="位拓展">位拓展</h4>
+<p>全名是存储位拓展。什么叫存储位？<strong>存储位就是内存的最小单元有几位二进制位</strong>。如果最小单元为 4bit，那么存储位就为 4bit。位拓展就是拓展存储位，将两块存储位为 4bit 的 SRAM 相连，可以构成一块存储位为 8bit 的整体，这就叫位拓展。</p>
+<p>为什么要位拓展？以 8086 为例，其内存要求的最小存储单元尺寸为 1Byte，也就是 8bit，如果 SRAM 存储位只有 4bit，那 8086 是没办法访问的，因为超过了最小的存储单元尺寸，8086 无法一次只访问 4bit 的数据。因此，需要位拓展以适应与 CPU。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107195317356.png"
+	width="1041"
+	height="724"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107195317356_hu3d89d153e1ffa28633e840f9b03641ab_179681_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220107195317356_hu3d89d153e1ffa28633e840f9b03641ab_179681_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220107195317356"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="143"
+		data-flex-basis="345px"
+	
+></p>
+<p>由于 8086 的双体内存结构，最小的访问单元是字（16bit），因此，将两片 2K*8bit 的 SRAM 以双体内存的形式，构成最小范围党员为 16bit 的 8086 的内存。</p>
+<p>注意，双体内存一定是偶存储体占用低8根数据线。</p>
+<h4 id="汇编读数据">汇编读数据</h4>
+<p>用汇编来读内存里的数据，如读地址为 80002H 开始的 16bit 数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	AX,	8000H
+</span></span><span class="line"><span class="cl">MOV	DS,	AX
+</span></span><span class="line"><span class="cl">MOV SI,	2H
+</span></span><span class="line"><span class="cl">MOV	AX,	[SI]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果只读 8bit 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	AX,	8000H
+</span></span><span class="line"><span class="cl">MOV	DS,	AX
+</span></span><span class="line"><span class="cl">MOV SI,	2H
+</span></span><span class="line"><span class="cl">MOV	AL,	[SI]	; 改用 8bit 的寄存器即可
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意如果不对齐，CPU 要访问两次内存才能取回数据，但在代码上体现出来都是一样的，只不过地址换为奇数地址。</p>
+<p>如何判断数据是否对齐？16bit的数据，起始地址为偶数，则对齐（仅限于 8086）。</p>
+<h4 id="作业-2">作业</h4>
+<p>5.1 的作业可以做了。</p>
+<h3 id="rom-作译码器">ROM 作译码器</h3>
+<blockquote>
+<p>非重点，看一下了解即可。</p>
+</blockquote>
+<p>ROM，只读存储器，与RAM相对，本质上也是一个存储器，通过获取输入的地址，返回对应地址的数据。以一道题目来讲一下，基本就可以明白了。</p>
+<p>现在要用4片6264构成一个存储容量为32KB的8位存储器（字扩展），其地址空间为E0000H~E7FFFH。 用一块512 4（即512个存储单元，每个存储单元为4位）的PROM芯片63S241作为ROM译码器。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108162702446.png"
+	width="892"
+	height="518"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108162702446_hu8fce51e385efcec5f623108beee669ea_187404_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108162702446_hu8fce51e385efcec5f623108beee669ea_187404_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108162702446"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="413px"
+	
+></p>
+<p>红黄绿蓝是四个时间段传入的数据。实际上就是在 ROM 地址空间中的 070H ~ 073H 分别写入 1110，1101，1011，0111。假如我现在要访问 E0002H 的内存地址，输入 ROM 中就是取了其中 070H 部分的内容，ROM 输出了 Q~0~ ~ Q~3~ 为 0111 的信号，低电平选中，只需要将 0 的那条线路连中对应该块地址的 SRAM，即可完成地址译码。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108163425593.png"
+	width="887"
+	height="611"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108163425593_hu03dc410ee2feac33373462a6f311835f_99887_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108163425593_hu03dc410ee2feac33373462a6f311835f_99887_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108163425593"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="348px"
+	
+></p>
+<p>示意图，重要在理解 ROM 的作用，中间是下拉电阻，保持电压稳定。</p>
+<h3 id="ram-设计题目">RAM 设计题目</h3>
+<blockquote>
+<p>重点，作业也有类似的题目，这里再给一道例题。</p>
+</blockquote>
+<p>现有容量为 8K 8bit 和 4K 8bit 的SRAM芯片。在8086系统中：</p>
+<ol>
+<li>利用这样的芯片构成地址范围为C2000H~C7FFFH的内存，画出最大模式下包括总线驱动在内的此芯片与系统总线的连接图（译码器件自行选择，尽量选择容量大的芯片）</li>
+<li>试编写8086汇编语言程序，从地址C2000H开始，依次写入数据，直到地址C7FFFH。要求数据从0开始，每写入一个字节后数据加1，即写入数据依次为：00H、01H、02H、03H、&hellip;&hellip; 、FEH、FFH、 00H、01H、…… 。然后逐个单元读出比较，若有错，则在DL中写入01H，退出检测；若每个单元均对，则在DL写入00H。</li>
+</ol>
+<p>答：</p>
+<p>这类题目，有个大体的分析模板，我在这里用这个模板分析做一下这道题。有些东西用文字还是不太好描述，只能写的尽量详细点，不懂再问。</p>
+<p><strong>1. 确定所要构成的空间大小，以及所需要的芯片数目。</strong></p>
+<p>地址范围为 C2000H ~ C7FFFH，由 C7FFFH - C2000H + 1 = 6000H = 6*2^12^ = 24KByte。</p>
+<p>题目要求首选大容量芯片，因此，首选 8K*8bit 的芯片。由于构成的是 8086 双体内存结果，所选的芯片必须为<strong>成两套</strong>的芯片，即两组一模一样的芯片，分别构成奇偶内存体。</p>
+<p>因此，奇偶内存体分别选用一块 8K*8bit 与一块 4K*8bit 构成，所有芯片共计选择 4 块， 8K*8bit 与 4K*8bit 各选择两块，容量合计也正好为 24KB。</p>
+<p><strong>由于 SRAM 芯片都为 8bit，8086 而言，奇偶存储体的结构需要以 16bit 作为单元，因此，将两块 8K 与两块 4K 之间分别作奇偶存储体的位拓展，形成 16bit 的存储器。</strong></p>
+<p><strong>2. 地址译码分析。</strong></p>
+<p>依上文分析，我们需要构成 24KB 的内存。将 C2000H ~ C7FFFH 的内存地址变化列出如下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108165316163.png"
+	width="858"
+	height="351"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108165316163_hud3292bb580f64516a3fbe048e327d299_78504_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108165316163_hud3292bb580f64516a3fbe048e327d299_78504_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108165316163"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="244"
+		data-flex-basis="586px"
+	
+></p>
+<p>每一行的地址范围，涵盖了内存空间为 24KB / 6 = 4KB，位拓展后，我们有 8K * 16bit 与 4K * 16bit 的存储器各一块（这个<strong>位拓展已经是把奇偶存储器一块算进去了，如 8K * 16bit，是由一块 8K * 8bit 构成偶存储体，一块 8K * 8bit 构成奇存储体，位拓展而成</strong>）。</p>
+<p>因此，划分地址空间上，前 4 行用作 8K * 16bit 的地址空间，后 2 行用作 4K * 16bit 的地址空间。</p>
+<p>再看两个存储器的地址引脚数（位拓展不改变地址引脚数），由 2^13^ = 8K，8K * 16bit 的地址引脚数为 13，同理，4K * 16bit 的地址引脚数为 2^12^。</p>
+<p>如图，在地址范围内，用红圈圈起对应位数的地址位，<strong>忽略 A~0~ 作为奇偶存储体选择信号</strong>。</p>
+<p>现在进行地址译码中最重要的一部分，**依据地址范围的特点，选择特定的地址信号线进行地址译码，实现访问特定地址时，选通特定内存芯片的效果。**本例中，我们有两块存储体需要选通，其选通的地址空间分别就为前四行和后两行。观察地址特点，<strong>A~13~ 与 A~14~ 两位的变化可以决定选中哪一部分的存储器。</strong></p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>A~14~</th>
+<th>A~13~</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>都不选中</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>选中 8K * 16bit</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>同选中 8K * 16bit</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>选中 4K * 16bit</td>
+</tr>
+</tbody>
+</table></div>
+<p>为了译码方便，再选入 A~15~，构成三位，以使用 3-8 译码器构成地址译码电路。（当然，只用两位，通过 2-4 译码器构成也是可以的，但 2-4 用的太少了）</p>
+<p><strong>3. 作出译码电路部分电路图。</strong></p>
+<p>依据地址范围特点，作出译码电路部分的电路图。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108170943328.png"
+	width="402"
+	height="211"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108170943328_hu8a0b7e5621025bef951c82b366a44b1a_35801_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108170943328_hu8a0b7e5621025bef951c82b366a44b1a_35801_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="190"
+		data-flex-basis="457px"
+	
+></p>
+<p><strong>4. 作出内存部分电路图。</strong></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171011510.png"
+	width="358"
+	height="613"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171011510_hu85b1c5e10ac69ef3a0fded29e8fc9d2e_114682_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171011510_hu85b1c5e10ac69ef3a0fded29e8fc9d2e_114682_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108171011510"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="58"
+		data-flex-basis="140px"
+	
+></p>
+<p><strong>5. 作出驱动器与三态门部分电路图。</strong></p>
+<p>数据线使用双向驱动（三态门），因为存在读入与写出的双端交互。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171054653.png"
+	width="434"
+	height="240"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171054653_hu478a05bc08f565a271232302363cb46b_40953_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171054653_hu478a05bc08f565a271232302363cb46b_40953_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108171054653"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="180"
+		data-flex-basis="434px"
+	
+></p>
+<p>余下的仅有单向传输需要的，用单向驱动器。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171210351.png"
+	width="405"
+	height="173"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171210351_hu7e492817017206f756999da1b22b2bc7_32827_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171210351_hu7e492817017206f756999da1b22b2bc7_32827_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108171210351"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="561px"
+	
+></p>
+<p><strong>6. 整理下，获得整体的电路图。</strong></p>
+<p>不过一般而言，也可以先画驱动，再画其他的，这样信号可以比较好判断用不用加一撇。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171306298.png"
+	width="859"
+	height="690"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171306298_hu709744525fc2723602b1062159adf3fd_240345_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171306298_hu709744525fc2723602b1062159adf3fd_240345_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108171306298"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="124"
+		data-flex-basis="298px"
+	
+></p>
+<p><strong>7. 汇编程序</strong></p>
+<p>如果电路图实在不会画，考试也尽量把汇编写出来，电路图画不画没有影响，有题目了汇编就可以写。</p>
+<p>不熟悉的话，推荐使用 8bit 写。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171401493.png"
+	width="933"
+	height="643"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171401493_hu8093446a86bd779e0993dee3a679e62d_217852_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108171401493_hu8093446a86bd779e0993dee3a679e62d_217852_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108171401493"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="348px"
+	
+></p>
+<h3 id="rom-只读存储器">ROM 只读存储器</h3>
+<p>正式介绍下 ROM，只读存储器。与 RAM 随机存储器最大的区别在于，存在非易失性，掉电不会影响里面的内容，但同时需要写的话不容易写，所以一般用作存储（也就是俗称的硬盘）。不过，某些擦除比较方便的 ROM 和 RAM 一样，也可以连在 8086 的总线上，占用内存的地址空间。</p>
+<p>至于这个东西怎么考？概念的东西就不说了，大体翻翻ppt，知道这个东西的特点、基本原理即可，大题上，这个东西会<strong>结合上面的 RAM 设计题考察</strong>。体现就在于要你综合设计 <strong>ROM 与 RAM</strong>。</p>
+<p>但这个其实也不难，原理其实是和 RAM 的设计题一模一样的，你就分开分别设计 ROM 与 RAM，分别分析地址空间，连线画图即可。</p>
+<h4 id="简单举个例子">简单举个例子</h4>
+<p>利用2732（8K 8bit SRAM）和6264（4K 8bit EPROM）构成从 00000H~02FFFH的ROM存储区和从03000H~06FFFH的RAM存储区。画出与8088系统总线的连接图。 （不考虑板内总线驱动）</p>
+<p><strong>选片分析 &amp; 地址译码分析</strong></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172359976.png"
+	width="892"
+	height="486"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172359976_hu6af71687c989f4f0edf6bd602c1027df_84556_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172359976_hu6af71687c989f4f0edf6bd602c1027df_84556_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108172359976"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="440px"
+	
+></p>
+<p><strong>连线</strong></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172410504.png"
+	width="865"
+	height="696"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172410504_hu1e5238f6a7b0ee2c9bdaaf09fc4d0fe3_115404_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172410504_hu1e5238f6a7b0ee2c9bdaaf09fc4d0fe3_115404_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108172410504"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="124"
+		data-flex-basis="298px"
+	
+></p>
+<p>如果将SRAM芯片改成8K 4bit，则在上面基础上加入一个位拓展即可。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172516165.png"
+	width="889"
+	height="619"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172516165_hudd7c62f6ac2e017b4e7ec220576bf291_131072_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108172516165_hudd7c62f6ac2e017b4e7ec220576bf291_131072_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108172516165"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="143"
+		data-flex-basis="344px"
+	
+></p>
+<h4 id="eeprom-电可擦除只读存储器构成主存">EEPROM 电可擦除只读存储器构成主存</h4>
+<blockquote>
+<p>这个要掌握，作业里有。</p>
+</blockquote>
+<p>一个典型的 EEPROM 芯片的型号是 98C64A。</p>
+<h5 id="引脚与功能">引脚与功能</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173027649.png"
+	width="724"
+	height="270"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173027649_hu0b5037b9a32c4134b13f4bcc8a7b02d2_52455_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173027649_hu0b5037b9a32c4134b13f4bcc8a7b02d2_52455_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108173027649"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="268"
+		data-flex-basis="643px"
+	
+></p>
+<p>A 是地址线引脚，D 是数据线引脚，与 RAM 一样，没什么好说的。</p>
+<p>!CE 是片选，为 0 时工作。!OE 是允许输出，需要读的时候，置为 0 。!WE 是允许写入，需要写的时候，置为 0 。</p>
+<p>比较特别是最后这个 Ready/!Busy 引脚。</p>
+<p>之前说过，ROM 的写入是不太容易的，因此，如果 CPU 向 ROM 写入了数据，需要等待 ROM 处理一段时间，才能真正完成数据的写入，在处理这段时间内，该引脚就会置为 0，表明目前正忙。</p>
+<h5 id="构成-8088-内存">构成 8088 内存</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173512787.png"
+	width="932"
+	height="688"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173512787_huba7245caaa789e57881f15ae06a61670_89152_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173512787_huba7245caaa789e57881f15ae06a61670_89152_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108173512787"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="135"
+		data-flex-basis="325px"
+	
+></p>
+<p>和之前 RAM 构成内存很像，最大区别就在于多了个 Ready/!Busy 信号的读取。</p>
+<p>这个引脚通过一个外设门来连接到总线中的 D~0~ 上。外设门有独立的接口地址，CPU 读这个外设门，门就会打开，将 Ready/!Busy 信号传到 D~0~，用以判断 ROM 是否完成了写入。</p>
+<h5 id="汇编-1">汇编</h5>
+<p>把芯片内部所有的单元写入55H。没有用到 Ready/!Busy，取而代之的是每次写入延时 20ms，等待其完成写入，再写入下一个。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173931074.png"
+	width="836"
+	height="452"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173931074_hud2bd60d2f33a981b00478bc68aa7d2ab_114741_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108173931074_hud2bd60d2f33a981b00478bc68aa7d2ab_114741_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108173931074"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="443px"
+	
+></p>
+<p>如果要启用 Ready/!Busy，每次写入查询这个引脚状态，一旦不为 Busy，则可以继续写入。</p>
+<p>给外设门设计译码电路。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174241360.png"
+	width="870"
+	height="629"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174241360_hu963d5c9ea728b9a1e176c3acfbea052d_110608_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174241360_hu963d5c9ea728b9a1e176c3acfbea052d_110608_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108174241360"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="138"
+		data-flex-basis="331px"
+	
+></p>
+<p>通过查询 Ready/!Busy的方式，改进写入逻辑。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174326391.png"
+	width="818"
+	height="550"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174326391_hu93776a9245e2eb80e631f6649a7f98af_139123_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108174326391_hu93776a9245e2eb80e631f6649a7f98af_139123_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108174326391"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="356px"
+	
+></p>
+<h3 id="作业-3">作业</h3>
+<p>第五章作业都可以做了。</p>
+<h2 id="io-技术">I/O 技术</h2>
+<p>这章以及后面一章，主要讲述 CPU 如何与外设通信。包含几种连接在总线与外设间的元器件，它们负责 CPU 与外设间的通信，依据 CPU 的指令，适时地开合。本章重点讲述中断处理。</p>
+<p>需要注意的是，后面涉及到外设、I/O 接口等，地址线无论是 8086，8088，都只需要用 16 根。因为外设是独立编址的，最大为 64KB，刚好 16 根地址线可以满足。</p>
+<h3 id="汇编中的-io-指令">汇编中的 I/O 指令</h3>
+<p>前面的没讲，这里补充下。</p>
+<h4 id="向外设读入数据">向外设读入数据</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	DX,	0800H	; 外设地址，必须存在DX寄存器(?)
+</span></span><span class="line"><span class="cl">IN	AL,	DX		; 从DX地址的外设中写入数据到AL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="向外设写出数据">向外设写出数据</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	DX,	0800H
+</span></span><span class="line"><span class="cl">MOV	AL,	0FFH
+</span></span><span class="line"><span class="cl">OUT	DX,	AL		; 向DX地址的外设写入FFH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="基本输入--输出方法">基本输入 / 输出方法</h3>
+<p>CPU 控制 I/O 的方式大体可以分为 3 种。</p>
+<h4 id="无条件传送方式">无条件传送方式</h4>
+<p>有一些最简单的外设不需要查询，可以随时给它发命令，随时读它的状态，这种外设可以采用无条件传送的方式。</p>
+<h5 id="输入设备">输入设备</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108202631562.png"
+	width="582"
+	height="468"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108202631562_hu8ee532a7707a8548c7de4e9b81af0958_34887_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108202631562_hu8ee532a7707a8548c7de4e9b81af0958_34887_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108202631562"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="124"
+		data-flex-basis="298px"
+	
+></p>
+<p>通过一个三态门，连接外设与总线。当 CPU 需要读取外设输入信息时，在地址线上传入外设的 I/O 地址，经过译码器作用，三态门被选中，导通，外设的数据传送到总线上，CPU 读入数据。</p>
+<h5 id="输出设备">输出设备</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108203520850.png"
+	width="695"
+	height="502"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108203520850_hu12e18ac2c3fc4f37652b8600e871960a_40247_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108203520850_hu12e18ac2c3fc4f37652b8600e871960a_40247_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108203520850"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="138"
+		data-flex-basis="332px"
+	
+></p>
+<p>类似地，通过一个锁存器，仅当 CPU 选中外设地址，且需要写外设时。<strong>CPU 将数据铺到总线上，由于输出的数据只在 OUT 指令执行瞬间呈现在数据线上，时间非常短，所以输出接口需要有锁存功能，将总线的数据读入到锁存器内，持续提供给外设</strong>。</p>
+<h4 id="查询方式">查询方式</h4>
+<p>与简单的无条件传送不同，查询方式要求 CPU 在读/写外设前先查询外设状态，若外设准备就绪则可以进行读/写，否则拒绝，CPU 等待。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108204427203.png"
+	width="875"
+	height="468"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108204427203_hu8d77ee94a500096b9b43f66bb3e0b433_94882_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108204427203_hu8d77ee94a500096b9b43f66bb3e0b433_94882_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108204427203"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="186"
+		data-flex-basis="448px"
+	
+></p>
+<p>查询的方式，通常需要外设有相应的状态接口。我们上面讲的 EEPROM，也提供了一个 Ready/!Busy 接口，其实与外设的查询方式基本是一致的，只不过上面的是 ROM，用的主存地址，外设用的 I/O 地址。因此，具体的例子也不讲了，题目遇到了我们在题目里说。</p>
+<p><strong>多外设的查询</strong></p>
+<p>多个外设使用查询方式，有几种方法。</p>
+<p>这种不好，要是某个坏掉了就一直卡着了。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205315682.png"
+	width="828"
+	height="604"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205315682_hub17b696a6dc9d045fe3e19c3f37ba6e0_50468_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205315682_hub17b696a6dc9d045fe3e19c3f37ba6e0_50468_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108205315682"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="137"
+		data-flex-basis="329px"
+	
+></p>
+<p>这个不错。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205351420.png"
+	width="876"
+	height="474"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205351420_hu05864e31d2f96a9c2ebac7abbb76db52_89099_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205351420_hu05864e31d2f96a9c2ebac7abbb76db52_89099_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108205351420"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="443px"
+	
+></p>
+<p>不需要优先级可以这样。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205418505.png"
+	width="918"
+	height="535"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205418505_huf9e436b2a7d017e594f23a9d4084a9f2_67202_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220108205418505_huf9e436b2a7d017e594f23a9d4084a9f2_67202_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220108205418505"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="411px"
+	
+></p>
+<h4 id="中断方式">中断方式</h4>
+<p>除了上述两种信息交互方式，还有一种方式，即外设需要与 CPU 交换信息时，向 CPU 发送一个中断请求，令 CPU 先放下手头的任务，中断来处理当前的请求任务。</p>
+<p>8086 处理中断的逻辑在前面讲过一些，这里着重讲的是来自 INTR 引脚（可屏蔽中断请求）的中断请求，一般对应了外设的中断请求。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109134215105.png"
+	width="938"
+	height="537"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109134215105_hu1d236cba2e747b56c884f7482a2cb1e1_111915_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109134215105_hu1d236cba2e747b56c884f7482a2cb1e1_111915_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109134215105"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="419px"
+	
+></p>
+<p>图中的 8259A，可以从多个可屏蔽中断请求中选取当前优先级最高的中断请求，然后向 CPU 发送 INTR 信号，请求中断。</p>
+<p>具体的中断处理过程，包括CPU响应中断，回复!INTA信号，以及保护现场，查找中断向量表详细过程，在下图中有部分体现，如果对整个过程还不太清楚，继续往下看，后面结合 8259 工作方式有讲解。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109135811708.png"
+	width="632"
+	height="468"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109135811708_hub2dd1211220e6277eb472b01a603c864_120506_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109135811708_hub2dd1211220e6277eb472b01a603c864_120506_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109135811708"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="135"
+		data-flex-basis="324px"
+	
+></p>
+<p>需要注意的几点：</p>
+<ul>
+<li>1413:0105 表示内存地址，左侧表示段寄存器，右侧表示段内偏移。</li>
+<li>8086 采用小端存储，小地址对应低字节，大地址对应高字节。</li>
+<li>CPU硬件在响应中断时会自动关中断。如果中断服务程序允许中断嵌套，在保护现场之后加开中断指令STI，恢复现场之前再用关中断指令CLI。</li>
+</ul>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109140306119.png"
+	width="839"
+	height="537"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109140306119_huca857a74451fd89b2649bd501f00d889_132904_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109140306119_huca857a74451fd89b2649bd501f00d889_132904_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109140306119"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="374px"
+	
+></p>
+<h3 id="可编程中断控制器-8259">可编程中断控制器 8259</h3>
+<p>对8个中断源实现优先级控制 支持多片级联，一个主片可以有8个从片，可扩展至对64个中断源实现优先级控制。可编程设置不同工作方式。</p>
+<blockquote>
+<p>可编程就是该芯片内部有一些寄存器，往寄存器里面写入不同的内容就可以具有不同的功能，可以 工作在不同的模式下。</p>
+</blockquote>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F20200617233106677.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L215UmVhbGl6YXRpb24%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70&amp;refer=http%3A%2F%2Fimg-blog.csdnimg.cn&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1644301168&amp;t=eef1a020511ba0110fab2f77a2a3ae90"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h4 id="外部引脚">外部引脚</h4>
+<p>首先看看这只蟑螂有哪些外部引脚，以实现一个判断中断优先级并选入最高优先级中断的功能。</p>
+<blockquote>
+<p>注意，这里的芯片引脚图只是个参考，并非所有 8259 芯片的引脚都如图，可能会有命名上的差异，或者高低电平上的差异，但整体而言大同小异。</p>
+</blockquote>
+<ul>
+<li>中断源输入引脚 IR0 ~ IR7，每块 8259 可以有 8 个中断源输入。</li>
+<li>双向数据总线 D0 ~ D7，连接到系统数据总线的低 8 位。</li>
+<li>中断请求 INT 与中断应答 !INTA。</li>
+<li>读写信号，WR 与 !RD，要对 8259 的内部寄存器进行读写，读写时传数据通过8根数据线。</li>
+<li>片选 !CS，也用于多片级联，需要看访问哪一片。</li>
+<li>地址 A0，8259 含一根地址线，占用两个接口地址。</li>
+<li>其他引脚与级联使用有关。</li>
+</ul>
+<h4 id="内部寄存器">内部寄存器</h4>
+<p>为了正确将优先级最高的中断输入给 CPU，8259 需要用到 3 个寄存器。</p>
+<ul>
+<li>
+<p>中断请求寄存器 IRR：保存从IR0 IR7来的中断请求信号，某位=1表示对应的 IR~i~ 有中断请求。</p>
+</li>
+<li>
+<p>中断屏蔽寄存器 IMR：存放中断屏蔽字，某位=1表示对应的 IR~i~ 输入被屏蔽。</p>
+</li>
+<li>
+<p>中断服务寄存器 ISR：保存正在服务的中断源，某位=1表示对应的 IR~i~ 中断正在被服务。</p>
+</li>
+</ul>
+<p>除此之外，涉及到初始化与级联相关使用，和可编程信息的存储器还有 7 个，4个初始化命令字 ICW1 ~ ICW4，还有3个操作命令字 OCW1 ~ OCW3。OCW1 其实就是 IMR，所以8259内部总共有9个寄存器。</p>
+<h4 id="一个例子说明-8259-的工作方式">一个例子说明 8259 的工作方式</h4>
+<p>某一时刻，8259 内部各寄存器状态如下，假设当前设置的优先级判别为数字小的中断请求优先级高于数字大的，即 IR2 &gt; IR5。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109143344243.png"
+	width="908"
+	height="435"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109143344243_hub25071c791160584a22913060ce4b4a2_46965_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109143344243_hub25071c791160584a22913060ce4b4a2_46965_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109143344243"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="208"
+		data-flex-basis="500px"
+	
+></p>
+<p>先看 IRR 寄存器，第 2，3，5 位被置 1，说明这 IR2，IR3，IR5 当前有中断请求输入。</p>
+<p>再看 IMR 寄存器，第 2 位置 1，说明屏蔽了 IR2 的中断请求输入。</p>
+<p>继续看 ISR 寄存器，第 4， 6 位置 1，说明 CPU 正在同时处理两个中断请求，且肯定发生了<strong>中断嵌套</strong>（一个中断处理的过程中继续被中断，处理另一个优先级更高的中断）。</p>
+<p>回看 IRR，发现 IR2，IR3 这两个位置上的中断优先级比正在处理的中断优先级都要高（IR2，IR3 &gt; IR4, IR6）。而 IR2 被屏蔽，那么 8259 就要为 IR3 通过 INT 向 CPU 发送一个中断请求。</p>
+<p>CPU 接收到 INT 请求后，如果 IF 为 1，开中断允许，则 CPU 会保护断点，将 Flags，CS，IP 入栈，将 IF 清 0 关中断。随后，CPU 通过 !INTA 传送出连续两个负脉冲。</p>
+<p>8259 接收到第一个负脉冲就知道CPU正在响应刚才的中断请求，因为CPU马上要执行到IR3对应的中断源的中断服务程序，会将ISR的第3位置1，IRR的第3位清0；同时，它会准备好发出中断请求的中断源的8位中断向量码，等第二个负脉冲来时将其放在低8位数据线上让 CPU 采样得到。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109144858968.png"
+	width="1050"
+	height="434"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109144858968_huc2d85ce3825787c1a45a939a62550252_49696_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109144858968_huc2d85ce3825787c1a45a939a62550252_49696_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109144858968"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="241"
+		data-flex-basis="580px"
+	
+></p>
+<p>CPU 在中断服务程序执行完之后通知 8259 可以将 ISR 的相应位清 0。在中断服务程序的最后恢复现场之前，要给 8259 发一个 EOI 中断结束命令。</p>
+<p>要实现 EOI 功能需要 3 条指令，先将 8259 的偶地址（ 8259 只有 一根地址线，地址线给0是偶地址，给1是奇地址）放到DX，要写入的内容放在AL，再用OUT指令把AL 的内容写入到DX所指向的接口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MOV	DX,	8259偶地址
+</span></span><span class="line"><span class="cl">MOV	AL,	20H
+</span></span><span class="line"><span class="cl">OUT	DX,	AL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写的数是20H，是一般EOI命令。</p>
+<p>允许中断嵌套并且是正常优先级的情况下就会在在中断服务程序的末尾向8259发一个一般EOI命令。8259接收到命令后将ISR中优先级最高的那一位清0，因为有正常优先级概念的情况下，如果允许中断嵌套，最先执行完的中断服务程序肯定是优先级最高的。</p>
+<h4 id="一个例子并不能说完-8259-的工作方式">一个例子并不能说完 8259 的工作方式</h4>
+<p>由于这玩意是可编程的，当然不可能一个例子就说完啦。</p>
+<p>总的来说，8259 的可编程表现在于以下方面可以根据需求设置。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145301093.png"
+	width="601"
+	height="357"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145301093_huc6c2ace0db8c5dea76c9cadd44a44666_105280_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145301093_huc6c2ace0db8c5dea76c9cadd44a44666_105280_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="****"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="404px"
+	
+></p>
+<p>看完后是不是一脸懵逼？没事，我也一脸懵逼。接着看下面的图，要如何按需求选择工作方式，就一目了然了。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145350856.png"
+	width="707"
+	height="437"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145350856_hubbeb3d40b92118ef09c78bbf35b5ae08_140354_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145350856_hubbeb3d40b92118ef09c78bbf35b5ae08_140354_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109145350856"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="388px"
+	
+></p>
+<p>缓冲模式，双向数据线需要加一个74LS245驱动器，由于后面都没怎么提到，默认为工作到非缓冲方式下。至于中断允许嵌套与屏蔽方式，直接引用下笔记里的表述。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145628939.png"
+	width="928"
+	height="140"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145628939_hu84ab4a2a3a581ea5bba29761e614c7d8_99461_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145628939_hu84ab4a2a3a581ea5bba29761e614c7d8_99461_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109145628939"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="662"
+		data-flex-basis="1590px"
+	
+></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145714798.png"
+	width="923"
+	height="194"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145714798_hua13fa5abcd8b5ab07c73cd7b8749602b_132109_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109145714798_hua13fa5abcd8b5ab07c73cd7b8749602b_132109_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109145714798"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="475"
+		data-flex-basis="1141px"
+	
+></p>
+<p>优先级和级联在下面开个主题单独聊。</p>
+<h4 id="优先级">优先级</h4>
+<h5 id="固定优先级">固定优先级</h5>
+<p>也就是我们上面举的例子，优先级默认从低到高为 IR7 ~ IR0。</p>
+<h5 id="自动循环优先级">自动循环优先级</h5>
+<p>这种方式下，某中断请求被处理后，其优先级别自动降为最低，原来比它低一级的优先级上升为最高级。初始的优先级顺序可由编程改变。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151131221.png"
+	width="915"
+	height="237"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151131221_huaa694109e5b673371827ba7cd9c53e3a_61559_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151131221_huaa694109e5b673371827ba7cd9c53e3a_61559_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109151131221"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="386"
+		data-flex-basis="926px"
+	
+></p>
+<h5 id="指定循环优先级">指定循环优先级</h5>
+<p>与固定优先级类似，但优先级顺序可以编程指定。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151323159.png"
+	width="913"
+	height="264"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151323159_hu5fbc182267596621f7beb7e30e504416_62745_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109151323159_hu5fbc182267596621f7beb7e30e504416_62745_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109151323159"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="345"
+		data-flex-basis="830px"
+	
+></p>
+<h4 id="级联">级联</h4>
+<p>级联我觉得考难的可能性不大，比较复杂，不过还是要注意下。</p>
+<p>单片 8259 可支持 8 个中断源，采用多片 8259A 级连，可最多支持 64 个中断源。n片 8259A 可支持7n+1 (n &lt;= 9) 个中断源。（除了主片，每片 8259 级联占用一个 IR 口，提供八个 IR 口，因此总共有为 7(n-1) + 8n）。</p>
+<p>主片通过接收到第一个负脉冲后会对ISR和IRR置位。主片替从片向CPU发中断请求，就会通过CAS0~CAS2这3根线送级联地址给两个从片，两个从片在中断应答的第一个负脉冲会检查这3根线的状态与ICW3内容作比较，一致则对ISR和IRR置位，并在第二个负脉冲来时提供中断向量。</p>
+<p>举个例子，从片1有中断请求，总片将其中断请求通过 IR3 输入，并提供至 CPU，CPU 响应，总片将 CAS0 ~ CAS2 置为 011 （IR3），两个从片收到 CPU 的 !INTA 后，检查 CAS，若 CAS0 ~ CAS3 = 自己的 ICW3，说明自己的请求被响应。本例中就是从片1知道自己被响应。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162918838.png"
+	width="918"
+	height="557"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162918838_hubf9d150b196a937769208ed1c8db5a3d_152043_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162918838_hubf9d150b196a937769208ed1c8db5a3d_152043_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109162918838"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="164"
+		data-flex-basis="395px"
+	
+></p>
+<p>一般嵌套方式与特殊全嵌套方式的区别主要在于封锁的 IR 口数量不同，如下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163309116.png"
+	width="794"
+	height="504"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163309116_hu5d648ef2580e7c4f9c5e9ae3ed8297fb_114528_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163309116_hu5d648ef2580e7c4f9c5e9ae3ed8297fb_114528_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163309116"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="157"
+		data-flex-basis="378px"
+	
+></p>
+<h4 id="8259-编程使用">8259 编程使用</h4>
+<blockquote>
+<p>寄存器格式不用记，考到了会给。</p>
+</blockquote>
+<p>内部存储器的访问如图。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109160305970.png"
+	width="894"
+	height="343"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109160305970_hu981484149887b5b29ecb2fe00c304382_74188_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109160305970_hu981484149887b5b29ecb2fe00c304382_74188_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109160305970"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="625px"
+	
+></p>
+<p>由于 8259 有一车可以初始化的寄存器，只有奇偶两个地址是不够用的，因此可以看到，数据线的 D4 和 D3 实际上也被用作了地址。</p>
+<h5 id="icw-寄存器">ICW 寄存器</h5>
+<p>一般而言，初始化 8259，首先要写 ICW1，那么我们先看 ICW1 的结构。</p>
+<h6 id="icw1初始化字">ICW1：初始化字</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109161843303.png"
+	width="941"
+	height="492"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109161843303_hud3ec1e88f012f0c8dd28e01341cc2bb7_105570_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109161843303_hud3ec1e88f012f0c8dd28e01341cc2bb7_105570_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109161843303"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="191"
+		data-flex-basis="459px"
+	
+></p>
+<blockquote>
+<p>LTIM 表示 IR0 ~ IR7 的触发方式。</p>
+</blockquote>
+<p>ICW1写入后启动了初始化过程，接下来要写后面的几个 ICW。至于要写几个 ICW，哪些 ICW 会跳过，见如下流程图。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162209386.png"
+	width="450"
+	height="600"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162209386_hub9a7bb5d830600ebe048800ed614ab8f_60104_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162209386_hub9a7bb5d830600ebe048800ed614ab8f_60104_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109162209386"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="75"
+		data-flex-basis="180px"
+	
+></p>
+<p>最少，需要写 ICW1，I W2 两个寄存器才能完成初始化。而至多需要写满 4 个 ICW 寄存器才能完成初始化。</p>
+<h6 id="icw2中断向量码">ICW2：中断向量码</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162511605.png"
+	width="946"
+	height="456"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162511605_hu84d1761b265c6dd5722a44459bbd2e59_128505_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109162511605_hu84d1761b265c6dd5722a44459bbd2e59_128505_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109162511605"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="207"
+		data-flex-basis="497px"
+	
+></p>
+<h6 id="icw3级联控制字">ICW3：级联控制字</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163351881.png"
+	width="789"
+	height="402"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163351881_hu822b35297c619dabb5ac5b878013439a_90073_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163351881_hu822b35297c619dabb5ac5b878013439a_90073_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163351881"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="471px"
+	
+></p>
+<h6 id="icw4中断结束方式">ICW4：中断结束方式</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163421594.png"
+	width="778"
+	height="409"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163421594_hu8002c37a69d1284388d8aaef090e93c4_104465_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163421594_hu8002c37a69d1284388d8aaef090e93c4_104465_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163421594"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="190"
+		data-flex-basis="456px"
+	
+></p>
+<h5 id="ocw-寄存器">OCW 寄存器</h5>
+<p>ICW 寄存器只能在初始化的过程中写入，工作后不可以更改。而 OCW 没有这个限制，随时可以写，任意顺序能写，写与不写都可以。</p>
+<h6 id="ocw1中断屏蔽字">OCW1：中断屏蔽字</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163458977.png"
+	width="780"
+	height="313"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163458977_hub5256fe27d1f1937b80c08de7b160300_69100_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163458977_hub5256fe27d1f1937b80c08de7b160300_69100_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163458977"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="249"
+		data-flex-basis="598px"
+	
+></p>
+<h6 id="ocw2中断结束和优先级循环">OCW2：中断结束和优先级循环</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163521931.png"
+	width="801"
+	height="421"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163521931_hua02b7703f5dabc0d208b71bd1e0c313a_163885_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163521931_hua02b7703f5dabc0d208b71bd1e0c313a_163885_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163521931"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="190"
+		data-flex-basis="456px"
+	
+></p>
+<h6 id="ocw3屏蔽方式和读出控制字">OCW3：屏蔽方式和读出控制字</h6>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163604178.png"
+	width="741"
+	height="348"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163604178_hub50244c168f618e69e7a253bca124afb_74519_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220109163604178_hub50244c168f618e69e7a253bca124afb_74519_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220109163604178"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="212"
+		data-flex-basis="511px"
+	
+></p>
+<h3 id="dma-控制器">DMA 控制器</h3>
+<p>这实际上是上面所说的“第四种方式”。</p>
+<p>DMA 控制器 8237 其可以实现内存到内存，内存到接口之间的数据传送，但不能实现接口到接口之间的数据传送，基本的在计组和操作系统都有讲过，要求不高，不详细讲。</p>
+<h3 id="作业-4">作业</h3>
+<p>第 6 章作业可以做了。</p>
+<h2 id="常用接口器件">常用接口器件</h2>
+<p>这章和上一章基本算是连起来的，讲的还是 I/O 相关。上一章着重介绍了 CPU 与外设通信方式中的<strong>中断方式</strong>，介绍了可编程中断控制器件 8259 。</p>
+<p>而有个未解决的问题在于，上一章我们的重点在于 8259 如何向 CPU 发送中断请求以及 CPU 如何处理中断请求，而外设如何与 CPU 进行中断方式的交互，如何与 8259 相连使得 CPU 可以收到中断请求这一部分，还没有进行说明。</p>
+<p>本章主要讲的接口器件，就是在外设与 CPU，外设与 8259 之间的一座桥梁，通过接口器件，外设可以向 8259 传送中断请求，也可以通过接口器件与系统总线实现数据交互。</p>
+<h3 id="三态门--锁存器用作接口器件">三态门 &amp; 锁存器用作接口器件</h3>
+<p>最简单的接口器件，也就是我们之前一直在用的三态门 / 锁存器。这个在第五章开头也讲过。</p>
+<blockquote>
+<p>这里稍微说一下，<em>74LS373、74LS244、74LS245、74LS273</em> 这一类器件都是三态门 / 锁存器 / 驱动器，区别无非是是否具有锁存功能、是否可以双向导通之类的，但本质上不必过于深究各个型号之间的差异，只需要知道这一类器件都是用于驱动 / 特定条件下选通数据即可。但注意的是，RAM 设计部分，单向驱动器用的是244，双向驱动器用的是245。</p>
+</blockquote>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110141805820.png"
+	width="801"
+	height="534"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110141805820_huc41ada1a5bb63f84b95abd0016745fe6_71270_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110141805820_huc41ada1a5bb63f84b95abd0016745fe6_71270_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110141805820"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></p>
+<p>上述连接方法，CPU 通过直接访问接口外设地址，就可以导通三态门 / 锁存器，读 / 写接口数据。这种方式虽然简单，但也有问题，即 CPU 利用率较低，大部分时间都花在不停地循环查询外设（比如有时候外设未准备好，CPU 访问该地址会遭到拒绝会是接收到无用数据，造成效率的浪费）。如果想要提高CPU的利用率，外设或者说接口能够引入中断功能，外设不忙需要CPU参与时再给CPU发中断请求。</p>
+<h3 id="具有发出中断能力的输入输出接口">具有发出中断能力的输入输出接口</h3>
+<p>抛弃三态门与锁存器，让我们通过带发出中断能力的接口来连接总线与外设。</p>
+<h4 id="单向中断接口">单向中断接口</h4>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110142134924.png"
+	width="766"
+	height="457"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110142134924_hu9741dcb23e815edd2d150aac48733d16_64512_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110142134924_hu9741dcb23e815edd2d150aac48733d16_64512_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110142134924"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="402px"
+	
+></p>
+<p>输出接口里有可以暂存数据的缓冲寄存器，也就是图里那个空窗窗，可以判断该寄存器内容是否为空，即数据是否已被外设取走。</p>
+<p>输出接口工作流程：</p>
+<ul>
+<li>输出接口检测到缓存为空，通过 !INTR 信号向 CPU 发送中断请求，通知 CPU 缓存已空，能否写入新的数据。</li>
+<li>CPU 经过一段过程，响应中断，进入中断服务程序，中断服务程序把要传输给外设的下一个数据写入到接口内部的缓冲寄存器，写完直接返回。</li>
+<li>接口检测到缓冲寄存器写入新数据，将 !OBF 信号置低电平，通知外设拿走数据。</li>
+<li>外设采样数据线，拿走数据且处理完后通过 !ACK 信号发一个负脉冲通知接口数据已被取走。接口将 !OBF 信号置高，同时再次向CPU发中断请求重复刚才的过程。</li>
+</ul>
+<p>输入接口工作流程类似：</p>
+<ul>
+<li>输入接口检测到缓存为空，通过将 IBF 信号置为高电平，提示外设现在可以写入数据。</li>
+<li>外设通过数据线提供数据，数据稳定后通过 !STB 信号发一个负脉冲，接口在负脉冲的上升沿把数据写入到其的暂存器中。</li>
+<li>接口写入新数据后把 IBF 信号置高表示输入缓冲区满，通过 !INTR 信号向 CPU 发中断请求。</li>
+<li>CPU 响应中断进入到中断服务程序，从接口把数据读走。</li>
+<li>接口将IBF信号置低，重复刚才的过程。</li>
+</ul>
+<p>需要注意的是，!STB 与 !ACK 都不是状态信号（持续的 0 或 1 表示某一种状态），而是脉冲信号（通过一个脉冲波形表达某种信息）。</p>
+<h4 id="双向中断接口">双向中断接口</h4>
+<p>可以将输入输出接口整合成一个总的接口，就成了双向中断接口。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110143420102.png"
+	width="725"
+	height="421"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110143420102_hu609a1b17d123f24750c337b5924bf464_53535_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110143420102_hu609a1b17d123f24750c337b5924bf464_53535_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110143420102"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="413px"
+	
+></p>
+<p>输入 / 输出接口内部有2个寄存器，从CPU角度一个只能写不能读一个只能读不能写，可以占用同一个寄存器接口地址。中断信号整合为 1 个，中断产生后，CPU 通过读状态寄存器得知产生中断的原因并做相应处理。</p>
+<h3 id="8255-可编程并行接口">8255 可编程并行接口</h3>
+<blockquote>
+<p>大题目前来看，按车车的说法是十年来都只考了方式0，但建议还是方式1方式2都多了解下。</p>
+</blockquote>
+<p>需要实现上述接口（三态门、单向中断、双向中断），可以采用器件为 8255 可编程并行接口。</p>
+<h4 id="8255-的三种工作方式">8255 的三种工作方式</h4>
+<ul>
+<li>方式0：
+<ul>
+<li>输入状态：相当于三态门</li>
+<li>输出状态：相当于锁存器</li>
+</ul>
+</li>
+<li>方式1：
+<ul>
+<li>输入状态：具有中断功能的输入接口</li>
+<li>输出状态：具有中断功能的输出接口</li>
+</ul>
+</li>
+<li>方式2：
+<ul>
+<li>双向输入/输出接口</li>
+</ul>
+</li>
+</ul>
+<h4 id="8255-的引脚接口">8255 的引脚接口</h4>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110150550043.png"
+	width="836"
+	height="577"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110150550043_hudb2f50319e959460c1cfde141efd262b_158431_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110150550043_hudb2f50319e959460c1cfde141efd262b_158431_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110150550043"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="347px"
+	
+></p>
+<p><strong>最主要的三类数据交互引脚</strong>：<em>PA0 ~ PA7</em> 对应 A 口，<em>PB0 ~ PB7</em> 对应 B 口，<em>PC0 ~ PC7</em> 对应 C 口。</p>
+<p>其中，C 口可以拆分为高 4 位与低 4 位，之间可以独立使用。</p>
+<p>任何一个口都可以工作在方式0，A口可以工作在方式1和方式2，B口可以工作在方式1。方式0和方式1可以配置成输入也可以配置成输出。若工作在方式1和方式2需要借用 C 口的部分引脚充当信号线。</p>
+<blockquote>
+<p>举个例子，若配置 8255 的 A 口工作在方式2。 这 8 根线跟外设之间是双向的，此外构成其他的一些握手信号如 !STB，IBF，!ACK，!OBF 和 !INTR，还需要分别借用 C 口的信号线 PC4 ~ PC7 和 PC3。如果B口刚好工作在方式1，还可以借用 C 口的另外 3 根线充当握手信号线。</p>
+</blockquote>
+<p><strong>A口，B口，C口各有1个8位的缓冲寄存器</strong>，此外还有<strong>1个控制字</strong>，加电启动后通过写控制字可以初始化 8255，配置具体的哪一个口应该工作在哪种方式下。对这些寄存器进行读写和总线间要有地址线 A0~A1，数据线 D0~D7，和读信号 !RD，写信号 !WR，片选信号 !CS。</p>
+<blockquote>
+<p>另外还多了1个复位信号RESET，直接接到计算机主板的复位电路引脚。计算机刚一加电后复位电路工作产生负脉冲，将8255内部的控制字自动置成事先设置好的状态即A，B，C口均为输入以避免总线竞争。</p>
+</blockquote>
+<h4 id="8255-的控制字与状态字">8255 的控制字与状态字</h4>
+<p>8255的地址线有2根，A，B，C三个口的缓冲寄存器和控制字分别占用地址00，01，10和11。</p>
+<h5 id="8255-读控制字与状态字">8255 读控制字与状态字</h5>
+<p>如图，通过地址的四种组合，分别能读取 8255 的三个控制字与状态字。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151535515.png"
+	width="536"
+	height="270"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151535515_huf131c5562374c85efc36a1be65cb221a_39715_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151535515_huf131c5562374c85efc36a1be65cb221a_39715_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110151535515"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="476px"
+	
+></p>
+<p>读状态字（前三个）会读取接口内对应的缓存内容，用于 CPU 获取外设的输入数据。</p>
+<h5 id="8255-写控制字与状态字">8255 写控制字与状态字</h5>
+<p>同样，通过地址的四种组合，分别能写入 8255 的三个控制字与状态字。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151309566.png"
+	width="537"
+	height="270"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151309566_hu6c25f4d9c70c933243450ae067fa3b1c_38085_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110151309566_hu6c25f4d9c70c933243450ae067fa3b1c_38085_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="477px"
+	
+></p>
+<p>写状态字（前三个）会改变接口内对应的缓存内容，用于 CPU 向外设输出数据。</p>
+<p>接下来重点讲一下状态字，状态字涉及 8255 的功能设定。</p>
+<h4 id="状态字">状态字</h4>
+<p>按状态字首位是 1 还是 0，可以将 8255 设定为两种功能类型。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110152356076.png"
+	width="765"
+	height="534"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110152356076_hu1886288e9ab190f5ad7f31cc7cf966db_116279_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110152356076_hu1886288e9ab190f5ad7f31cc7cf966db_116279_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110152356076"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="143"
+		data-flex-basis="343px"
+	
+></p>
+<h5 id="首位为0方式选择">首位为0，方式选择</h5>
+<p>如图，首位为0时，设定 8255 各口的工作方式。方式0就不说了，讲一下方式1和方式2时 C 口的分配。</p>
+<h6 id="方式1">方式1</h6>
+<p>A口工作在方式1时，C口中如下几位会用作控制、状态信号；若B口此时也工作在方式1，则C口如下另外几位会用作B口的控制、状态信号。C口没有用作控制、状态信号的数据线则可以正常用于输入或输出。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153242754.png"
+	width="1017"
+	height="441"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153242754_hu77aeb81d1d569c55c6e24b130c9791b5_119282_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153242754_hu77aeb81d1d569c55c6e24b130c9791b5_119282_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110153242754"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="230"
+		data-flex-basis="553px"
+	
+></p>
+<p>下面四个图，内部的逻辑不用看，只看状态字和对应的接口，了解接口如何分配。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153804676.png"
+	width="1068"
+	height="639"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153804676_hu5d93804ffa9a987ac11b31750205040b_234612_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153804676_hu5d93804ffa9a987ac11b31750205040b_234612_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110153804676"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="401px"
+	
+></p>
+<h6 id="方式2">方式2</h6>
+<p>只有A口可以工作在方式2，当A口工作在方式2时，需要占用如下几条C口的数据线作为A口的控制线。同时，剩余的C口数据线可以用作输入输出或是B口方式1下的控制线。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153915372.png"
+	width="988"
+	height="804"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153915372_hu39b995efc866d6e32025ad7c97b2a837_196189_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110153915372_hu39b995efc866d6e32025ad7c97b2a837_196189_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110153915372"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="122"
+		data-flex-basis="294px"
+	
+></p>
+<p>同理，上面两个图不用追究内部逻辑，看懂状态字和对应的引脚输入输出即可，不用记。</p>
+<h5 id="首位为1c口位操作">首位为1，C口位操作</h5>
+<p>D3~D1选择C口哪一位，D0设置这一位是0还是1 。</p>
+<h4 id="8255-的寻址--连接到总线">8255 的寻址 &amp; 连接到总线</h4>
+<p>以方式 0 举例，如图连接。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154720335.png"
+	width="960"
+	height="497"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154720335_hu1e1a5fb2551b3e46a69694535c721cee_76281_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154720335_hu1e1a5fb2551b3e46a69694535c721cee_76281_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110154720335"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="193"
+		data-flex-basis="463px"
+	
+></p>
+<p>通过地址译码电路，可以得到 8255 的 A，B，C口寄存器和控制字的地址为380H，381H，382H，383H。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154817800.png"
+	width="475"
+	height="85"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154817800_huddbfb84e30bb18895ec7ff56f71f3e7a_9427_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110154817800_huddbfb84e30bb18895ec7ff56f71f3e7a_9427_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110154817800"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="558"
+		data-flex-basis="1341px"
+	
+></p>
+<blockquote>
+<p>看地址线 A0，A1，怎么连确定连的是8086还是8088？</p>
+<p>8259的 A0，A1 连系统总线的 A0，A1，则连的是 8088的系统总线；8259 的 A0，A1 连系统总线的 A1，A2，则连的是8086的系统总线，数据线如果连到系统总线低8位必须要给偶地址，地址译码电路加偶地址存储体选择信号A0必须是低电平的条件。</p>
+</blockquote>
+<h4 id="应用题举例">应用题举例</h4>
+<p>方式0 - 打印机接口</p>
+<h4 id="电路图与时序">电路图与时序</h4>
+<p>如图，打印机通过 8255 连接到系统总线，8255 A口与C口均工作在方式 0，同时，打印机的工作时序如下图。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110155135696.png"
+	width="875"
+	height="568"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110155135696_huec067a9470e0005a67a1ca07609e37c8_75939_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110155135696_huec067a9470e0005a67a1ca07609e37c8_75939_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110155135696"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="369px"
+	
+></p>
+<p>工作时序可能看不懂，这里解释一下。</p>
+<p>打印机，自然是一个需要输出的外设。8255 工作在方式1，输出状态，因此用作锁存器。CPU将数据送到数据线上，此时，8255 接收到数据，存到内部的 A口寄存器中。同时，给 !STROBE 一个负脉冲，表明现在有数据需要打印，且已经锁存到 A口上。外设收到 !STROBE 的信号后，开始从 A口读入数据。此时，外设将 BUSY置1，表明正忙。</p>
+<h4 id="c-口工作方式的选择">C 口工作方式的选择</h4>
+<p>除了数据线，外设还要求有锁存信号 !STROBE，要用B口或C口的某一根线提供（负脉冲宽度要求 1us，无法直接通过较快的总线信号提供）。</p>
+<p>对外设来讲，!STROBE 信号是输入，BUSY信号是输出， 而C口较为灵活，高4位和低4位可以分别配置。可以让C口的高4位配置成输出，只能写不能读，再随便选一根线如 PC6 用作 !STROBE；C口的低4位配置成输入，只能读不能写，再随便选一根线如 PC1，刚好既可以判断 BUSY信号的状态，又可以给它送 !STROBE 信号。</p>
+<h4 id="汇编代码实现访问打印机接口">汇编代码实现访问打印机接口</h4>
+<p>假设 8255 地址：380H~383H。</p>
+<h5 id="初始化程序">初始化程序</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163204927.png"
+	width="948"
+	height="237"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163204927_huc3418de1394341a04666cf7ed3ddc42c_52802_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163204927_huc3418de1394341a04666cf7ed3ddc42c_52802_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110163204927"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="400"
+		data-flex-basis="960px"
+	
+></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163755698.png"
+	width="741"
+	height="532"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163755698_hudee0ecbf24dd4df207d4486da2295ad2_127322_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110163755698_hudee0ecbf24dd4df207d4486da2295ad2_127322_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220110163755698"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="139"
+		data-flex-basis="334px"
+	
+></p>
+<p>0383H 为状态寄存器地址，10000011B表明，A口工作方式0输出状态，C口高四位输出，B口工作在方式0输入状态（其实B口不重要），C口低四位输入。</p>
+<p>00001101B表明，C口中的PC6初始化置1 。</p>
+<h5 id="8255-方式0-以查询方式实现打印机接口">8255 方式0 以查询方式实现打印机接口</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110164713228.png"
+	width="727"
+	height="552"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110164713228_hud9dc0242c94c50f5c3f3b4e8c2711d40_143099_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220110164713228_hud9dc0242c94c50f5c3f3b4e8c2711d40_143099_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="131"
+		data-flex-basis="316px"
+	
+></p>
+<h3 id="作业-5">作业</h3>
+<p>7.1 作业可以做了。</p>
+<h3 id="8253-可编程定时器">8253 可编程定时器</h3>
+<h4 id="芯片功能">芯片功能</h4>
+<p>定时器有另外一个我们熟悉的名字，即计数器。定时器本质就是个计数器，通过输入频率已知的时钟信号，对信号进行计数，也就可以达到定时的效果。</p>
+<h4 id="片引脚">片引脚</h4>
+<p>8253 即可以编程、带自定义选项的定时器，其内部有 3 个计数器，以及若干寄存器。开始计数时，每一个时钟下降沿计数值 - 1 。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304232343681.png"
+	width="651"
+	height="412"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304232343681_hu81a7fba84c973bec65f61d088fe55e6b_91314_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304232343681_hu81a7fba84c973bec65f61d088fe55e6b_91314_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220304232343681"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="158"
+		data-flex-basis="379px"
+	
+></p>
+<p>如图，3 个计数器各自有对应的 16 bit 寄存器用于写入计数初值。有 8 条数据线 $D_0$ ~ $D_8$ 写计数初值分开两次写，先写低 8 bit，后写高 8 bit。</p>
+<p>因为有 3 个计数器，要区分读写的是哪个寄存器，需要地址线 $A_0$ 与 $A_1$ 。除开 3 个计数器对应的寄存器，系统总线可见的寄存器还有控制字。控制字内的内容可以决定不同计数器所工作的不同模式。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>$A_0$</th>
+<th>$A_1$</th>
+<th>寄存器</th>
+<th>可写 / 可读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>计数器 0</td>
+<td>R / W</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>计数器 1</td>
+<td>R / W</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>计数器 2</td>
+<td>R / W</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>控制字</td>
+<td>W</td>
+</tr>
+</tbody>
+</table></div>
+<p>剩余的其他信号线，也就是片选CS，读写RD，WR，不多介绍。</p>
+<h4 id="计数器引脚">计数器引脚</h4>
+<p>继续看每个计数器单独所有的引脚。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233422024.png"
+	width="304"
+	height="106"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233422024_hu86c2f36f23d1e88c137b1cb013a8e80e_8352_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233422024_hu86c2f36f23d1e88c137b1cb013a8e80e_8352_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="286"
+		data-flex-basis="688px"
+	
+></p>
+<ul>
+<li>CLK：时钟信号输入引脚。</li>
+<li>OUT：输出引脚，计数值减到 0 时，用于通知。</li>
+<li>GATE：门控信号，用于暂停 / 启用计数。</li>
+</ul>
+<h4 id="工作方式">工作方式</h4>
+<p>3 个计数器，每一个都可以工作在 6 种不同的模式。为了不吓到你，就先不把六种模式的图都丢出来了。我们拆分开来，一个一个模式看。设计数初值为 n，时钟周期为 T 。</p>
+<h5 id="方式-0计数结束时产生中断">方式 0：计数结束时产生中断</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233617966.png"
+	width="792"
+	height="443"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233617966_hu9364b06bdbe11bb69ecfda7bb47ea561_72027_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220304233617966_hu9364b06bdbe11bb69ecfda7bb47ea561_72027_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="178"
+		data-flex-basis="429px"
+	
+></p>
+<p>先看红框部分。</p>
+<p>第一行，为 CLK 输入的时钟信号。第二行，为写信号，低电平时写入计数初值 n = 4，写入结束，跳回高电平。此时，在下一个时钟周期的<strong>下降沿</strong>时，开始计数（从 4 开始，而不是 4 - 1）。</p>
+<p>当减到 0 时，OUTPUT 置为高电平，提示计数结束。</p>
+<p>再看红框以外，这里除了正常的计数外，映入了 GATE 门控信号。</p>
+<p>还是 WR，正常地低电平写入计数初值 m = 5，写入结束后转到高电平，下一个时钟下降沿开始计数。计数至 4 时，GATE 置低电平，禁止计数，此时停止计数。直到 GATE 置高电平，允许计数，在下一个时钟下降沿，继续计数。</p>
+<blockquote>
+<ul>
+<li>关于 OUT 引脚初值</li>
+</ul>
+<p>一旦写控制字，规定当前计数器工作在方式0下后，OUT引脚马上就变为低电平。</p>
+<p>写入计数初值 后开始定时计数， 计数值减到0后OUT引脚变为高电平。</p>
+<p>其他方式下，只要写控制字规定工作方式后，OUT引脚马上变为高电平。可将其接到8259的一个中断请求输入引脚，定时向CPU发出中断请求。</p>
+</blockquote>
+<h5 id="方式-1可重复启动计数">方式 1：可重复启动计数</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131149692-16464571113292.png"
+	width="1035"
+	height="571"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131149692-16464571113292_hu64b773409047941b1622b014fddc0be7_91144_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131149692-16464571113292_hu64b773409047941b1622b014fddc0be7_91144_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="181"
+		data-flex-basis="435px"
+	
+></p>
+<p>同样，先看红框。</p>
+<p>WR 置低电平，写入初值 n = 4 后，置高电平，与方式 0 不同，此时并没有立刻启动计数。</p>
+<p>GATE 门控信号置高电平，此时正式开始启动计数，计数器将在时钟的下一个下降沿开始计数，直到计数结束。</p>
+<p>再看红框以外的部分。</p>
+<p>GATE 由低置高，启动计数，计数过程中，GATE 置回低电平，此时不影响计数；计数降至 2 时，GATE 重新置高电平，此时，重置计数，无论当前计数值如何，在下一个时钟下降沿，重新从初值开始计数。</p>
+<h5 id="方式-2频率发生器">方式 2：频率发生器</h5>
+<p>方式 2 可以视为一个分频器。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131702279.png"
+	width="993"
+	height="283"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131702279_hu75d8c3294019fb3126582ebad28ee336_54005_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131702279_hu75d8c3294019fb3126582ebad28ee336_54005_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305131702279"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="350"
+		data-flex-basis="842px"
+	
+></p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131718600.png"
+	width="1011"
+	height="511"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131718600_hu0ace70825322f33c87e4fe3d29aa9fb7_100075_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305131718600_hu0ace70825322f33c87e4fe3d29aa9fb7_100075_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305131718600"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="197"
+		data-flex-basis="474px"
+	
+></p>
+<p>红框部分，WR 写入计数初值 n = 4，写入完成置回高电平，计数器从下一个下降沿开始计数。</p>
+<p>减至 0 时，OUT 引脚置 0，紧接着，在下一个下降沿，自动重新开始计数，更新计数初值为 n，重复此过程。</p>
+<p>设时钟周期为 T，计数初值为 n，一个计数周期满足 $t = n*T = (n-1)*T + T$，即可以划分为 (n-1) 个计数阶段和 1 个零阶段。</p>
+<p>再看红框以外，同样，GATE 置 0 时，计数器停止计数，且 OUTPUT 置为高，当 GATE 重新置 1 时，计数器重新从初值 n 开始计数。</p>
+<blockquote>
+<p>因为方式 2 可以任意设定计数初值 n，同时具有不断重复计数的功能，因此，我们可以任意设定 n，加入周期为 T 、频率为 f 的 CLK 信号，从 OUT 接口，可以得到一个周期为 t = nT，频率为 f/n 的新信号，故所以方式2也叫做分频器。</p>
+</blockquote>
+<h5 id="方式-3方波发生器">方式 3：方波发生器</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305132509591.png"
+	width="960"
+	height="298"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305132509591_huf111d8e1bcec443948b7e66e3767c45b_54309_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305132509591_huf111d8e1bcec443948b7e66e3767c45b_54309_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305132509591"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="322"
+		data-flex-basis="773px"
+	
+></p>
+<p>输入计数初值 n，存在两种情况。</p>
+<ul>
+<li>n 为偶数，此时 OUT 引脚输出对称的方波，每个完整方波（上 + 下）的周期为 n*T。单个方波（上 OR 下）的周期为 n*T / 2。</li>
+<li>n 为计数，此时 OUT 引脚输出上半方波更宽的非对称方波，整个方波的周期仍然为 n*T，上方波的周期为 (n / 2 + 1)*T，除法向下取整；下方波周期为 n*T /2。</li>
+</ul>
+<p>GATE 的作用与 方式 2 相同，置为低电平时，禁止计数，OUT 置高，置为高电平时，重新计数。</p>
+<h5 id="方式-4">方式 4</h5>
+<p>比较简单，看图就可以。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133435304.png"
+	width="1070"
+	height="597"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133435304_hu13a683ceee422f1ba5248c26f86fe439_93937_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133435304_hu13a683ceee422f1ba5248c26f86fe439_93937_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305133435304"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="430px"
+	
+></p>
+<p>类似于方式 0，写入初值后开始计数，OUT 初始化为 1，而非 0 。（方式 0 中 OUT 技术过程中为 0，计数结束为 1）。计数结束后 OUT 置 0 一个周期，再置 1 。</p>
+<p>GATE 为低电平时停止计数，但重置为高电平时，不会重新计数，会接着之前的结果继续计数。</p>
+<h5 id="方式-5">方式 5</h5>
+<p>同样比较简单。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133636184.png"
+	width="1020"
+	height="502"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133636184_hu39d72972112ad6788206452e2066cd13_80443_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305133636184_hu39d72972112ad6788206452e2066cd13_80443_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305133636184"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="203"
+		data-flex-basis="487px"
+	
+></p>
+<p>写入初值后，当 GATE 由 0 置 1 时，启动计数。计数结束后，与方式 4 相同，OUT 输出一个周期的低电平。技术过程中，GATE 由低置高时，会重置计数为初值，重新开始计数。</p>
+<h4 id="控制字">控制字</h4>
+<h5 id="计数器的计数过程">计数器的计数过程</h5>
+<p>前面我们提到，计数器有一个计数寄存器，用于存储计数结果，我们可以写这个寄存器，来改变计数初值，或者读这个寄存器，来获取当前计数值。</p>
+<p>实际上，这是抽象出来的一个对外的 API，目的是便于使用。芯片内真正实现计数过程使用了 3 个寄存器。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305134157736.png"
+	width="1112"
+	height="311"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305134157736_hu0c7d34df9a2ceb7c3f78b0b7d9f9ef0e_112594_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305134157736_hu0c7d34df9a2ceb7c3f78b0b7d9f9ef0e_112594_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305134157736"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="357"
+		data-flex-basis="858px"
+	
+></p>
+<ul>
+<li>计数值寄存器：写计数初值时，实际上把初值写到了这个寄存器里，这个值除非重新写入，否则是不会改变的。</li>
+<li>减一寄存器：这计数过程中真正在变的寄存器，计数开始时，第一个时钟下降沿会把初值从计数值寄存器传送到减一寄存器。<strong>注意，取初值到减一寄存器这一步并不会判断是否为 0，在下一个时钟周期下降沿，才会对减一寄存器的值减 1，再判断是否为 0</strong> 。因此，如果初值写入的是 0000H，在实际计数的过程中，对应的是计数最大值 FFFFH + 1 。</li>
+<li>计数锁存器：每次减一寄存器改变，其内容都会同步到技术锁存器。正常工作时这两个寄存器的内容总是一样的。**计数值寄存器和计数锁存器占用同一个地址，写这个地址将计数初值写入计数值寄存器，读这个地址读当前计数锁存器的内容。**减1计数器则不能读也不能写。读计数锁存器之前，要给计数器发锁存命令 ，一旦发锁存命令后减1计数器和计数锁存器切断联系，计数锁存器内容不再变化。</li>
+</ul>
+<blockquote>
+<p>从系统总线的角度来讲，每个计数器好像只有1个相应的16位寄存器，但其实有3个。</p>
+<p>8253的地址3对应控制字，看起来8253内部好像也只有一个控制字，但实际上内部对应每一个计数器都有其专有的控制字。故每一个计数器内部都有4个寄存器：计数值寄存器，减1计数器，计数锁存器和控制字寄存器。</p>
+</blockquote>
+<h5 id="控制字格式">控制字格式</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135152670.png"
+	width="1094"
+	height="814"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135152670_hua031863f8b25473950dc2204fc68f426_180205_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135152670_hua031863f8b25473950dc2204fc68f426_180205_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135152670"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="134"
+		data-flex-basis="322px"
+	
+></p>
+<p>二进制计数与 BCD 计数的范围如下。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135320201.png"
+	width="876"
+	height="237"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135320201_hu5c54debbda482aaabdefde2b1995429a_85200_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135320201_hu5c54debbda482aaabdefde2b1995429a_85200_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135320201"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="369"
+		data-flex-basis="887px"
+	
+></p>
+<h4 id="8253-寻址与连接">8253 寻址与连接</h4>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135409694.png"
+	width="976"
+	height="791"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135409694_huf6cd81f0036c0ec23a032dbb22c30211_154924_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135409694_huf6cd81f0036c0ec23a032dbb22c30211_154924_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135409694"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="123"
+		data-flex-basis="296px"
+	
+></p>
+<h4 id="8253-的初始化与使用">8253 的初始化与使用</h4>
+<h5 id="编程初始化顺序">编程初始化顺序</h5>
+<p>只需要一个计数器时：
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135553409.png"
+	width="484"
+	height="450"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135553409_hu4402e7afd80b2293a8870163b0445379_58440_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135553409_hu4402e7afd80b2293a8870163b0445379_58440_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135553409"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="107"
+		data-flex-basis="258px"
+	
+></p>
+<p>同时需要用多个计数器时：</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135608023.png"
+	width="577"
+	height="821"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135608023_hud3e7986ba36a771265a803f66d2edaf2_154623_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135608023_hud3e7986ba36a771265a803f66d2edaf2_154623_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135608023"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="70"
+		data-flex-basis="168px"
+	
+></p>
+<p>示例程序。</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135836910.png"
+	width="1150"
+	height="939"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135836910_hu9795ca0e409005cd78a826ab8e9a2961_284039_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305135836910_hu9795ca0e409005cd78a826ab8e9a2961_284039_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305135836910"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="122"
+		data-flex-basis="293px"
+	
+></p>
+<h4 id="喜闻乐见的串联">喜闻乐见的串联</h4>
+<h5 id="单个计数器的限制">单个计数器的限制</h5>
+<p>假设仅有时钟信号 $f_{CLK} = 2MHz, T_{CLK} = 0.5us$</p>
+<p>此时，单个计数器的最长定时时间 = 最大计数值 $n_{max}$  * 时钟周期 $T_{CLK}$。</p>
+<p>即 $65536 * 0.5us = 32.77ms$</p>
+<p>如果我需要定时时间更长，即输出信号的周期更长，需要将多个计数器串联。</p>
+<h5 id="计数器串联使用">计数器串联使用</h5>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305140206608.png"
+	width="1086"
+	height="633"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305140206608_hud38e721d8272c4e5eb29106dfd34347c_203684_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305140206608_hud38e721d8272c4e5eb29106dfd34347c_203684_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305140206608"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="411px"
+	
+></p>
+<p>分析下这个图。</p>
+<p>输入 CLK 的周期为 T，设 Timer0 输出的信号周期为 T0，Timer1 输出的信号周期为 T1 。</p>
+<p>$T_0 = n_0*T$</p>
+<p>$T_1 = n_1*T_0$</p>
+<p>即 $T_1 = n_0 * n_1 * T$</p>
+<p>突破了单个计数器的 $n$ 的限制。</p>
+<p><strong>我们分析下为什么需要用方式 2 或方式 3。</strong></p>
+<p>方式 0 无法做到持续计数，一次计数结束后就结束，方式 1 可以重复技术，但需要 GATE 的信号用于重置，方式 4 ，方式 5 与前两者类似，这四种方式都无法稳定持续地计数。</p>
+<p>只有方式 2 （一个周期内 $(n-1)<em>T$ 的高电平 + $T$ 的低电平）和方式 3 （周期为 $n</em>T$ 的方波）才能做到持续稳定又自律地计数并产生输出信号。</p>
+<p>具体选用方式 2 还是 方式 3？</p>
+<ul>
+<li>方式 2：输出信号为<strong>周期性的负脉冲</strong>，且对负脉冲宽度无要求。</li>
+<li>方式 3：输出信号为<strong>方波</strong>。</li>
+</ul>
+<p><strong>如果要求输出指定宽度的周期性负脉冲，如何设计？</strong></p>
+<p>解法 1：</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305141051595.png"
+	width="918"
+	height="264"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305141051595_hu7383e04bb496070f77c422032656ec81_61461_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305141051595_hu7383e04bb496070f77c422032656ec81_61461_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305141051595"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="347"
+		data-flex-basis="834px"
+	
+></p>
+<p>假设要求的负脉冲宽度（持续时间）为 $W$。</p>
+<p>先看 Timer1，假设 Timer1 采用方式 2 输出，可以知道负脉冲宽度为</p>
+<p>$T_{negative} = T_0 = W$</p>
+<p>设立合适的 $n_0$，满足 $T_0 = n_0*T = W$，即 $n_0 = W/T$。</p>
+<p>此时，就可以在 $T_1$ 获取宽度为 $W$ 的稳定负脉冲。</p>
+<p>至于 $n_1$，则具体需要看为 $T_1$ 设置多长的周期，满足 $T_1 = n_1*W$。</p>
+<ul>
+<li>优点：$T_1$ 为 32bit 计数器的定时结果，即 $T_1 = n_0 * n_ 1 * T$。</li>
+<li>限制：$T_1$ 必须为 $W$ 的整数倍。</li>
+</ul>
+<p>解法 2：</p>
+<p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305142446883.png"
+	width="883"
+	height="335"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305142446883_hu6ecbc927d847562cb335e72bc00c1447_66253_480x0_resize_box_3.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image-20220305142446883_hu6ecbc927d847562cb335e72bc00c1447_66253_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20220305142446883"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="263"
+		data-flex-basis="632px"
+	
+></p>
+<p>同样，先看输出，即 Timer1，Timer1 采用方式 1 输出，则负脉冲宽度为计数时长（在计数时 OUT 就为负脉冲）。观察到 Timer1 的 CLK 输入即为 $T$。</p>
+<p>由于负脉冲宽度即为计数时长，则有</p>
+<p>计数时长 $t = T*n_1 = W$，</p>
+<p>$n_1 = W / T$。即可满足输出指定宽度的负脉冲的要求。</p>
+<p>方式 1 的问题在于需要通过 $GATE$ 完成重复启动，因此，接着看 Timer0 如何产生信号 $T_0$ 来作为 Timer1 的 $GATE$ 输入，使其持续重复启动计数。</p>
+<p>看 Timer0，输出 $T_0 = n_0*T$，无论是方式 2 还是方式 3，上升沿的周期都为 $T_0$。（$GATE$ 在方式 1 时上升沿起效。）。</p>
+<p>只需要满足 $T_0 &gt; W$，那么每隔 $T_0$ 时间，Timer1 都会收到一个 $GATE$ 信号，重新开始计数。因此，$T_1 = T_0 = T*n_0$。$n_0$ 根据需要的 $T_1$ 长度进行设置即可。</p>
+<ul>
+<li>优点：$T_1 可以不是 W 的整数倍。$</li>
+<li>缺点：$T_1$ 是 16 bit 计数器的结果，即 $T_1 = T * n_0$，需要更长的 $T_1$ 时还需要串联更多计数器。</li>
+</ul>
+<p>记得做题。</p>
+<h2 id="基于总线的-io-接口设计">基于总线的 I/O 接口设计</h2>
+<p>略过。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/">微机原理</a>
+        
+            <a href="/tags/%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">课程总结</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                <img src="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.7210c0bbc52d559bd03581952c2fd4ca_hu60a335ca4c55178541a8b7f6f0b682b3_1463971_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C&#43;&#43;程序设计课程总结"
+                        
+                        data-hash="md5-chDAu8UtVZvQNYGVLC/Uyg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43;程序设计课程总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/cover.15439c68560ee33444d59aa2dc29c0f0_hu213652e9e8afc24335433dfd45f3b0e2_5684916_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 基于消息队列实现的分布式随机信号分析系统"
+                        
+                        data-hash="md5-FUOcaFYO4zRE1Zqi3CnA8A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于消息队列实现的分布式随机信号分析系统</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover.d27b36ed5cdfc55b25a8d332b6650c6c_hubbcff01d8523d34c7e0c058aaa3c8f24_1400464_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 基于 Nginx 实现的负载均衡策略"
+                        
+                        data-hash="md5-0ns27VzfxVslqNMytmUMbA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于 Nginx 实现的负载均衡策略</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover.4949488bd6b92f4e1bffecd21ea2ef6f_huc13785305f2408b6fafb21eff69213c9_3568700_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 地图路由(Map Routing)"
+                        
+                        data-hash="md5-SUlIi9a5L04b/&#43;zSHqLvbw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">地图路由(Map Routing)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/cover.31f26ee997fedf080e52d2a1eae2592f_hu20ccea9eb23f4fac4fbcfe2eebe08c1d_11962038_250x150_fill_q75_box_smart1.JPG" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 排序算法的实验性能比较"
+                        
+                        data-hash="md5-MfJu6Zf&#43;3wgOUtKh6uJZLw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">排序算法的实验性能比较</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>

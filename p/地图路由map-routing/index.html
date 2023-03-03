@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='实现经典的 Dijkstra 最短路径算法，并对其进行优化。 这种算法广泛应用于地理信息系统（GIS），包括 MapQuest 和基于 GPS 的汽车导航系统。'>
+<title>地图路由(Map Routing)</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='地图路由(Map Routing)'>
+<meta property='og:description' content='实现经典的 Dijkstra 最短路径算法，并对其进行优化。 这种算法广泛应用于地理信息系统（GIS），包括 MapQuest 和基于 GPS 的汽车导航系统。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Dijkstra' /><meta property='article:tag' content='算法与数据结构' /><meta property='article:published_time' content='2022-02-03T16:12:52&#43;00:00'/><meta property='article:modified_time' content='2022-02-03T16:12:52&#43;00:00'/><meta property='og:image' content='https://TuJin07.github.io/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover.jpeg' />
+<meta name="twitter:title" content="地图路由(Map Routing)">
+<meta name="twitter:description" content="实现经典的 Dijkstra 最短路径算法，并对其进行优化。 这种算法广泛应用于地理信息系统（GIS），包括 MapQuest 和基于 GPS 的汽车导航系统。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#问题描述">问题描述</a>
+      <ol>
+        <li><a href="#地图">地图</a></li>
+        <li><a href="#dijkstra算法"><em>Dijkstra</em>算法</a></li>
+        <li><a href="#实验目标">实验目标</a>
+          <ol>
+            <li><a href="#想法-1">想法 1</a></li>
+            <li><a href="#想法-2">想法 2</a></li>
+            <li><a href="#想法-3">想法 3</a></li>
+          </ol>
+        </li>
+        <li><a href="#测试">测试</a></li>
+      </ol>
+    </li>
+    <li><a href="#问题分析">问题分析</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#优化-1提前结束搜索">优化 1	提前结束搜索</a></li>
+            <li><a href="#优化-2降低初始化开销">优化 2	降低初始化开销</a></li>
+            <li><a href="#优化-3对搜索过程采用-a-算法优化">优化 3	对搜索过程采用 A* 算法优化</a></li>
+            <li><a href="#优化-4采用多路堆实现优先队列">优化 4	采用多路堆实现优先队列</a></li>
+            <li><a href="#测试数据集选用">测试数据集选用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#实现细节">实现细节</a>
+      <ol>
+        <li><a href="#dijkstra-算法的基本实现">Dijkstra 算法的基本实现</a></li>
+        <li><a href="#优化-1提前结束搜索-1">优化 1	提前结束搜索</a></li>
+        <li><a href="#优化-2降低初始化开销-1">优化 2	降低初始化开销</a></li>
+        <li><a href="#优化-3对搜索过程采用-a-算法优化-1">优化 3	对搜索过程采用 A* 算法优化</a></li>
+        <li><a href="#优化-4采用多路堆实现优先队列-1">优化 4	采用多路堆实现优先队列</a></li>
+      </ol>
+    </li>
+    <li><a href="#实验结果">实验结果</a>
+      <ol>
+        <li><a href="#测试环境">测试环境</a></li>
+        <li><a href="#测试数据">测试数据</a></li>
+        <li><a href="#结果解读">结果解读</a>
+          <ol>
+            <li><a href="#优化版本-1-相较于原始算法">优化版本 1 相较于原始算法</a></li>
+            <li><a href="#优化版本-2-相较于优化版本-1">优化版本 2 相较于优化版本 1</a></li>
+            <li><a href="#优化版本-3-相较于优化版本-2">优化版本 3 相较于优化版本 2</a></li>
+            <li><a href="#优化版本-4-相较于优化版本3">优化版本 4 相较于优化版本3</a></li>
+          </ol>
+        </li>
+        <li><a href="#分析总结">分析总结</a></li>
+      </ol>
+    </li>
+    <li><a href="#收获感想">收获感想</a></li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#完整测试结果">完整测试结果</a>
+          <ol>
+            <li><a href="#原始-dijkstra算法">原始 Dijkstra算法</a></li>
+            <li><a href="#优化版本-1-1">优化版本 1</a></li>
+            <li><a href="#优化版本-2">优化版本 2</a></li>
+            <li><a href="#优化版本-3">优化版本 3</a></li>
+            <li><a href="#优化版本-4">优化版本 4</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验程序">实验程序</a>
+          <ol>
+            <li><a href="#dijkstra_0-原始算法">Dijkstra_0 原始算法</a></li>
+            <li><a href="#dijkstra_1-优化版本-1">Dijkstra_1 优化版本 1</a></li>
+            <li><a href="#dijkstra_2-优化版本-2">Dijkstra_2 优化版本 2</a></li>
+            <li><a href="#dijkstra_3-优化版本-3">Dijkstra_3 优化版本 3</a></li>
+            <li><a href="#dijkstra_4-优化版本-4">Dijkstra_4 优化版本 4</a></li>
+            <li><a href="#shortestpath-获取最短路并绘图">ShortestPath 获取最短路并绘图</a></li>
+            <li><a href="#performancetest-测试各版本算法表现">PerformanceTest 测试各版本算法表现</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/">
+                <img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover_huc13785305f2408b6fafb21eff69213c9_3568700_800x0_resize_q75_box.jpeg"
+                        srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover_huc13785305f2408b6fafb21eff69213c9_3568700_800x0_resize_q75_box.jpeg 800w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/cover_huc13785305f2408b6fafb21eff69213c9_3568700_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post 地图路由(Map Routing)" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" style="background-color: #2a9d8f; color: #fff;">
+                实验报告
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/">地图路由(Map Routing)</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            实现经典的 Dijkstra 最短路径算法，并对其进行优化。 这种算法广泛应用于地理信息系统（GIS），包括 MapQuest 和基于 GPS 的汽车导航系统。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 03, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 14 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="地图路由map-routing">地图路由（Map Routing）</h1>
+<h2 id="问题描述">问题描述</h2>
+<p>实现经典的 Dijkstra 最短路径算法，并对其进行优化。 这种算法广泛应用于地理信息系统（GIS），包括 MapQuest 和基于 GPS 的汽车导航系统。</p>
+<h3 id="地图">地图</h3>
+<p>本次实验对象是图 <em>maps</em> 或 <em>graphs</em>，其中顶点为平面上的点，这些点由权值为欧氏距离的边相连成图。 可将顶点视为城市，将边视为相连的道路。 为了在文件中表示地图，我们列出了顶点数和边数，然后列出顶点（索引后跟其 <em>x</em> 和 <em>y</em> 坐标），然后列出边（顶点对），最后列出源点和汇点。 例如，如下左图信息表示右图：</p>
+<p><img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20220224153650505.png"
+	width="518"
+	height="259"
+	srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20220224153650505_hub88507cabe301c074eb546df0233571a_36747_480x0_resize_box_3.png 480w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20220224153650505_hub88507cabe301c074eb546df0233571a_36747_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="200"
+		data-flex-basis="480px"
+	
+></p>
+<h3 id="dijkstra算法"><em>Dijkstra</em>算法</h3>
+<p>Dijkstra 算法是最短路径问题的经典解决方案。 它在教科书第21章中有描述。 基本思路不难理解。 对于图中的每个顶点，我们维护从源点到该顶点的最短已知的路径长度，并且将这些长度保持在优先队列（<em>priority queue</em>, <em>PQ</em>）中。 初始时，我们把所有的顶点放在这个队列中，并设置高优先级，然后将源点的优先级设为0.0。 算法通过从<em>PQ</em>中取出最低优先级的顶点，然后检查可从该顶点经由一条边可达的所有顶点，以查看这条边是否提供了从源点到那个顶点较之之前已知的最短路径的更短路径。 如果是这样，它会降低优先级来反映这种新的信息。</p>
+<p>这里给出了Dijkstra算法计算从0到5的最短路径0-1-2-5的详细过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">0</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lower</span> <span class="mi">3</span> <span class="n">to</span> <span class="mf">3841.9</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lower</span> <span class="mi">1</span> <span class="n">to</span> <span class="mf">1897.4</span>
+</span></span><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">1</span> <span class="p">(</span><span class="mf">1897.4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lower</span> <span class="mi">4</span> <span class="n">to</span> <span class="mf">3776.2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lower</span> <span class="mi">2</span> <span class="n">to</span> <span class="mf">2537.7</span>
+</span></span><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">2</span> <span class="p">(</span><span class="mf">2537.7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lower</span> <span class="mi">5</span> <span class="n">to</span> <span class="mf">6274.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">4</span> <span class="p">(</span><span class="mf">3776.2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">3</span> <span class="p">(</span><span class="mf">3841.9</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">process</span> <span class="mi">5</span> <span class="p">(</span><span class="mf">6274.0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该方法计算最短路径的长度。 为了记录路径，我们还保持每个顶点的源点到该顶点最短路径上的前驱。 文件 <em>Euclidean Graph.java，Point.java，IndexPQ.java，IntIterator.java</em> 和 <em>Dijkstra.java</em> 提供了针对 <em>map</em> 的 <em>Dijkstra算法</em> 的基本框架实现，你应该以此作为起点。</p>
+<p>客户端程序 <em>ShortestPath.java</em> 求解一个单源点最短路径问题，并使用图形绘制了结果。 客户端程序 <em>Paths.java</em> 求解了许多最短路径问题，并将最短路径打印到标准输出。 客户端程序 <em>Distances.java</em> 求解了许多最短路径问题，仅将距离打印到标准输出。</p>
+<h3 id="实验目标">实验目标</h3>
+<p>优化 Dijkstra算法，使其可以处理给定图的数千条最短路径查询。 一旦你读取图（并可选地预处理），你的程序应该在<strong>亚线性时间</strong>内解决最短路径问题。 一种方法是预先计算出所有顶点对的最短路径；然而，你无法承受存储所有这些信息所需的二次空间。 你的目标是减少每次最短路径计算所涉及的工作量，而不会占用过多的空间。 建议你选择下面的一些潜在想法来实现， 或者你可以开发和实现自己的想法。</p>
+<h4 id="想法-1">想法 1</h4>
+<p>Dijkstra算法的朴素实现检查图中的所有 <em>V</em> 个顶点。 减少检查的顶点数量的一种策略是一旦发现目的地的最短路径就停止搜索。 通过这种方法，可以使每个最短路径查询的运行时间与 <em>E</em>&rsquo; log <em>V</em>&rsquo; 成比例，其中 <em>E</em>&rsquo; 和 <em>V</em>&rsquo; 是 Dijkstra算法检查的边和顶点数。 然而，这需要一些小心，因为只是重新初始化所有距离为 ∞ 就需要与 <em>V</em> 成正比的时间。由于你在不断执行查询，因而只需重新初始化在先前查询中改变的那些值来大大加速查询。</p>
+<h4 id="想法-2">想法 2</h4>
+<p>你可以利用问题的欧式几何来进一步减少搜索时间，这在算法书的第21.5节描述过。对于一般图，Dijkstra通过将 d[w] 更新为 d[v] + 从 v 到 w 的距离来松弛边 v - w。 对于地图，则将 d[w] 更新为 d[v] + 从 v 到 w 的距离 + 从 w 到 d 的欧式距离 - 从 v 到 d 的欧式距离。 这种方法称之为 A* 算法。这种启发式方法会有性能上的影响，但不会影响正确性。</p>
+<h4 id="想法-3">想法 3</h4>
+<p>使用更快的优先队列。 在提供的优先队列中有一些优化空间。 你也可以考虑使用 Sedgewick 程序20.10中的多路堆。</p>
+<h3 id="测试">测试</h3>
+<p>美国大陆文件 <a class="link" href="ftp://ftp.cs.princeton.edu/pub/cs226/map/usa.txt" >usa.txt</a> 包含87,575个交叉口和121,961条道路。 图形非常稀疏 - 平均的度为2.8。 你的主要目标应该是快速回答这个网络上的顶点对的最短路径查询。 你的算法可能会有不同执行时间，这取决于两个顶点是否在附近或相距较远。 我们提供测试这两种情况的输入文件。 你可以假设所有的<em>x</em>和<em>y</em>坐标都是0到10,000之间的整数。</p>
+<p>注：这个问题的实验由Bob Sedgewick和Kevin Wayne设计开发（Copyright © 2004）。更多信息可参考<a class="link" href="http://algs4.cs.princeton.edu/home/"  target="_blank" rel="noopener"
+    >http://algs4.cs.princeton.edu/</a>。</p>
+<h2 id="问题分析">问题分析</h2>
+<p>本实验要求实现经典的 Dijkstra 算法，并对算法进行迭代改进，实现性能上的提升以应对大规模的输入数据。</p>
+<p>在实现朴素的 Dijkstra 算法基础上，不断实现效率上的改进，参考提供的思路，针对本次测试环境，可以制定出以下几种迭代优化方案。</p>
+<h4 id="优化-1提前结束搜索">优化 1	提前结束搜索</h4>
+<p>Dijkstra算法的朴素实现每次都会检查图中的所有顶点。我们可以通过减少检查的顶点数量来优化查询效率。具体体现会一但搜索到终点，得到最短路径即可结束搜索。</p>
+<h4 id="优化-2降低初始化开销">优化 2	降低初始化开销</h4>
+<p>通过 <em>优化 1</em> 的优化，在理论上我们可以使每次查询最短路径的运行时间正比于 <em>E</em> log <em>V</em>，然而问题在于，每次执行查询算法，仍要进行时间开销为 <em>V</em> 的初始化工作，在这一点上，基于 <em>优化 1</em> 的算法还有进一步优化空间。</p>
+<p>具体的想法是，通过使用队列 <em>Queue</em>（本次实验中具体的实现为 <em>LinkedList</em>）存储那些在上一轮查询中被修改了的点，在本轮查询的初始化过程中，仅对这些被修改过的点进行初始化。此举在 <em>优化 1</em> 的基础上能进一步降低算法运行时间开销。</p>
+<h4 id="优化-3对搜索过程采用-a-算法优化">优化 3	对搜索过程采用 A* 算法优化</h4>
+<p>A* 算法，即启发式算法。在搜寻最短路的效率上，由于考虑了搜索结点到终点的花费，效率上更优于 Dijkstra算法的默认实现。</p>
+<p>A* 通过如下函数来计算每个节点的优先级。</p>
+<p><img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/v2-3c1f00587f5f8994946cf1d224419bba_1440w-16456883597153.png"
+	width="186"
+	height="45"
+	srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/v2-3c1f00587f5f8994946cf1d224419bba_1440w-16456883597153_huc8c5d84bf9c8d558441a5c8dcfbaf49a_1524_480x0_resize_box_3.png 480w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/v2-3c1f00587f5f8994946cf1d224419bba_1440w-16456883597153_huc8c5d84bf9c8d558441a5c8dcfbaf49a_1524_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="公式 1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="413"
+		data-flex-basis="992px"
+	
+></p>
+<ul>
+<li>定义 <code>f(n)</code> 表示节点 <code>n</code> 的综合优先级。选择下一个要遍历的节点时，总会选取综合优先级最高的节点。</li>
+<li>定义 <code>g(n)</code> 是节点 <code>n</code> 距离起点的距离。</li>
+<li>定义 <code>h(n)</code> 是节点 <code>n</code>距离终点的预计花费，这也就是A*算法的启发函数。</li>
+</ul>
+<p>A* 算法的完整运算过程与基本的 Dijkstra算法类似，区别在于在运算过程中，每次从优先队列中选取 <code>f(n)</code> 值最小，即优先级最高的节点作为下一个待遍历的节点。</p>
+<p>启发函数会影响 A* 算法的行为。用 <code>n</code> 表上当前遍历节点，<code>d</code> 表示终点，<code>cost(a, b)</code> 表示由点 <code>a</code> 到达 <code>b</code> 的代价。</p>
+<ul>
+<li><code>h(N) = 0</code>，直接由 <code>g(n)</code> 决定节点的优先级，此时算法就退化成朴素的 Dijkstra算法。</li>
+<li><code>h(n) &lt;= cost(n, d)</code>，则 A* 算法保证一定能够找到最短路径。<code>h(n)</code> 的值越小，算法将遍历越多的节点，也就导致算法越慢。</li>
+<li><code>h(n) = cost(n, d)</code>，则A*算法将找到最佳路径，并且速度很快。并非所有场景下都能做到这一点。</li>
+<li><code>h(n) &gt; cost(n, d)</code>，则A*算法不能保证找到最短路径，不过此时会很快。</li>
+</ul>
+<p>由上面这些信息我们可以知道，通过调节启发函数我们可以控制算法的速度和精确度。因为在一些情况，我们可能未必需要最短路径，而是希望能够尽快找到一个路径即可。这也是 A* 算法比较灵活的地方。</p>
+<p>对于本次实验的地图模型，我们采用<strong>欧几里得距离</strong>（Euclidean distance）来构造启发函数。在算法层面的具体实现表现为将 d[w] 更新为 d[v] + 从 v 到 w 的距离 + 从 w 到 d 的欧式距离 - 从 v 到 d 的欧式距离。这种启发式方法会有性能上的影响，但不会影响正确性。</p>
+<h4 id="优化-4采用多路堆实现优先队列">优化 4	采用多路堆实现优先队列</h4>
+<p>尝试采用更快的优先队列以观察其对运行效率上的提升是否有益。用多路堆（四叉堆）替换原始实现中的二叉堆，检验是否带来效率上的提升。</p>
+<h4 id="测试数据集选用">测试数据集选用</h4>
+<p>使用提供的地图数据以及测试数据集进行测试，地图数据采用美国大陆文件 <code>usa.txt</code>。选用 <code>usa-100long</code> 与 <code>usa-100short</code> 两种具有不同特点的测试数据集对算法进行性能测试。</p>
+<h2 id="实现细节">实现细节</h2>
+<h3 id="dijkstra-算法的基本实现">Dijkstra 算法的基本实现</h3>
+<p>未做任何优化的朴素 Dijkstra算法的实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 初始化；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// dist[v] 记录点 v 至源点的距离；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pred[v] 记录点 v 最短路的上一个节点。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 优先队列的创建并初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">IndexPQ</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设立源点，源点至源点的距离为 0，源点前一个节点为其本身
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>  <span class="c1">// 修改优先队列里的源点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动 Dijkstra 算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 当 v 点不可达时退出循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 遍历所有 v 点的邻居
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果得到新的距离要比原来更近，则更新长度和路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="优化-1提前结束搜索-1">优化 1	提前结束搜索</h3>
+<p>一旦找到终点，立刻结束搜索。体现在 Dijkstra算法的 <code>while</code> 循环中加入了如下语句。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>具体的代码实现如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="cm">/* 改进 1：一旦找到目标点，立刻结束搜索 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 启动 Dijkstra 算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果得到新的距离要比原来更近，则更新长度和路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果以及找到终点，则直接退出搜索，返回结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="优化-2降低初始化开销-1">优化 2	降低初始化开销</h3>
+<p>在优化1的基础上，通过使用队列 <em>Queue</em>（本次实验中具体的实现为 <em>LinkedList</em>）存储那些在上一轮查询中被修改了的点，在本轮查询的初始化过程中，仅对这些被修改过的点进行初始化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="cm">/* 用于记录哪些节点被修改过的队列 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">changed</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时，为了降低复杂度，对于优先队列 <em>priority queue</em>，每轮查询初始化的过程中不再将所有点的信息入列，取而代之的是只对源点入列，在算法遍历过程中动态更新队列里的节点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="c1">// 对队列内的点以及 priority queue 进行初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>整体的代码实现如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="cm">/* 改进 2：在改进 1 的基础上将初始化时间优化为压线性 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 对队列内的点进行初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果得到新的距离要比原来更近，则更新长度和路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 若该点重来没有被遍历过，将其加入优先队列pq，否则修改其在优先队列内的数值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 将其加入队列，标记该点已被修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="优化-3对搜索过程采用-a-算法优化-1">优化 3	对搜索过程采用 A* 算法优化</h3>
+<p>采用<strong>欧几里得距离</strong>（Euclidean distance）来构造启发函数。在算法层面的具体实现表现为将 d[w] 更新为 d[v] + 从 v 到 w 的距离 + 从 w 到 d 的欧式距离 - 从 v 到 d 的欧式距离。在算法上的修改具体体现在如下。</p>
+<p>原来对节点 <code>v</code> 的邻居节点 <code>w</code> 遍历时，更新条件为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{...}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改更新条件，令其变更变为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{...}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时需要修改的还有 <code>dist[w]</code> 所更新的值。</p>
+<p>具体的代码实现如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="cm">/* 改进 3：在改进 2 的基础上，更改为 A* 算法，即启发性搜索 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将d[w]更新为d[v] + 从v到w的距离 + 从w到d的欧式距离 - 从v到d的欧式距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="优化-4采用多路堆实现优先队列-1">优化 4	采用多路堆实现优先队列</h3>
+<p>继续优化，在实现了优化3的基础上，考虑对优先队列这个数据结构本身进行挑战。原始的实现中采用的是二叉堆实现的优先队列。尝试采用四叉堆对优先队列进行重构实现，检验其对性能的提升是否有益。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="cm">/* 改进 4：在改进 3 的基础上，优先队列采用多路堆实现 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 四叉堆定义，WAYS = 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">IndexMultiwayMinPQ</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexMultiwayMinPQ</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;(</span><span class="n">V</span><span class="o">,</span> <span class="n">WAYS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="o">.</span><span class="na">changeKey</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="实验结果">实验结果</h2>
+<h3 id="测试环境">测试环境</h3>
+<p>搭载 <em>Windows 11</em> 操作系统的计算机。</p>
+<ul>
+<li>CPU: <em>AMD Ryzen 5 5600U</em> with 2.30Ghz</li>
+<li>RAM: 16.0 GB</li>
+</ul>
+<h3 id="测试数据">测试数据</h3>
+<p>我们对原始算法，以及累计 4 个迭代版本的优化算法进行测试，每种算法分别以 <code>usa-long100.txt</code> 和 <code>usa-short100.txt</code> 为测试数据集，进行 10 轮测试，取平均值，汇总成如下的表格。篇幅所限，在此仅展示统计平均结果，详细的每轮测试耗时见附录。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>usa_long 测试平均耗时 (ms)</th>
+<th>usa_short 测试平均耗时 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始算法</td>
+<td>2213.4</td>
+<td>2197.7</td>
+</tr>
+<tr>
+<td>优化版本 1</td>
+<td>1089</td>
+<td>165.2</td>
+</tr>
+<tr>
+<td>优化版本 2</td>
+<td>813.8</td>
+<td>99.6</td>
+</tr>
+<tr>
+<td>优化版本 3</td>
+<td>199.3</td>
+<td>42.1</td>
+</tr>
+<tr>
+<td>优化版本 4</td>
+<td>257.9</td>
+<td>45</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="结果解读">结果解读</h3>
+<p>对如上测试结果进行解读。</p>
+<h4 id="优化版本-1-相较于原始算法">优化版本 1 相较于原始算法</h4>
+<p>优化版本 1 主要改进了每次搜索的广度。原始算法无论是否已经找到终点，都会持续进行搜索，直到对整张地图遍历完成，这样会造成大量不必要的时间开销。优化版本 1 则解决了这一问题，在搜索过程中，一旦找到终点，则立刻停止搜索，避免额外的时间开销。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>usa_long 测试平均耗时 (ms)</th>
+<th>usa_short 测试平均耗时 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始算法</td>
+<td>2213.4</td>
+<td>2197.7</td>
+</tr>
+<tr>
+<td>优化版本 1</td>
+<td>1089</td>
+<td>165.2</td>
+</tr>
+</tbody>
+</table></div>
+<p>观测实验结果，与我们的分析相符。由于原始算法无论如何都会对整张地图遍历，因此在两个测试集中的表现差异不大。而优化后的算法在两类测试集上的性能均有显著提升。尤其在搜索较短路径的 <code>usa_short</code> 测试中，优化后的算法在效率上要大大高于原始算法，甚至实现了数量级的飞跃。</p>
+<p>为较为明显地体现出搜索效率的差距，以下给出原始算法以及优化版本 1 中，搜索同一条最短路径时所搜索到的所有路径。其中，最短路径以<!-- raw HTML omitted -->红色<!-- raw HTML omitted -->标明，其他搜索到的路径以<!-- raw HTML omitted -->青色<!-- raw HTML omitted -->标明。</p>
+<h5 id="原始算法">原始算法</h5>
+<p><img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213100956564-16456882744421.png"
+	width="400"
+	height="280"
+	srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213100956564-16456882744421_hu06e85cfbe4dcc7667d2d44a41df0e48b_48275_480x0_resize_box_3.png 480w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213100956564-16456882744421_hu06e85cfbe4dcc7667d2d44a41df0e48b_48275_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="142"
+		data-flex-basis="342px"
+	
+></p>
+<h5 id="优化版本-1">优化版本 1</h5>
+<p><img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101009291-16456883022182.png"
+	width="400"
+	height="280"
+	srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101009291-16456883022182_hu5dae2e765a2f0b53ef68802425fea893_42367_480x0_resize_box_3.png 480w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101009291-16456883022182_hu5dae2e765a2f0b53ef68802425fea893_42367_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 3"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="142"
+		data-flex-basis="342px"
+	
+></p>
+<h4 id="优化版本-2-相较于优化版本-1">优化版本 2 相较于优化版本 1</h4>
+<p>优化版本 1 的问题在于，尽管通过找到结果即时停止搜索的方式降低了复杂度，但每次搜索中初始化的过程仍占有相当的时间开销。优化版本 2 就对这一点进行了补充。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>usa_long 测试平均耗时 (ms)</th>
+<th>usa_short 测试平均耗时 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化版本 1</td>
+<td>1089</td>
+<td>165.2</td>
+</tr>
+<tr>
+<td>优化版本 2</td>
+<td>813.8</td>
+<td>99.6</td>
+</tr>
+</tbody>
+</table></div>
+<p>观察上述结果，在对初始化的开销进行优化为亚线性级别后，算法在两个测试集上的运行效率均得到了提升。在 <code>usa_long</code> 测试上提升达到 <em>1.34x</em>，在 <code>usa_short</code> 测试上的提升达到了 <em>1.66x</em>。</p>
+<h4 id="优化版本-3-相较于优化版本-2">优化版本 3 相较于优化版本 2</h4>
+<p>尽管通过两个版本的优化，算法的效率已经得到了大幅的提升，但每次我们的搜索仍然具有相当的盲目性，这体现在于我们没有充分利用节点之间的拓扑结构。优化版本 3 就在优化版本 2 的基础上，引入了解决这一问题的 <em><em>A</em> 算法</em>*。通过这一启发性算法，能利用图本身的拓扑结构信息，对节点搜索的方向进行一个指向性的优化。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>usa_long 测试平均耗时 (ms)</th>
+<th>usa_short 测试平均耗时 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化版本 2</td>
+<td>813.8</td>
+<td>99.6</td>
+</tr>
+<tr>
+<td>优化版本 3</td>
+<td>199.3</td>
+<td>42.1</td>
+</tr>
+</tbody>
+</table></div>
+<p>观察实验结果，通过 A* 算法优化后的优化版本 3，在两类数据集上都迎来了巨大的效率提升。尤其在于测试长距离路径的 <code>usa_long</code> 测试集上的表现，相较于版本 2，优化幅度可达 <em>4.1x</em>。而在短距离路径测试集 <code>usa_short</code> 上也有着 <em>2.4x</em> 的效率提升。</p>
+<p>显然，A* 算法提供的指向性搜索，对长距离路径的优化更为显著，这一点无论是理论上还是测试得到的结果上都可以加以验证。以下同样给出搜索同一条最短路径时所搜索的所有路径的信息。</p>
+<p><img src="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101119956.png"
+	width="400"
+	height="280"
+	srcset="/p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101119956_hu56a52d544774c9a851106f314654b154_36485_480x0_resize_box_3.png 480w, /p/%E5%9C%B0%E5%9B%BE%E8%B7%AF%E7%94%B1map-routing/image-20211213101119956_hu56a52d544774c9a851106f314654b154_36485_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pic 4"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="142"
+		data-flex-basis="342px"
+	
+></p>
+<p>可以看出，相较于版本 1，优化版本 3 中避免了更多不必要的搜索，提高了效率。</p>
+<h4 id="优化版本-4-相较于优化版本3">优化版本 4 相较于优化版本3</h4>
+<p>这一版本的优化，相较于之前的版本迭代获取的效率提升而言，就有些不尽如人意。从实验的数据结果来看，这一优化甚至无益于提升效率，还会降低整体的算法效率。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>usa_long 测试平均耗时 (ms)</th>
+<th>usa_short 测试平均耗时 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化版本 3</td>
+<td>199.3</td>
+<td>42.1</td>
+</tr>
+<tr>
+<td>优化版本 4</td>
+<td>257.9</td>
+<td>45</td>
+</tr>
+</tbody>
+</table></div>
+<p>将优化版本 3 中以二叉堆实现的优先队列更换为优化版本 4 中以四叉堆实现的优先队列，从得到的测试结果来看，效率不仅没有提高，反而有略微的下降。通过对两种数据结构的分析，总结出以下原因。</p>
+<p><code>N</code> 叉堆（<code>N&gt;2</code>），相较二叉堆，优势有两点。</p>
+<ul>
+<li>节点上浮的操作更快。同样的上浮操作，N叉堆需要的比较次数只有二叉堆的 <em>log<!-- raw HTML omitted -->N<!-- raw HTML omitted -->2</em> 倍；</li>
+<li>对缓存更友好。二叉堆对数组的访问范围更大，也更加随机，而N叉堆则更集中于数组的前部，这就对缓存更加友好。</li>
+</ul>
+<p>但需要注意的是，尽管多叉堆有如上优点，数据结构往往需要在空间性能与节省性能之中做出权衡于取舍。具有如上优点的多叉堆的代价就在于，多叉堆在执行删除最小元素的操作时，需要的比较次数是二叉堆的 <em>log<!-- raw HTML omitted -->2<!-- raw HTML omitted -->N</em> 倍。</p>
+<p>不同的特点导致不同的应用场景，依据上述分析，二叉堆更加适合数据量较小，入队出队最更加频繁的场景；而多叉堆则更适合数据量较大，出队不太频繁的场景。我们需要根据应用场景，来选择最合适的数据结构。</p>
+<p>如本次实验的情形中，由于我们在 Dijkstra算法的搜索过程中，需要不断地取出并删除堆中的最小元素，因此对于 <code>delMin()</code> 操作的使用是相当频繁的。而这也正是多叉堆效率上不如二叉堆的原因。因此，优化版本 4 的实现效率反而不如采用二叉堆实现的优化版本 3 。</p>
+<h3 id="分析总结">分析总结</h3>
+<p>通过对原始 Dijkstra算法的不断优化改进，算法在面对大规模输入数据的情形下更加得心应手。在效率最高的优化版本 3 中，面对短路径数据集的效率提升达到了原始版本的 <em>52x</em>，面对长路径数据集的效率也提高到了原始版本的 <em>11x</em>。</p>
+<p>其中，优化版本 1，即一旦搜索到终点即结束搜索，对短路径搜索最短路径的效率提升极高；优化版本 3，即采用启发式算法改进搜索过程则对无论是短路径还是长路径的改进也都相当可观。</p>
+<p>美中不足之处在于，对于优化版本 4，即采用多路堆替代二叉堆实现优先队列，产生的效果不甚理想。通过查阅资料与对算法逻辑的分析，也查明了其原因。进一步认识到了数据结构的选用应该与实际应用场景所相适应。</p>
+<h2 id="收获感想">收获感想</h2>
+<p>在本次实验中，通过对原始 Dijkstra算法的不断改进，加强了我的实践编程能力，同时，更好地认识了 Dijkstra算法以及相关图算法的特点，初步了解了 A* 算法的理论和应用。同时，学会了针对不同的应用环境选用恰当的数据结构。</p>
+<h2 id="附录">附录</h2>
+<h3 id="完整测试结果">完整测试结果</h3>
+<h4 id="原始-dijkstra算法">原始 Dijkstra算法</h4>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>usa_long 测试耗时</th>
+<th>usa_short 测试耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2265</td>
+<td>2196</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2253</td>
+<td>2205</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2206</td>
+<td>2181</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2219</td>
+<td>2187</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2196</td>
+<td>2205</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2190</td>
+<td>2215</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2170</td>
+<td>2202</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2171</td>
+<td>2213</td>
+</tr>
+<tr>
+<td>9</td>
+<td>2213</td>
+<td>2186</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2251</td>
+<td>2187</td>
+</tr>
+<tr>
+<td>平均值</td>
+<td>2213.4</td>
+<td>2197.7</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="优化版本-1-1">优化版本 1</h4>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>usa_long 测试耗时</th>
+<th>usa_short 测试耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1071</td>
+<td>163</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1085</td>
+<td>166</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1073</td>
+<td>166</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1103</td>
+<td>161</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1076</td>
+<td>185</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1082</td>
+<td>159</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1083</td>
+<td>163</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1130</td>
+<td>170</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1084</td>
+<td>161</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1103</td>
+<td>158</td>
+</tr>
+<tr>
+<td>平均值</td>
+<td>1089</td>
+<td>165.2</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="优化版本-2">优化版本 2</h4>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>usa_long 测试耗时</th>
+<th>usa_short 测试耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>787</td>
+<td>99</td>
+</tr>
+<tr>
+<td>2</td>
+<td>806</td>
+<td>102</td>
+</tr>
+<tr>
+<td>3</td>
+<td>814</td>
+<td>97</td>
+</tr>
+<tr>
+<td>4</td>
+<td>818</td>
+<td>100</td>
+</tr>
+<tr>
+<td>5</td>
+<td>810</td>
+<td>102</td>
+</tr>
+<tr>
+<td>6</td>
+<td>811</td>
+<td>99</td>
+</tr>
+<tr>
+<td>7</td>
+<td>833</td>
+<td>99</td>
+</tr>
+<tr>
+<td>8</td>
+<td>809</td>
+<td>104</td>
+</tr>
+<tr>
+<td>9</td>
+<td>829</td>
+<td>97</td>
+</tr>
+<tr>
+<td>10</td>
+<td>821</td>
+<td>97</td>
+</tr>
+<tr>
+<td>平均值</td>
+<td>813.8</td>
+<td>99.6</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="优化版本-3">优化版本 3</h4>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>usa_long 测试耗时</th>
+<th>usa_short 测试耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>195</td>
+<td>40</td>
+</tr>
+<tr>
+<td>2</td>
+<td>197</td>
+<td>41</td>
+</tr>
+<tr>
+<td>3</td>
+<td>204</td>
+<td>41</td>
+</tr>
+<tr>
+<td>4</td>
+<td>198</td>
+<td>39</td>
+</tr>
+<tr>
+<td>5</td>
+<td>201</td>
+<td>40</td>
+</tr>
+<tr>
+<td>6</td>
+<td>198</td>
+<td>39</td>
+</tr>
+<tr>
+<td>7</td>
+<td>205</td>
+<td>49</td>
+</tr>
+<tr>
+<td>8</td>
+<td>197</td>
+<td>45</td>
+</tr>
+<tr>
+<td>9</td>
+<td>202</td>
+<td>47</td>
+</tr>
+<tr>
+<td>10</td>
+<td>196</td>
+<td>40</td>
+</tr>
+<tr>
+<td>平均值</td>
+<td>199.3</td>
+<td>42.1</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="优化版本-4">优化版本 4</h4>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>usa_long 测试耗时</th>
+<th>usa_short 测试耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>253</td>
+<td>43</td>
+</tr>
+<tr>
+<td>2</td>
+<td>257</td>
+<td>43</td>
+</tr>
+<tr>
+<td>3</td>
+<td>258</td>
+<td>43</td>
+</tr>
+<tr>
+<td>4</td>
+<td>257</td>
+<td>45</td>
+</tr>
+<tr>
+<td>5</td>
+<td>257</td>
+<td>48</td>
+</tr>
+<tr>
+<td>6</td>
+<td>257</td>
+<td>47</td>
+</tr>
+<tr>
+<td>7</td>
+<td>262</td>
+<td>43</td>
+</tr>
+<tr>
+<td>8</td>
+<td>260</td>
+<td>43</td>
+</tr>
+<tr>
+<td>9</td>
+<td>258</td>
+<td>47</td>
+</tr>
+<tr>
+<td>10</td>
+<td>260</td>
+<td>48</td>
+</tr>
+<tr>
+<td>平均值</td>
+<td>257.9</td>
+<td>45</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="实验程序">实验程序</h3>
+<h4 id="dijkstra_0-原始算法">Dijkstra_0 原始算法</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="c1">// Dijkstra&#39;s algorithm to find shortest path from s to d
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">deleted</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 优先队列创建并初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">IndexPQ</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设立源点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Dijkstra 算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">deleted</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 当 v 点不可达时退出循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 遍历所有 v 点的邻居
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果新的距离更短，则更新距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dijkstra_1-优化版本-1">Dijkstra_1 优化版本 1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="cm">/* 改进 1：一旦找到目标点，立刻结束搜索 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">V</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span> <span class="c1">// 距离初始化为无穷大
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">IndexPQ</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// set distance of source 设定源点到达源点的距离为 0，源点到源点的前一个结点为本身
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>  <span class="c1">// 修改优先队列里的源点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// run Dijkstra&#39;s algorithm 运行 Dijkstra 算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 取出 pq 中的排序的 dist 最小的结点，并将结点从队列中出列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// v not reachable from s so stop 结点不可达时，结束循环，不用深究这个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// scan through all nodes w adjacent to v 查找所有与 v 相邻的 w 节点，分别做处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 用迭代器遍历 G 的 neighbors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果得到新的距离要比原来更近，则更新长度和路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dijkstra_2-优化版本-2">Dijkstra_2 优化版本 2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="c1">// Dijkstra&#39;s algorithm to find shortest path from s to d
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/* 改进 2：在改进 1 的基础上将初始化时间优化为压线性 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 对队列内的点进行初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果得到新的距离要比原来更近，则更新长度和路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 若该点重来没有被遍历过，将其加入优先队列pq，否则修改其在优先队列内的数值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 将其加入队列，标记该点已被修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dijkstra_3-优化版本-3">Dijkstra_3 优化版本 3</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="c1">// Dijkstra&#39;s algorithm to find shortest path from s to d
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/* 改进 3：在改进 2 的基础上，更改为 A* 算法，即启发性搜索 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexPQ</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// run Dijkstra&#39;s algorithm 运行 Dijkstra 算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 将d[w]更新为d[v] + 从v到w的距离 + 从w到d的欧式距离 - 从v到d的欧式距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">change</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dijkstra_4-优化版本-4">Dijkstra_4 优化版本 4</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="c1">// Dijkstra&#39;s algorithm to find shortest path from s to d
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/* 改进 4：在改进 3 的基础上，优先队列采用多路堆实现 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dijkstra</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">V</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(!</span><span class="n">changed</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">changed</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">IndexMultiwayMinPQ</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexMultiwayMinPQ</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;(</span><span class="n">V</span><span class="o">,</span> <span class="n">WAYS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">s</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(!</span> <span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">delMin</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">||</span> <span class="n">pred</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">IntIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="na">neighbors</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">!=</span> <span class="n">INFINITY</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">changeKey</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">dist</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">)</span> <span class="o">+</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">-</span> <span class="n">G</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">dist</span><span class="o">[</span><span class="n">w</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">changed</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pred</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="shortestpath-获取最短路并绘图">ShortestPath 获取最短路并绘图</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShortestPath</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Turtle</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="mi">1000</span><span class="o">,</span> <span class="mi">700</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>	<span class="c1">// usa.txt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// read in the graph from a file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">In</span> <span class="n">graphin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">In</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EuclideanGraph</span> <span class="n">G</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EuclideanGraph</span><span class="o">(</span><span class="n">graphin</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Done reading the graph &#34;</span> <span class="o">+</span> <span class="n">file</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Enter query pair from stdin&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">G</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="c1">// read in the s-d pair from standard input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Dijkstra_0</span> <span class="n">dijkstra</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_0</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">StdIn</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">StdIn</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dijkstra</span><span class="o">.</span><span class="na">showPath</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dijkstra</span><span class="o">.</span><span class="na">drawPath</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Turtle</span><span class="o">.</span><span class="na">render</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="performancetest-测试各版本算法表现">PerformanceTest 测试各版本算法表现</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>			<span class="c1">// usa.txt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">File</span> <span class="n">lf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>		<span class="c1">// usa-long100.txt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">File</span> <span class="n">sf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>		<span class="c1">// usa-short100.txt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Scanner</span> <span class="n">ls</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">lf</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Scanner</span> <span class="n">ss</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">sf</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">startTime</span><span class="o">,</span> <span class="n">endTime</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// read in the graph from a file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">In</span> <span class="n">graphin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">In</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EuclideanGraph</span> <span class="n">G</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EuclideanGraph</span><span class="o">(</span><span class="n">graphin</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Dijkstra_0</span> <span class="n">dijkstra_0</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_0</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Dijkstra_1</span> <span class="n">dijkstra_1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_1</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Dijkstra_2</span> <span class="n">dijkstra_2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_2</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Dijkstra_3</span> <span class="n">dijkstra_3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_3</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Dijkstra_4</span> <span class="n">dijkstra_4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dijkstra_4</span><span class="o">(</span><span class="n">G</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 对算法进行 usa-long100.txt 数据集的测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;version 0, usa_long.txt&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">TIMES</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ls</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">lf</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">startTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">ls</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dijkstra_0</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">endTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 对算法进行 usa-short100.txt 数据集的测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;version 0, usa_short.txt&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">TIMES</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ss</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">sf</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">startTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">ss</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dijkstra_0</span><span class="o">.</span><span class="na">distance</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">endTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/dijkstra/">Dijkstra</a>
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%B8%97%E9%80%8F%E9%97%AE%E9%A2%98percolation/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%B8%97%E9%80%8F%E9%97%AE%E9%A2%98percolation/cover.819a0f1f01394fc32a9555fcd59f1116_hu312e2770b834f6abc1b8e3d7400af482_1303151_250x150_fill_q75_box_smart1.JPG" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 渗透问题(Percolation)"
+                        
+                        data-hash="md5-gZoPHwE5T8MqlVX81Z8RFg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">渗透问题(Percolation)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9F%BA%E4%BA%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%9A%8F%E6%9C%BA%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F/cover.15439c68560ee33444d59aa2dc29c0f0_hu213652e9e8afc24335433dfd45f3b0e2_5684916_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 基于消息队列实现的分布式随机信号分析系统"
+                        
+                        data-hash="md5-FUOcaFYO4zRE1Zqi3CnA8A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于消息队列实现的分布式随机信号分析系统</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                <img src="/p/c-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.7210c0bbc52d559bd03581952c2fd4ca_hu60a335ca4c55178541a8b7f6f0b682b3_1463971_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C&#43;&#43;程序设计课程总结"
+                        
+                        data-hash="md5-chDAu8UtVZvQNYGVLC/Uyg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43;程序设计课程总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.21ce7e32e039dc67a02a0355feee0442_hud909cb1be98356b124c5a237e088aad3_1604452_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 微机原理与接口技术课程总结"
+                        
+                        data-hash="md5-Ic5&#43;MuA53GegKgNV/u4EQg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">微机原理与接口技术课程总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%9F%BA%E4%BA%8E-nginx-%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/cover.d27b36ed5cdfc55b25a8d332b6650c6c_hubbcff01d8523d34c7e0c058aaa3c8f24_1400464_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 基于 Nginx 实现的负载均衡策略"
+                        
+                        data-hash="md5-0ns27VzfxVslqNMytmUMbA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于 Nginx 实现的负载均衡策略</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>

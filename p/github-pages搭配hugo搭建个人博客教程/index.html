@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='简要记录下使用GitHub Pages搭配Hugo搭建个人博客笔记系统的流程，留档备用。'>
+<title>GitHub Pages搭配Hugo搭建个人博客教程</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='GitHub Pages搭配Hugo搭建个人博客教程'>
+<meta property='og:description' content='简要记录下使用GitHub Pages搭配Hugo搭建个人博客笔记系统的流程，留档备用。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='hugo' /><meta property='article:published_time' content='2023-03-02T16:02:30&#43;08:00'/><meta property='article:modified_time' content='2023-03-02T16:02:30&#43;08:00'/><meta property='og:image' content='https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover.jpeg' />
+<meta name="twitter:title" content="GitHub Pages搭配Hugo搭建个人博客教程">
+<meta name="twitter:description" content="简要记录下使用GitHub Pages搭配Hugo搭建个人博客笔记系统的流程，留档备用。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#搭建-github-pages">搭建 GitHub Pages</a>
+      <ol>
+        <li><a href="#创建个人页面仓库">创建个人页面仓库</a></li>
+        <li><a href="#github-pages-配置">GitHub Pages 配置</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用-hugo-美化博客">使用 Hugo 美化博客</a>
+      <ol>
+        <li><a href="#command-line-tools">Command Line Tools</a></li>
+        <li><a href="#homebrew">HomeBrew</a></li>
+        <li><a href="#hugo-安装">Hugo 安装</a></li>
+        <li><a href="#使用-hugo-进行初始化">使用 Hugo 进行初始化</a></li>
+        <li><a href="#使用-hugo-模版">使用 Hugo 模版</a></li>
+        <li><a href="#配置-hugo-模版">配置 Hugo 模版</a></li>
+        <li><a href="#将-hugo-生成的静态模版发布至-github-pages">将 Hugo 生成的静态模版发布至 GitHub Pages</a></li>
+        <li><a href="#开始写作">开始写作</a></li>
+        <li><a href="#了解-hugo-项目模版目录结构可选">了解 Hugo 项目模版目录结构（可选）</a>
+          <ol>
+            <li><a href="#archetypes">archetypes</a></li>
+            <li><a href="#content">content</a></li>
+            <li><a href="#data">data</a></li>
+            <li><a href="#layouts">layouts</a></li>
+            <li><a href="#static">static</a></li>
+            <li><a href="#public">public</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#结语">结语</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">
+                <img src="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover_hua729ae8b5af9b293b0c75ca2c629cff2_3457944_800x0_resize_q75_box.jpeg"
+                        srcset="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover_hua729ae8b5af9b293b0c75ca2c629cff2_3457944_800x0_resize_q75_box.jpeg 800w, /p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover_hua729ae8b5af9b293b0c75ca2c629cff2_3457944_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post GitHub Pages搭配Hugo搭建个人博客教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="background-color: #2a9d8f; color: #fff;">
+                博客建站
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">GitHub Pages搭配Hugo搭建个人博客教程</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            简要记录下使用GitHub Pages搭配Hugo搭建个人博客笔记系统的流程，留档备用。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 02, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="github-pages-搭配-hugo-搭建个人博客教程">GitHub Pages 搭配 Hugo 搭建个人博客教程</h1>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>GitHub Pages 是一项静态站点托管服务，它直接从 GitHub 上的仓库获取 HTML、CSS 和 JavaScript 文件，（可选）通过构建过程运行文件，然后发布网站。</p>
+</blockquote>
+<p>GitHub Pages用于搭建一款轻量级的个人博客，相较于传统的服务端部署的建站服务，优势如下。</p>
+<ul>
+<li>GitHub Pages的基础功能是完全免费的，相较于服务端部署建站，你可能需要支付一笔高昂的云服务器费用以及购买域名的费用。</li>
+<li>省略服务器部署的种种细节，由GitHub Pages代你完成，你只需要专注于文章内容的创作。</li>
+<li>极高的自定义性以及拓展性，支持自定义你的网页模版、绑定你的域名、自带的HTTPS、各类插件支持等。</li>
+</ul>
+<h2 id="搭建-github-pages">搭建 GitHub Pages</h2>
+<p>本教程默认你已经：</p>
+<ul>
+<li>拥有自己的GitHub账户，并有一定的GitHub使用经验。</li>
+<li>本机上安装了Git，并知晓Git的简单使用。</li>
+<li>熟悉一些命令行终端最基本的语法和操作（如 <code>cd</code> 等）。</li>
+</ul>
+<h3 id="创建个人页面仓库">创建个人页面仓库</h3>
+<p>登陆你的GitHub，在Github首页点击右上角的 <code>+</code> 号，点击 <code>New repository</code> 创建一个新仓库。出现如下页面。</p>
+<p><img src="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309.png"
+	width="1127"
+	height="645"
+	srcset="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309_hu41a78dd73bbc859a119960a5b6567c3f_81673_480x0_resize_box_3.png 480w, /p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309_hu41a78dd73bbc859a119960a5b6567c3f_81673_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20230303154723309"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="419px"
+	
+></p>
+<p>在 <code>Repository name</code> 内，以如下格式键入个人页面仓库名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{替换为你的GitHub昵称}.github.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>仓库类型设置为 <code>Public</code>，不需要添加 <code>README</code>，点击 <code>create repository</code> 创建仓库。</p>
+<h3 id="github-pages-配置">GitHub Pages 配置</h3>
+<p>回到新建的仓库的首页，点击 <code>Settings</code>，点击 <code>Pages</code> 选项卡，进入 <code>GitHub Pages</code> 配置页面。在 <code>Source</code> 选项中选择 <code>Deploy from a branch</code> 选项。</p>
+<h2 id="使用-hugo-美化博客">使用 Hugo 美化博客</h2>
+<p>接下来，我们会通过使用静态模板系统来让替代默认的网页模版，使得博客页面更加美观，同时文章也更易于管理。</p>
+<p>这里我们采用的基于Go编写的Hugo。除了Hugo之外，还有许多其他静态模板系统可以用来搭建 GitHub Pages。如GitHub官方推荐的Jekyll，采用Node.js编写的Hexo，采用Python编写的Pelican等。如果有你熟悉的静态模版系统，可以使用，而不必拘泥于教程中的Hugo或是官方推荐的Jekyll。</p>
+<p>以下安装教程基于macOS 13系统进行，Windows与Linux系统类似，有需要的朋友可以参考官方的中文文档 <a class="link" href="https://www.gohugo.org/doc/overview/installing/"  target="_blank" rel="noopener"
+    >安装 Hugo</a>。</p>
+<h3 id="command-line-tools">Command Line Tools</h3>
+<blockquote>
+<p>Command Line Tools 可以认为是一个可选的独立包，为macOS终端用户提供许多常用工具、实用程序和编译器。包括svn，git，make，GCC，clang，perl，size，strip，strings，libtool，cpp，what以及其他很多能够在Linux默认安装中找到的有用的命令。</p>
+</blockquote>
+<p>首先确保你的macOS上已经安装了终端的Command Line Tools工具，可以参考<a class="link" href="https://segmentfault.com/a/1190000018045211"  target="_blank" rel="noopener"
+    >这篇文章</a>。</p>
+<h3 id="homebrew">HomeBrew</h3>
+<blockquote>
+<p><em>Homebrew是</em>一款自由及开放源代码的软件包管理系统，用以简化macOS系统上的软件安装过程。</p>
+</blockquote>
+<p>在终端运行如下命令，检验是否已安装 <code>Brew</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你的系统已经安装 <code>Brew</code> 包管理器，可以跳至下一节。如提示指令找不到等错误信息，可以参考接下来的步骤进行 <code>Brew</code> 的安装。</p>
+<p>由于众所周知的原因，官网的安装脚本要么下载极慢，要么直接连接失败。在此，我们使用中科大的源来进行安装。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/usr/bin/ruby -e <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install<span class="k">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装过程不需要任何操作，安装结束后如未设置环境变量路径，最后会有提示，根据提示要求，直接复制命令执行环境路径的添加即可。</p>
+<p>安装完成后再次使用上述指令检验，如提示版本信息则安装成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">% brew -v
+</span></span><span class="line"><span class="cl">Homebrew 4.0.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="hugo-安装">Hugo 安装</h3>
+<p>中科大源安装的 <code>Brew</code> 默认已经替换了镜像源，使用如下指令直接安装 <code>Hugo</code>，待安装完成即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用-hugo-进行初始化">使用 Hugo 进行初始化</h3>
+<p>在终端移动到你决定在本地存放你网站文件的目录下，执行以下命令，<code>Hugo</code> 会在当前目录下新建一个目录用于存放网站文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo new site hugo-site
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>hugo-stie</code> 替换为你自己的网站名称，这个名称是任意的。</p>
+<h3 id="使用-hugo-模版">使用 Hugo 模版</h3>
+<p>在<a class="link" href="https://themes.gohugo.io"  target="_blank" rel="noopener"
+    >Hugo Themes</a>上你可以找到许多高质量的模版，同时作者也提供了安装的教程。</p>
+<p><img src="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456.png"
+	width="1210"
+	height="742"
+	srcset="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456_hub25ca20162e1a22202fd0cc4aa7c8948_269179_480x0_resize_box_3.png 480w, /p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456_hub25ca20162e1a22202fd0cc4aa7c8948_269179_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20230303201222456"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="163"
+		data-flex-basis="391px"
+	
+></p>
+<p>一般而言，模版的安装过程都是大同小异的，这里我们以模版<a class="link" href="https://themes.gohugo.io/themes/hugo-tranquilpeak-theme/"  target="_blank" rel="noopener"
+    >Tranquilpeek</a>为例，说明下模版的使用方法。</p>
+<p>在终端中转到 <code>Hugo</code> 新建了网站的目录下，执行如下命令，clone主题的GitHub库至 <code>./themes/</code> 路径下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git ./themes/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后移动到主题的根目录下，可以看到 <code>exampleStie</code> 目录。这是主题作者为我们准备的示例网站，建议在此基础上进行博客的搭建，可以省去很多不必要的麻烦。</p>
+<p>将 <code>exampleStie</code> 中的文件统一复制到网站的根目录下，同名时覆盖原有文件。完成后在终端移动至网站根目录下，运行如下命令，即可在本地查看网站渲染效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器中输入地址 <code>localhost:1313</code>，跳转即可看到当前网站的渲染效果。此时看到的应该是模版的默认形式，我们没有添加任何修改的情况下。</p>
+<p><img src="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113.png"
+	width="1210"
+	height="751"
+	srcset="/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113_hubc9821c2bdab5210cccc2c3e0e456f86_596069_480x0_resize_box_3.png 480w, /p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113_hubc9821c2bdab5210cccc2c3e0e456f86_596069_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20230303203445113"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="386px"
+	
+></p>
+<p>在此你可以自由点击各种选项卡进行测试。</p>
+<h3 id="配置-hugo-模版">配置 Hugo 模版</h3>
+<p>这部分是较为重要的部分，让示例网站成为你的专属网站主要就是调整配置文件内的各项参数。</p>
+<p>模版的配置通常只需要通过根目录下的 <code>config.toml</code> 或 <code>config.yaml</code> 文件即可完成。需要注意的是二者是二选一的关系，除了语法没有其他差异，不要同时使用。</p>
+<p>在 <code>config</code> 文件内，你可以指定网站的域名、使用的主题、多语言设置、默认编码等，同时根据各个模版的不同，可以配置包括但不限于背景图片、头像、侧边栏功能、跳转链接等。具体可以参考每个主题作者提供的 <code>config</code> 示例和说明。</p>
+<p>在调整的过程中，可以保持网站的本地渲染状态，大多数情形下可以直接在页面上看到调整结果。</p>
+<h3 id="将-hugo-生成的静态模版发布至-github-pages">将 Hugo 生成的静态模版发布至 GitHub Pages</h3>
+<p>使用以下指令，将网站声称一个静态文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时所有的网页信息都打包在了 <code>public</code> 文件夹下。</p>
+<p>接下来需要将GitHub的个人仓库衔接到本地的 <code>public</code> 文件夹。终端中移动到 <code>public</code> 目录中，执行以下指令，完成仓库的初次提交。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;init&#34;</span>
+</span></span><span class="line"><span class="cl">git remote add origin <span class="o">{</span>你的github仓库链接<span class="o">}</span>
+</span></span><span class="line"><span class="cl">git push -u origin master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功的话，所有的网站源码就已经托管在你的GitHub仓库上了，此时访问 <code>https://{你的GitHub昵称}.github.io</code> 就能访问部署的网站了。</p>
+<h3 id="开始写作">开始写作</h3>
+<p>可以使用以下命令生成文章草稿。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo new posts/first-post.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>则在content目录中，会自动以 <code>archetypes/default.md</code> 为模板在 <code>content/posts</code> 目录下生成一篇名为 <code>first-post.md</code> 的文章草稿。这份草稿文件就是除开是个 MarkDown 文件外，还添加了标记文件信息的 <code>front matter</code>，格式如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;First Post&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2022-11-25T15:23:42</span><span class="m">-08</span><span class="p">:</span><span class="m">00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如图所示，默认的 <code>front matter</code> 中包含了文章名、日期与时间、是否草稿（设置为 <code>false</code> 后会在网页中展示）。除了上述几个必选的基本项外，你还可以添加其他标签方便你对文章进行管理，如 <code>tags</code>、<code>categories</code> 等。参见：<a class="link" href="https://gohugo.io/content-management/front-matter/"  target="_blank" rel="noopener"
+    >Front Matter</a></p>
+<p>如上文所述，如果你想修改默认生成的 <code>front matter</code>，可以修改 <code>archetypes/default.md</code> 文件。</p>
+<p>通过这种形式，需要新建文章时，只需要重复一遍终端指令，输入对应的路径以及文件名即可生成 <code>.md</code> 文件。编辑文件内的 <code>front matter</code> 即可为文章指定标题、Tag等配置项。</p>
+<h3 id="了解-hugo-项目模版目录结构可选">了解 Hugo 项目模版目录结构（可选）</h3>
+<p>参考：<a class="link" href="https://www.jianshu.com/p/c5297a8bb1e7"  target="_blank" rel="noopener"
+    >Hugo 不完美教程 - II: Hugo 目录组织</a></p>
+<p>成功运行模版的示例网站后，我们来了解下 <code>hugo</code> 网站根目录下的目录结构。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── archetypes 
+</span></span><span class="line"><span class="cl">├── config.toml
+</span></span><span class="line"><span class="cl">├── content
+</span></span><span class="line"><span class="cl">├── data
+</span></span><span class="line"><span class="cl">├── layouts
+</span></span><span class="line"><span class="cl">├── static
+</span></span><span class="line"><span class="cl">└── themes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="archetypes">archetypes</h4>
+<p>默认内容模版。通过 <code>hugo new</code> 创建的内容会添加 <code>date</code>, <code>title</code>, <code>draft = true</code> 等扉页 front matter 设置信息，它们就是从 <strong>archetypes</strong> 模板文件中拷贝的。这可以节省时间，同时保证统一性。</p>
+<h4 id="content">content</h4>
+<p>内容页面的存放目录，content下的一级子目录看作一个对应的 <strong>section</strong> 内容分类区。比如，为博客设置一个 <code>blog</code> 目录，为文章设置一个 <code>articles</code> 目录，为教程设置一个 <code>tutorials</code> 目录等，Hugo 使用内容分类区分作为默认<strong>内容类型</strong> content type，如果在扉页 front matter 设置了 <code>type</code> 则以具体设置的类型为准。</p>
+<p>内容目录结构与 URL 对应关系参考如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">└── content
+</span></span><span class="line"><span class="cl">    └── about
+</span></span><span class="line"><span class="cl">    |   └── index.md       // &lt;- https://example.com/about/
+</span></span><span class="line"><span class="cl">    ├── posts
+</span></span><span class="line"><span class="cl">    |   ├── _index.md      // &lt;- https://example.com/posts/
+</span></span><span class="line"><span class="cl">    |   ├── index.md       // &lt;- https://example.com/posts/
+</span></span><span class="line"><span class="cl">    |   ├── firstpost.md   // &lt;- https://example.com/posts/firstpost/
+</span></span><span class="line"><span class="cl">    |   ├── happy
+</span></span><span class="line"><span class="cl">    |   |   └── ness.md    // &lt;- https://example.com/posts/happy/ness/
+</span></span><span class="line"><span class="cl">    |   └── secondpost.md  // &lt;- https://example.com/posts/secondpost/
+</span></span><span class="line"><span class="cl">    └── quote
+</span></span><span class="line"><span class="cl">        ├── first.md       // &lt;- https://example.com/quote/first/
+</span></span><span class="line"><span class="cl">        └── second.md      // &lt;- https://example.com/quote/second/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="data">data</h4>
+<p>数据模板目录，Hugo 静态网站不会连接像 MySQL 这样的数据库，而此目录保存的数据相当于 Hugo 使用的数据库，生成过程用到的配置数据，可以用 YAML, JSON, TOML 等格式文件。</p>
+<h4 id="layouts">layouts</h4>
+<p>布局模板文件目录，存放 <code>.html</code> 布局模板文件，对应不同的内容，模板有多种，data-templates、homepage、lists、menu-templates、partials、section-templates 等等。</p>
+<p>站点的首页模板在主题目录中 <strong>layouts/index.html</strong>，除首页外，Hugo 有两类基本页面：</p>
+<ul>
+<li>Single page 单体页面，如 <strong>hugo new demo.md</strong> 创建的 Post 页面；</li>
+<li>List page 列表页面，如 tags 或 categories 页面；</li>
+</ul>
+<p>这两种页面的默认模板都在主题目录中 <strong>layouts/_default</strong>，分别对应着 single.html 和 list.html。</p>
+<h4 id="static">static</h4>
+<p>静态资源存放目录，比如想使用 Marmarid 画作模块，或者 jQuery 工具库，或者其它脚本、图像、CSS 等等，就可以将文件放到这里，在 Hugo 编译生成时会自动原样复制到 <strong>public</strong> 目录。注意，可以有多个静态资源目录。</p>
+<h4 id="public">public</h4>
+<p>生成静态站点的文件输出目录。</p>
+<h2 id="结语">结语</h2>
+<p>相信不少从事技术行业的朋友，在学习某项新技术的过程中，都曾受到一些技术文章、博客的帮助与启发。而自身也在或多或少地萌生过撰写文章或是博客来分享、记录知识的想法。笔者亦是如此，出于对知识的整理、巩固，以及期望自己的知识能帮助到更多有需要的人，笔者很早就尝试过搭建个人的博客笔记系统。</p>
+<p>最早，笔者是通过csdn、简书等技术内容分享平台进行文章发布与管理的，这类平台最大的优势就在于无需一些繁琐的配置，免费且开箱即用，只需要在平台创建上账号，即可专注于文章的创作，余下的网页部署、搜索引擎摘录这些工作都不需要操心。</p>
+<p>然而随着深入使用，这类平台的缺点变得愈发显著。首先，在平台上发布文章，始终是归属于该平台下，博客页面自定义程度受限、无法使用个人域名等缺陷不可避免；其次，该类平台往往出于业绩压力，某些方面的吃相愈发难看，渐渐地已经违背了知识分享这一初衷。</p>
+<p>为了克服上述缺点，同时自身的技术水平也有所长进，决定另辟蹊径，寻求一条能搭建完全独立的、由自己掌控的博客，且使用自己个性的域名的途径。期间采用的方案是云服务器部署加购买个人域名的方案。该方案从实用性的角度而言确实满足了我对它的所有需求，然而缺点也很明显，高昂的服务器费用缺也使得仍是学生的笔者感到难以维续。</p>
+<p>近期服务器即将到期，决定将博客系统继续迁徙至备受好评的GitHub Pages上。使用GitHub Pages作为一款轻量的个人博客服务，正如前面所说，它有着完全免费、无需购买云服务器从头搭建、主题海量、可以绑定域名等诸多优势。只是单纯作为一个记录与分享知识的平台而言，GitHub Pages仍可以说是中小型博客的最佳选项之一。</p>
+<p>也正如前文所说，希望我的文章能对你有所帮助。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hugo/">hugo</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>

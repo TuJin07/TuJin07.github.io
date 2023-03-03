@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>hugo on 荼锦</title>
+        <link>https://TuJin07.github.io/tags/hugo/</link>
+        <description>Recent content in hugo on 荼锦</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Thu, 02 Mar 2023 16:02:30 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GitHub Pages搭配Hugo搭建个人博客教程</title>
+        <link>https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Thu, 02 Mar 2023 16:02:30 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/cover.jpeg" alt="Featured image of post GitHub Pages搭配Hugo搭建个人博客教程" /&gt;&lt;h1 id=&#34;github-pages-搭配-hugo-搭建个人博客教程&#34;&gt;GitHub Pages 搭配 Hugo 搭建个人博客教程&lt;/h1&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub Pages 是一项静态站点托管服务，它直接从 GitHub 上的仓库获取 HTML、CSS 和 JavaScript 文件，（可选）通过构建过程运行文件，然后发布网站。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;GitHub Pages用于搭建一款轻量级的个人博客，相较于传统的服务端部署的建站服务，优势如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub Pages的基础功能是完全免费的，相较于服务端部署建站，你可能需要支付一笔高昂的云服务器费用以及购买域名的费用。&lt;/li&gt;
+&lt;li&gt;省略服务器部署的种种细节，由GitHub Pages代你完成，你只需要专注于文章内容的创作。&lt;/li&gt;
+&lt;li&gt;极高的自定义性以及拓展性，支持自定义你的网页模版、绑定你的域名、自带的HTTPS、各类插件支持等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;搭建-github-pages&#34;&gt;搭建 GitHub Pages&lt;/h2&gt;
+&lt;p&gt;本教程默认你已经：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;拥有自己的GitHub账户，并有一定的GitHub使用经验。&lt;/li&gt;
+&lt;li&gt;本机上安装了Git，并知晓Git的简单使用。&lt;/li&gt;
+&lt;li&gt;熟悉一些命令行终端最基本的语法和操作（如 &lt;code&gt;cd&lt;/code&gt; 等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;创建个人页面仓库&#34;&gt;创建个人页面仓库&lt;/h3&gt;
+&lt;p&gt;登陆你的GitHub，在Github首页点击右上角的 &lt;code&gt;+&lt;/code&gt; 号，点击 &lt;code&gt;New repository&lt;/code&gt; 创建一个新仓库。出现如下页面。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309.png&#34;
+	width=&#34;1127&#34;
+	height=&#34;645&#34;
+	srcset=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309_hu41a78dd73bbc859a119960a5b6567c3f_81673_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303154723309_hu41a78dd73bbc859a119960a5b6567c3f_81673_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230303154723309&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;174&#34;
+		data-flex-basis=&#34;419px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;Repository name&lt;/code&gt; 内，以如下格式键入个人页面仓库名。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{替换为你的GitHub昵称}.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;仓库类型设置为 &lt;code&gt;Public&lt;/code&gt;，不需要添加 &lt;code&gt;README&lt;/code&gt;，点击 &lt;code&gt;create repository&lt;/code&gt; 创建仓库。&lt;/p&gt;
+&lt;h3 id=&#34;github-pages-配置&#34;&gt;GitHub Pages 配置&lt;/h3&gt;
+&lt;p&gt;回到新建的仓库的首页，点击 &lt;code&gt;Settings&lt;/code&gt;，点击 &lt;code&gt;Pages&lt;/code&gt; 选项卡，进入 &lt;code&gt;GitHub Pages&lt;/code&gt; 配置页面。在 &lt;code&gt;Source&lt;/code&gt; 选项中选择 &lt;code&gt;Deploy from a branch&lt;/code&gt; 选项。&lt;/p&gt;
+&lt;h2 id=&#34;使用-hugo-美化博客&#34;&gt;使用 Hugo 美化博客&lt;/h2&gt;
+&lt;p&gt;接下来，我们会通过使用静态模板系统来让替代默认的网页模版，使得博客页面更加美观，同时文章也更易于管理。&lt;/p&gt;
+&lt;p&gt;这里我们采用的基于Go编写的Hugo。除了Hugo之外，还有许多其他静态模板系统可以用来搭建 GitHub Pages。如GitHub官方推荐的Jekyll，采用Node.js编写的Hexo，采用Python编写的Pelican等。如果有你熟悉的静态模版系统，可以使用，而不必拘泥于教程中的Hugo或是官方推荐的Jekyll。&lt;/p&gt;
+&lt;p&gt;以下安装教程基于macOS 13系统进行，Windows与Linux系统类似，有需要的朋友可以参考官方的中文文档 &lt;a class=&#34;link&#34; href=&#34;https://www.gohugo.org/doc/overview/installing/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安装 Hugo&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;command-line-tools&#34;&gt;Command Line Tools&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command Line Tools 可以认为是一个可选的独立包，为macOS终端用户提供许多常用工具、实用程序和编译器。包括svn，git，make，GCC，clang，perl，size，strip，strings，libtool，cpp，what以及其他很多能够在Linux默认安装中找到的有用的命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先确保你的macOS上已经安装了终端的Command Line Tools工具，可以参考&lt;a class=&#34;link&#34; href=&#34;https://segmentfault.com/a/1190000018045211&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;homebrew&#34;&gt;HomeBrew&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Homebrew是&lt;/em&gt;一款自由及开放源代码的软件包管理系统，用以简化macOS系统上的软件安装过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在终端运行如下命令，检验是否已安装 &lt;code&gt;Brew&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果你的系统已经安装 &lt;code&gt;Brew&lt;/code&gt; 包管理器，可以跳至下一节。如提示指令找不到等错误信息，可以参考接下来的步骤进行 &lt;code&gt;Brew&lt;/code&gt; 的安装。&lt;/p&gt;
+&lt;p&gt;由于众所周知的原因，官网的安装脚本要么下载极慢，要么直接连接失败。在此，我们使用中科大的源来进行安装。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/ruby -e &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;安装过程不需要任何操作，安装结束后如未设置环境变量路径，最后会有提示，根据提示要求，直接复制命令执行环境路径的添加即可。&lt;/p&gt;
+&lt;p&gt;安装完成后再次使用上述指令检验，如提示版本信息则安装成功。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;% brew -v
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Homebrew 4.0.4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;hugo-安装&#34;&gt;Hugo 安装&lt;/h3&gt;
+&lt;p&gt;中科大源安装的 &lt;code&gt;Brew&lt;/code&gt; 默认已经替换了镜像源，使用如下指令直接安装 &lt;code&gt;Hugo&lt;/code&gt;，待安装完成即可。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install hugo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;使用-hugo-进行初始化&#34;&gt;使用 Hugo 进行初始化&lt;/h3&gt;
+&lt;p&gt;在终端移动到你决定在本地存放你网站文件的目录下，执行以下命令，&lt;code&gt;Hugo&lt;/code&gt; 会在当前目录下新建一个目录用于存放网站文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo new site hugo-site
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;hugo-stie&lt;/code&gt; 替换为你自己的网站名称，这个名称是任意的。&lt;/p&gt;
+&lt;h3 id=&#34;使用-hugo-模版&#34;&gt;使用 Hugo 模版&lt;/h3&gt;
+&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Themes&lt;/a&gt;上你可以找到许多高质量的模版，同时作者也提供了安装的教程。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456.png&#34;
+	width=&#34;1210&#34;
+	height=&#34;742&#34;
+	srcset=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456_hub25ca20162e1a22202fd0cc4aa7c8948_269179_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303201222456_hub25ca20162e1a22202fd0cc4aa7c8948_269179_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230303201222456&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;163&#34;
+		data-flex-basis=&#34;391px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一般而言，模版的安装过程都是大同小异的，这里我们以模版&lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io/themes/hugo-tranquilpeak-theme/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tranquilpeek&lt;/a&gt;为例，说明下模版的使用方法。&lt;/p&gt;
+&lt;p&gt;在终端中转到 &lt;code&gt;Hugo&lt;/code&gt; 新建了网站的目录下，执行如下命令，clone主题的GitHub库至 &lt;code&gt;./themes/&lt;/code&gt; 路径下。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git ./themes/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后移动到主题的根目录下，可以看到 &lt;code&gt;exampleStie&lt;/code&gt; 目录。这是主题作者为我们准备的示例网站，建议在此基础上进行博客的搭建，可以省去很多不必要的麻烦。&lt;/p&gt;
+&lt;p&gt;将 &lt;code&gt;exampleStie&lt;/code&gt; 中的文件统一复制到网站的根目录下，同名时覆盖原有文件。完成后在终端移动至网站根目录下，运行如下命令，即可在本地查看网站渲染效果。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;浏览器中输入地址 &lt;code&gt;localhost:1313&lt;/code&gt;，跳转即可看到当前网站的渲染效果。此时看到的应该是模版的默认形式，我们没有添加任何修改的情况下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113.png&#34;
+	width=&#34;1210&#34;
+	height=&#34;751&#34;
+	srcset=&#34;https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113_hubc9821c2bdab5210cccc2c3e0e456f86_596069_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/github-pages%E6%90%AD%E9%85%8Dhugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/image-20230303203445113_hubc9821c2bdab5210cccc2c3e0e456f86_596069_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230303203445113&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;161&#34;
+		data-flex-basis=&#34;386px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在此你可以自由点击各种选项卡进行测试。&lt;/p&gt;
+&lt;h3 id=&#34;配置-hugo-模版&#34;&gt;配置 Hugo 模版&lt;/h3&gt;
+&lt;p&gt;这部分是较为重要的部分，让示例网站成为你的专属网站主要就是调整配置文件内的各项参数。&lt;/p&gt;
+&lt;p&gt;模版的配置通常只需要通过根目录下的 &lt;code&gt;config.toml&lt;/code&gt; 或 &lt;code&gt;config.yaml&lt;/code&gt; 文件即可完成。需要注意的是二者是二选一的关系，除了语法没有其他差异，不要同时使用。&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;config&lt;/code&gt; 文件内，你可以指定网站的域名、使用的主题、多语言设置、默认编码等，同时根据各个模版的不同，可以配置包括但不限于背景图片、头像、侧边栏功能、跳转链接等。具体可以参考每个主题作者提供的 &lt;code&gt;config&lt;/code&gt; 示例和说明。&lt;/p&gt;
+&lt;p&gt;在调整的过程中，可以保持网站的本地渲染状态，大多数情形下可以直接在页面上看到调整结果。&lt;/p&gt;
+&lt;h3 id=&#34;将-hugo-生成的静态模版发布至-github-pages&#34;&gt;将 Hugo 生成的静态模版发布至 GitHub Pages&lt;/h3&gt;
+&lt;p&gt;使用以下指令，将网站声称一个静态文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时所有的网页信息都打包在了 &lt;code&gt;public&lt;/code&gt; 文件夹下。&lt;/p&gt;
+&lt;p&gt;接下来需要将GitHub的个人仓库衔接到本地的 &lt;code&gt;public&lt;/code&gt; 文件夹。终端中移动到 &lt;code&gt;public&lt;/code&gt; 目录中，执行以下指令，完成仓库的初次提交。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git init
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;init&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git remote add origin &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;你的github仓库链接&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;成功的话，所有的网站源码就已经托管在你的GitHub仓库上了，此时访问 &lt;code&gt;https://{你的GitHub昵称}.github.io&lt;/code&gt; 就能访问部署的网站了。&lt;/p&gt;
+&lt;h3 id=&#34;开始写作&#34;&gt;开始写作&lt;/h3&gt;
+&lt;p&gt;可以使用以下命令生成文章草稿。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo new posts/first-post.md
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;则在content目录中，会自动以 &lt;code&gt;archetypes/default.md&lt;/code&gt; 为模板在 &lt;code&gt;content/posts&lt;/code&gt; 目录下生成一篇名为 &lt;code&gt;first-post.md&lt;/code&gt; 的文章草稿。这份草稿文件就是除开是个 MarkDown 文件外，还添加了标记文件信息的 &lt;code&gt;front matter&lt;/code&gt;，格式如下。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;First Post&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;ld&#34;&gt;2022-11-25T15:23:42&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-08&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;draft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如图所示，默认的 &lt;code&gt;front matter&lt;/code&gt; 中包含了文章名、日期与时间、是否草稿（设置为 &lt;code&gt;false&lt;/code&gt; 后会在网页中展示）。除了上述几个必选的基本项外，你还可以添加其他标签方便你对文章进行管理，如 &lt;code&gt;tags&lt;/code&gt;、&lt;code&gt;categories&lt;/code&gt; 等。参见：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/content-management/front-matter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Front Matter&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如上文所述，如果你想修改默认生成的 &lt;code&gt;front matter&lt;/code&gt;，可以修改 &lt;code&gt;archetypes/default.md&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;p&gt;通过这种形式，需要新建文章时，只需要重复一遍终端指令，输入对应的路径以及文件名即可生成 &lt;code&gt;.md&lt;/code&gt; 文件。编辑文件内的 &lt;code&gt;front matter&lt;/code&gt; 即可为文章指定标题、Tag等配置项。&lt;/p&gt;
+&lt;h3 id=&#34;了解-hugo-项目模版目录结构可选&#34;&gt;了解 Hugo 项目模版目录结构（可选）&lt;/h3&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/c5297a8bb1e7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 不完美教程 - II: Hugo 目录组织&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;成功运行模版的示例网站后，我们来了解下 &lt;code&gt;hugo&lt;/code&gt; 网站根目录下的目录结构。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── archetypes 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── content
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── data
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── layouts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── static
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── themes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;archetypes&#34;&gt;archetypes&lt;/h4&gt;
+&lt;p&gt;默认内容模版。通过 &lt;code&gt;hugo new&lt;/code&gt; 创建的内容会添加 &lt;code&gt;date&lt;/code&gt;, &lt;code&gt;title&lt;/code&gt;, &lt;code&gt;draft = true&lt;/code&gt; 等扉页 front matter 设置信息，它们就是从 &lt;strong&gt;archetypes&lt;/strong&gt; 模板文件中拷贝的。这可以节省时间，同时保证统一性。&lt;/p&gt;
+&lt;h4 id=&#34;content&#34;&gt;content&lt;/h4&gt;
+&lt;p&gt;内容页面的存放目录，content下的一级子目录看作一个对应的 &lt;strong&gt;section&lt;/strong&gt; 内容分类区。比如，为博客设置一个 &lt;code&gt;blog&lt;/code&gt; 目录，为文章设置一个 &lt;code&gt;articles&lt;/code&gt; 目录，为教程设置一个 &lt;code&gt;tutorials&lt;/code&gt; 目录等，Hugo 使用内容分类区分作为默认&lt;strong&gt;内容类型&lt;/strong&gt; content type，如果在扉页 front matter 设置了 &lt;code&gt;type&lt;/code&gt; 则以具体设置的类型为准。&lt;/p&gt;
+&lt;p&gt;内容目录结构与 URL 对应关系参考如下。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── content
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    └── about
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   └── index.md       // &amp;lt;- https://example.com/about/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── posts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   ├── _index.md      // &amp;lt;- https://example.com/posts/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   ├── index.md       // &amp;lt;- https://example.com/posts/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   ├── firstpost.md   // &amp;lt;- https://example.com/posts/firstpost/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   ├── happy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   |   └── ness.md    // &amp;lt;- https://example.com/posts/happy/ness/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    |   └── secondpost.md  // &amp;lt;- https://example.com/posts/secondpost/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    └── quote
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ├── first.md       // &amp;lt;- https://example.com/quote/first/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        └── second.md      // &amp;lt;- https://example.com/quote/second/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;data&#34;&gt;data&lt;/h4&gt;
+&lt;p&gt;数据模板目录，Hugo 静态网站不会连接像 MySQL 这样的数据库，而此目录保存的数据相当于 Hugo 使用的数据库，生成过程用到的配置数据，可以用 YAML, JSON, TOML 等格式文件。&lt;/p&gt;
+&lt;h4 id=&#34;layouts&#34;&gt;layouts&lt;/h4&gt;
+&lt;p&gt;布局模板文件目录，存放 &lt;code&gt;.html&lt;/code&gt; 布局模板文件，对应不同的内容，模板有多种，data-templates、homepage、lists、menu-templates、partials、section-templates 等等。&lt;/p&gt;
+&lt;p&gt;站点的首页模板在主题目录中 &lt;strong&gt;layouts/index.html&lt;/strong&gt;，除首页外，Hugo 有两类基本页面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Single page 单体页面，如 &lt;strong&gt;hugo new demo.md&lt;/strong&gt; 创建的 Post 页面；&lt;/li&gt;
+&lt;li&gt;List page 列表页面，如 tags 或 categories 页面；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两种页面的默认模板都在主题目录中 &lt;strong&gt;layouts/_default&lt;/strong&gt;，分别对应着 single.html 和 list.html。&lt;/p&gt;
+&lt;h4 id=&#34;static&#34;&gt;static&lt;/h4&gt;
+&lt;p&gt;静态资源存放目录，比如想使用 Marmarid 画作模块，或者 jQuery 工具库，或者其它脚本、图像、CSS 等等，就可以将文件放到这里，在 Hugo 编译生成时会自动原样复制到 &lt;strong&gt;public&lt;/strong&gt; 目录。注意，可以有多个静态资源目录。&lt;/p&gt;
+&lt;h4 id=&#34;public&#34;&gt;public&lt;/h4&gt;
+&lt;p&gt;生成静态站点的文件输出目录。&lt;/p&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
+&lt;p&gt;相信不少从事技术行业的朋友，在学习某项新技术的过程中，都曾受到一些技术文章、博客的帮助与启发。而自身也在或多或少地萌生过撰写文章或是博客来分享、记录知识的想法。笔者亦是如此，出于对知识的整理、巩固，以及期望自己的知识能帮助到更多有需要的人，笔者很早就尝试过搭建个人的博客笔记系统。&lt;/p&gt;
+&lt;p&gt;最早，笔者是通过csdn、简书等技术内容分享平台进行文章发布与管理的，这类平台最大的优势就在于无需一些繁琐的配置，免费且开箱即用，只需要在平台创建上账号，即可专注于文章的创作，余下的网页部署、搜索引擎摘录这些工作都不需要操心。&lt;/p&gt;
+&lt;p&gt;然而随着深入使用，这类平台的缺点变得愈发显著。首先，在平台上发布文章，始终是归属于该平台下，博客页面自定义程度受限、无法使用个人域名等缺陷不可避免；其次，该类平台往往出于业绩压力，某些方面的吃相愈发难看，渐渐地已经违背了知识分享这一初衷。&lt;/p&gt;
+&lt;p&gt;为了克服上述缺点，同时自身的技术水平也有所长进，决定另辟蹊径，寻求一条能搭建完全独立的、由自己掌控的博客，且使用自己个性的域名的途径。期间采用的方案是云服务器部署加购买个人域名的方案。该方案从实用性的角度而言确实满足了我对它的所有需求，然而缺点也很明显，高昂的服务器费用缺也使得仍是学生的笔者感到难以维续。&lt;/p&gt;
+&lt;p&gt;近期服务器即将到期，决定将博客系统继续迁徙至备受好评的GitHub Pages上。使用GitHub Pages作为一款轻量的个人博客服务，正如前面所说，它有着完全免费、无需购买云服务器从头搭建、主题海量、可以绑定域名等诸多优势。只是单纯作为一个记录与分享知识的平台而言，GitHub Pages仍可以说是中小型博客的最佳选项之一。&lt;/p&gt;
+&lt;p&gt;也正如前文所说，希望我的文章能对你有所帮助。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
