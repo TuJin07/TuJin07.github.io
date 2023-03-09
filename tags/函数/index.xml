@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Sat, 07 Jan 2023 20:27:48 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/tags/%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Go语言中的两个保留函数: main()和init()</title>
-        <link>https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/</link>
+        <title>Golang中的两个保留函数: main()和init()</title>
+        <link>https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/</link>
         <pubDate>Sat, 07 Jan 2023 20:27:48 +0800</pubDate>
         
-        <guid>https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/</guid>
-        <description>&lt;img src="https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/cover.jpeg" alt="Featured image of post Go语言中的两个保留函数: main()和init()" /&gt;&lt;h1 id=&#34;go语言中的main函数与init函数&#34;&gt;Go语言中的main函数与init函数&lt;/h1&gt;
+        <guid>https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/cover.jpeg" alt="Featured image of post Golang中的两个保留函数: main()和init()" /&gt;&lt;h1 id=&#34;go语言中的main函数与init函数&#34;&gt;Go语言中的main函数与init函数&lt;/h1&gt;
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;Go语言中有两个比较重要的函数：&lt;code&gt;main()&lt;/code&gt;和&lt;code&gt;init()&lt;/code&gt;。这两个函数在程序运行时都会被自动调用，但它们的调用时机和作用却不尽相同。本文将探讨这两个函数的异同点以及各自的使用场景。&lt;/p&gt;
 &lt;h2 id=&#34;main函数&#34;&gt;main函数&lt;/h2&gt;
@@ -60,10 +60,10 @@
 &lt;h2 id=&#34;两者的执行顺序&#34;&gt;两者的执行顺序&lt;/h2&gt;
 &lt;p&gt;通过一张图可以形象地表达当Go程序执行时，&lt;code&gt;main()&lt;/code&gt;函数和&lt;code&gt;init()&lt;/code&gt;函数的执行顺序。来源：&lt;a class=&#34;link&#34; href=&#34;https://www.yuque.com/aceld/mo95lb/kk9cvo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;函数&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252.png&#34;
 	width=&#34;750&#34;
 	height=&#34;326&#34;
-	srcset=&#34;https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252_hu58934b652c0ab20c46c40eaa4906559a_122641_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252_hu58934b652c0ab20c46c40eaa4906559a_122641_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252_hu58934b652c0ab20c46c40eaa4906559a_122641_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/golang%E4%B8%AD%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BF%9D%E7%95%99%E5%87%BD%E6%95%B0-main%E5%92%8Cinit/1650528765014-63d3d631-428e-4468-bc95-40206d8cd252_hu58934b652c0ab20c46c40eaa4906559a_122641_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;31-init.png&#34;
