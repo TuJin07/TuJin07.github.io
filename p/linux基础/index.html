@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Linux 基础 常见的Linux发行版 Linux发行版大致可以分为两类：商业发行版和社区发行版。
+商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。
+社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。
+操作系统内核 操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：
+进程管理： 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。 存储管理： 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。 文件系统管理： 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。 设备驱动程序： 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。 网络管理： 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。 总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。
+概括两点：
+操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。 操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。 中央处理器 中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：
+运算器（ALU）： 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。 控制器（CU）： 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。 寄存器（Register）： 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。 高速缓存（Cache）： 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。 总线（Bus）： 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。 中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。
+Linux 文件系统 转载原文来源：Linux 基础知识总结
+Linux 文件系统简介 在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。 也就是说在 Linux 系统中有一个重要的概念：一切都是文件。
+其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。
+node 介绍 inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?
+硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。'>
+<title>Linux基础</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='Linux基础'>
+<meta property='og:description' content='Linux 基础 常见的Linux发行版 Linux发行版大致可以分为两类：商业发行版和社区发行版。
+商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。
+社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。
+操作系统内核 操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：
+进程管理： 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。 存储管理： 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。 文件系统管理： 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。 设备驱动程序： 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。 网络管理： 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。 总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。
+概括两点：
+操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。 操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。 中央处理器 中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：
+运算器（ALU）： 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。 控制器（CU）： 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。 寄存器（Register）： 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。 高速缓存（Cache）： 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。 总线（Bus）： 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。 中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。
+Linux 文件系统 转载原文来源：Linux 基础知识总结
+Linux 文件系统简介 在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。 也就是说在 Linux 系统中有一个重要的概念：一切都是文件。
+其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。
+node 介绍 inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?
+硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='' /><meta property='article:published_time' content='2022-12-13T20:48:59&#43;08:00'/><meta property='article:modified_time' content='2022-12-13T20:48:59&#43;08:00'/><meta property='og:image' content='https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/cover.jpeg' />
+<meta name="twitter:title" content="Linux基础">
+<meta name="twitter:description" content="Linux 基础 常见的Linux发行版 Linux发行版大致可以分为两类：商业发行版和社区发行版。
+商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。
+社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。
+操作系统内核 操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：
+进程管理： 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。 存储管理： 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。 文件系统管理： 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。 设备驱动程序： 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。 网络管理： 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。 总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。
+概括两点：
+操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。 操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。 中央处理器 中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：
+运算器（ALU）： 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。 控制器（CU）： 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。 寄存器（Register）： 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。 高速缓存（Cache）： 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。 总线（Bus）： 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。 中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。
+Linux 文件系统 转载原文来源：Linux 基础知识总结
+Linux 文件系统简介 在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。 也就是说在 Linux 系统中有一个重要的概念：一切都是文件。
+其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。
+node 介绍 inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?
+硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/cover.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#常见的linux发行版">常见的Linux发行版</a></li>
+    <li><a href="#操作系统内核">操作系统内核</a></li>
+    <li><a href="#中央处理器">中央处理器</a></li>
+    <li><a href="#linux-文件系统">Linux 文件系统</a>
+      <ol>
+        <li><a href="#linux-文件系统简介">Linux 文件系统简介</a></li>
+        <li><a href="#node-介绍">node 介绍</a></li>
+        <li><a href="#linux-文件类型">Linux 文件类型</a></li>
+        <li><a href="#linux-目录树">Linux 目录树</a></li>
+      </ol>
+    </li>
+    <li><a href="#linux-基本命令">Linux 基本命令</a>
+      <ol>
+        <li><a href="#目录切换命令">目录切换命令</a></li>
+        <li><a href="#目录的操作命令增删改查">目录的操作命令(增删改查)</a></li>
+        <li><a href="#文件的操作命令增删改查">文件的操作命令(增删改查)</a></li>
+        <li><a href="#压缩文件的操作命令">压缩文件的操作命令</a></li>
+        <li><a href="#linux-的权限命令">Linux 的权限命令</a></li>
+        <li><a href="#linux-用户管理">Linux 用户管理</a></li>
+        <li><a href="#linux-系统用户组的管理">Linux 系统用户组的管理</a></li>
+        <li><a href="#其他常用命令">其他常用命令</a></li>
+      </ol>
+    </li>
+    <li><a href="#linux-环境变量">Linux 环境变量</a>
+      <ol>
+        <li><a href="#环境变量分类">环境变量分类</a></li>
+        <li><a href="#读取环境变量">读取环境变量</a></li>
+        <li><a href="#环境变量修改">环境变量修改</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/linux%E5%9F%BA%E7%A1%80/">
+                <img src="/p/linux%E5%9F%BA%E7%A1%80/cover_hue0ae1fc78bc599c674d2cbcbba27a40b_3455342_800x0_resize_q75_box.jpeg"
+                        srcset="/p/linux%E5%9F%BA%E7%A1%80/cover_hue0ae1fc78bc599c674d2cbcbba27a40b_3455342_800x0_resize_q75_box.jpeg 800w, /p/linux%E5%9F%BA%E7%A1%80/cover_hue0ae1fc78bc599c674d2cbcbba27a40b_3455342_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post Linux基础" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #2a9d8f; color: #fff;">
+                Linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 13, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="linux-基础">Linux 基础</h1>
+<h2 id="常见的linux发行版">常见的Linux发行版</h2>
+<p>Linux发行版大致可以分为两类：商业发行版和社区发行版。</p>
+<p>商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。</p>
+<p>社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。</p>
+<h2 id="操作系统内核">操作系统内核</h2>
+<p>操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：</p>
+<ul>
+<li><strong>进程管理：</strong> 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。</li>
+<li><strong>存储管理：</strong> 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。</li>
+<li><strong>文件系统管理：</strong> 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。</li>
+<li><strong>设备驱动程序：</strong> 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。</li>
+<li><strong>网络管理：</strong> 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。</li>
+</ul>
+<p>总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。</p>
+<p>概括两点：</p>
+<ol>
+<li><strong>操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。</strong></li>
+<li><strong>操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。</strong></li>
+</ol>
+<h2 id="中央处理器">中央处理器</h2>
+<p>中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：</p>
+<ol>
+<li><strong>运算器（ALU）：</strong> 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。</li>
+<li><strong>控制器（CU）：</strong> 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。</li>
+<li><strong>寄存器（Register）：</strong> 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。</li>
+<li><strong>高速缓存（Cache）：</strong> 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。</li>
+<li><strong>总线（Bus）：</strong> 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。</li>
+</ol>
+<p>中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。</p>
+<h2 id="linux-文件系统">Linux 文件系统</h2>
+<p>转载原文来源：<a class="link" href="https://javaguide.cn/cs-basics/operating-system/linux-intro.html"  target="_blank" rel="noopener"
+    >Linux 基础知识总结</a></p>
+<h3 id="linux-文件系统简介">Linux 文件系统简介</h3>
+<p><strong>在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。</strong> 也就是说在 Linux 系统中有一个重要的概念：<strong>一切都是文件</strong>。</p>
+<p>其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。</p>
+<h3 id="node-介绍">node 介绍</h3>
+<p><strong>inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?</strong></p>
+<p>硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。</p>
+<p>虽然，我们将文件存储在了块(block)中，但是我们还需要一个空间来存储文件的 <strong>元信息 metadata</strong> ：如某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等。这种 <strong>存储文件元信息的区域就叫 inode</strong>，译为索引节点：<strong>i（index）+node</strong>。 每个文件都有一个 inode，存储文件的元信息。</p>
+<p>可以使用 <code>stat</code> 命令可以查看文件的 inode 信息。每个 inode 都有一个号码，Linux/Unix 操作系统不使用文件名来区分文件，而是使用 inode 号码区分不同的文件。</p>
+<p>简单来说：inode 就是用来维护某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等信息。</p>
+<p>简单总结一下：</p>
+<ul>
+<li><strong>inode</strong> ：记录文件的属性信息，可以使用 stat 命令查看 inode 信息。</li>
+<li><strong>block</strong> ：实际文件的内容，如果一个文件大于一个块时候，那么将占用多个 block，但是一个块只能存放一个文件。（因为数据是由 inode 指向的，如果有两个文件的数据存放在同一个块中，就会乱套了。</li>
+</ul>
+<p><img src="/p/linux%E5%9F%BA%E7%A1%80/inodemsg.png"
+	width="728"
+	height="311"
+	srcset="/p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_480x0_resize_box_3.png 480w, /p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="561px"
+	
+></p>
+<h3 id="linux-文件类型">Linux 文件类型</h3>
+<p>Linux 支持很多文件类型，其中非常重要的文件类型有: <strong>普通文件</strong>，<strong>目录文件</strong>，<strong>链接文件</strong>，<strong>设备文件</strong>，<strong>管道文件</strong>，<strong>Socket 套接字文件</strong>等。</p>
+<ul>
+<li><strong>普通文件（-）</strong> ： 用于存储信息和数据， Linux 用户可以根据访问权限对普通文件进行查看、更改和删除。比如：图片、声音、PDF、text、视频、源代码等等。</li>
+<li><strong>目录文件（d，directory file）</strong> ：目录也是文件的一种，用于表示和管理系统中的文件，目录文件中包含一些文件名和子目录名。打开目录事实上就是打开目录文件。</li>
+<li><strong>符号链接文件（l，symbolic link）</strong> ：保留了指向文件的地址而不是文件本身。</li>
+<li><strong>字符设备（c，char）</strong> ：用来访问字符设备比如键盘。</li>
+<li><strong>设备文件（b，block）</strong> ： 用来访问块设备比如硬盘、软盘。</li>
+<li><strong>管道文件(p,pipe)</strong> : 一种特殊类型的文件，用于进程之间的通信。</li>
+<li><strong>套接字(s,socket)</strong> ：用于进程间的网络通信，也可以用于本机之间的非网络通信。</li>
+</ul>
+<h3 id="linux-目录树">Linux 目录树</h3>
+<p>所有可操作的计算机资源都存在于目录树这个结构中，对计算资源的访问，可以看做是对这棵目录树的访问。</p>
+<p><strong>Linux 的目录结构如下：</strong></p>
+<p>Linux 文件系统的结构层次鲜明，就像一棵倒立的树，最顶层是其根目录：</p>
+<p><img src="/p/linux%E5%9F%BA%E7%A1%80/tree.png"
+	width="823"
+	height="315"
+	srcset="/p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_480x0_resize_box_3.png 480w, /p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="261"
+		data-flex-basis="627px"
+	
+></p>
+<p><strong>常见目录说明：</strong></p>
+<ul>
+<li><strong>/bin：</strong> 存放二进制可执行文件(ls、cat、mkdir 等)，常用命令一般都在这里；</li>
+<li><strong>/etc：</strong> 存放系统管理和配置文件；</li>
+<li><strong>/home：</strong> 存放所有用户文件的根目录，是用户主目录的基点，比如用户 user 的主目录就是/home/user，可以用~user 表示；</li>
+<li><strong>/usr ：</strong> 用于存放系统应用程序；</li>
+<li><strong>/opt：</strong> 额外安装的可选应用程序包所放置的位置。一般情况下，我们可以把 tomcat 等都安装到这里；</li>
+<li><strong>/proc：</strong> 虚拟文件系统目录，是系统内存的映射。可直接访问这个目录来获取系统信息；</li>
+<li><strong>/root：</strong> 超级用户（系统管理员）的主目录（特权阶级^o^）；</li>
+<li><strong>/sbin:</strong> 存放二进制可执行文件，只有 root 才能访问。这里存放的是系统管理员使用的系统级别的管理命令和程序。如 ifconfig 等；</li>
+<li><strong>/dev：</strong> 用于存放设备文件；</li>
+<li><strong>/mnt：</strong> 系统管理员安装临时文件系统的安装点，系统提供这个目录是让用户临时挂载其他的文件系统；</li>
+<li><strong>/boot：</strong> 存放用于系统引导时使用的各种文件；</li>
+<li><strong>/lib ：</strong> 存放着和系统运行相关的库文件 ；</li>
+<li><strong>/tmp：</strong> 用于存放各种临时文件，是公用的临时文件存储点；</li>
+<li><strong>/var：</strong> 用于存放运行时需要改变数据的文件，也是某些大文件的溢出区，比方说各种服务的日志文件（系统启动日志等。）等；</li>
+<li><strong>/lost+found：</strong> 这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows 下叫什么.chk）就在这里。</li>
+</ul>
+<h2 id="linux-基本命令">Linux 基本命令</h2>
+<p>下面只是给出了一些比较常用的命令。 。</p>
+<p><a class="link" href="https://www.shell.how/"  target="_blank" rel="noopener"
+    >shell.howopen in new window</a> 这个网站可以用来解释常见命令的意思，对你学习 Linux 基本命令以及其他常用命令（如 Git、NPM）。</p>
+<h3 id="目录切换命令">目录切换命令</h3>
+<ul>
+<li><strong><code>cd usr</code>：</strong> 切换到该目录下 usr 目录</li>
+<li><strong><code>cd ..（或cd../）</code>：</strong> 切换到上一层目录</li>
+<li><strong><code>cd /</code>：</strong> 切换到系统根目录</li>
+<li><strong><code>cd ~</code>：</strong> 切换到用户主目录</li>
+<li><strong><code>cd -</code>：</strong> 切换到上一个操作所在目录</li>
+</ul>
+<h3 id="目录的操作命令增删改查">目录的操作命令(增删改查)</h3>
+<ul>
+<li><strong><code>mkdir 目录名称</code>：</strong> 增加目录。</li>
+<li><strong><code>ls/ll</code></strong>（ll 是 ls -l 的别名，ll 命令可以看到该目录下的所有目录和文件的详细信息）：查看目录信息。</li>
+<li><strong><code>find 目录 参数</code>：</strong> 寻找目录（查）。示例：① 列出当前目录及子目录下所有文件和文件夹: <code>find .</code>；② 在<code>/home</code>目录下查找以.txt 结尾的文件名:<code>find /home -name &quot;*.txt&quot;</code> ,忽略大小写: <code>find /home -iname &quot;*.txt&quot;</code> ；③ 当前目录及子目录下查找所有以.txt 和.pdf 结尾的文件:<code>find . \\( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \\)</code>或<code>find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;</code>。</li>
+<li><strong><code>mv 目录名称 新目录名称</code>：</strong> 修改目录的名称（改）。注意：mv 的语法不仅可以对目录进行重命名而且也可以对各种文件，压缩包等进行 重命名的操作。mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。后面会介绍到 mv 命令的另一个用法。</li>
+<li><strong><code>mv 目录名称 目录的新位置</code>：</strong> 移动目录的位置&mdash;剪切（改）。注意：mv 语法不仅可以对目录进行剪切操作，对文件和压缩包等都可执行剪切操作。另外 mv 与 cp 的结果不同，mv 好像文件“搬家”，文件个数并未增加。而 cp 对文件进行复制，文件个数增加了。</li>
+<li><strong><code>cp -r 目录名称 目录拷贝的目标位置</code>：</strong> 拷贝目录（改），-r 代表递归拷贝 。注意：cp 命令不仅可以拷贝目录还可以拷贝文件，压缩包等，拷贝文件和压缩包时不 用写-r 递归。</li>
+<li><strong><code>rm [-rf] 目录</code> :</strong> 删除目录（删）。注意：rm 不仅可以删除目录，也可以删除其他文件或压缩包，为了增强大家的记忆， 无论删除任何目录或文件，都直接使用<code>rm -rf</code> 目录/文件/压缩包。</li>
+</ul>
+<h3 id="文件的操作命令增删改查">文件的操作命令(增删改查)</h3>
+<ul>
+<li><strong><code>touch 文件名称</code>:</strong> 文件的创建（增）。</li>
+<li><strong><code>cat/more/less/tail 文件名称</code></strong> ：文件的查看（查） 。命令 <code>tail -f 文件</code> 可以对某个文件进行动态监控，例如 tomcat 的日志文件， 会随着程序的运行，日志会变化，可以使用 <code>tail -f catalina-2016-11-11.log</code> 监控 文 件的变化 。</li>
+<li><strong><code>vim 文件</code>：</strong> 修改文件的内容（改）。vim 编辑器是 Linux 中的强大组件，是 vi 编辑器的加强版，vim 编辑器的命令和快捷方式有很多，但此处不一一阐述，大家也无需研究的很透彻，使用 vim 编辑修改文件的方式基本会使用就可以了。在实际开发中，使用 vim 编辑器主要作用就是修改配置文件，下面是一般步骤： <code>vim 文件------&gt;进入文件-----&gt;命令模式------&gt;按i进入编辑模式-----&gt;编辑文件 -------&gt;按Esc进入底行模式-----&gt;输入：wq/q!</code> （输入 wq 代表写入内容并退出，即保存；输入 q!代表强制退出不保存）。</li>
+<li><strong><code>rm -rf 文件</code>：</strong> 删除文件（删）。</li>
+</ul>
+<h3 id="压缩文件的操作命令">压缩文件的操作命令</h3>
+<p><strong>1）打包并压缩文件：</strong></p>
+<p>Linux 中的打包文件一般是以.tar 结尾的，压缩的命令一般是以.gz 结尾的。而一般情况下打包和压缩是一起进行的，打包并压缩后的文件的后缀名一般.tar.gz。 命令：<code>tar -zcvf 打包压缩后的文件名 要打包压缩的文件</code> ，其中：</p>
+<ul>
+<li>z：调用 gzip 压缩命令进行压缩</li>
+<li>c：打包文件</li>
+<li>v：显示运行过程</li>
+<li>f：指定文件名</li>
+</ul>
+<p>比如：假如 test 目录下有三个文件分别是：aaa.txt bbb.txt ccc.txt，如果我们要打包 test 目录并指定压缩后的压缩包名称为 test.tar.gz 可以使用命令：<strong><code>tar -zcvf test.tar.gz aaa.txt bbb.txt ccc.txt</code> 或 <code>tar -zcvf test.tar.gz /test/</code></strong></p>
+<p><strong>2）解压压缩包：</strong></p>
+<p>命令：<code>tar [-xvf] 压缩文件</code></p>
+<p>其中：x：代表解压</p>
+<p>示例：</p>
+<ul>
+<li>将 /test 下的 test.tar.gz 解压到当前目录下可以使用命令：<strong><code>tar -xvf test.tar.gz</code></strong></li>
+<li>将 /test 下的 test.tar.gz 解压到根目录/usr 下:<strong><code>tar -xvf test.tar.gz -C /usr</code></strong>（- C 代表指定解压的位置</li>
+</ul>
+<h3 id="linux-的权限命令">Linux 的权限命令</h3>
+<p>操作系统中每个文件都拥有特定的权限、所属用户和所属组。权限是操作系统用来限制资源访问的机制，在 Linux 中权限一般分为读(readable)、写(writable)和执行(excutable)，分为三组。分别对应文件的属主(owner)，属组(group)和其他用户(other)，通过这样的机制来限制哪些用户、哪些组可以对特定的文件进行什么样的操作。</p>
+<p>通过 <strong><code>ls -l</code></strong> 命令我们可以 查看某个目录下的文件或目录的权限</p>
+<p>示例：在随意某个目录下<code>ls -l</code></p>
+<p><img src="/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40.png"
+	width="589"
+	height="228"
+	srcset="/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_480x0_resize_box_3.png 480w, /p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="258"
+		data-flex-basis="620px"
+	
+></p>
+<p>第一列的内容的信息解释如下：</p>
+<p><img src="/p/linux%E5%9F%BA%E7%A1%80/mod.png"
+	width="489"
+	height="209"
+	srcset="/p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_480x0_resize_box_3.png 480w, /p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="561px"
+	
+></p>
+<blockquote>
+<p>下面将详细讲解文件的类型、Linux 中权限以及文件有所有者、所在组、其它组具体是什么？</p>
+</blockquote>
+<p><strong>文件的类型：</strong></p>
+<ul>
+<li>d： 代表目录</li>
+<li>： 代表文件</li>
+<li>l： 代表软链接（可以认为是 window 中的快捷方式）</li>
+</ul>
+<p><strong>Linux 中权限分为以下几种：</strong></p>
+<ul>
+<li>r：代表权限是可读，r 也可以用数字 4 表示</li>
+<li>w：代表权限是可写，w 也可以用数字 2 表示</li>
+<li>x：代表权限是可执行，x 也可以用数字 1 表示</li>
+</ul>
+<p><strong>文件和目录权限的区别：</strong></p>
+<p>对文件和目录而言，读写执行表示不同的意义。</p>
+<p>对于文件：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>权限名称</th>
+<th>可执行操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>可以使用 cat 查看文件的内容</td>
+</tr>
+<tr>
+<td>w</td>
+<td>可以修改文件的内容</td>
+</tr>
+<tr>
+<td>x</td>
+<td>可以将其运行为二进制文件</td>
+</tr>
+</tbody>
+</table></div>
+<p>对于目录：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>权限名称</th>
+<th>可执行操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>可以查看目录下列表</td>
+</tr>
+<tr>
+<td>w</td>
+<td>可以创建和删除目录下文件</td>
+</tr>
+<tr>
+<td>x</td>
+<td>可以使用 cd 进入目录</td>
+</tr>
+</tbody>
+</table></div>
+<p>需要注意的是： <strong>超级用户可以无视普通用户的权限，即使文件目录权限是 000，依旧可以访问。</strong></p>
+<p><strong>在 linux 中的每个用户必须属于一个组，不能独立于组外。在 linux 中每个文件有所有者、所在组、其它组的概念。</strong></p>
+<ul>
+<li><strong>所有者(u)</strong> ：一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者，用 <code>ls ‐ahl</code> 命令可以看到文件的所有者 也可以使用 chown 用户名 文件名来修改文件的所有者 。</li>
+<li><strong>文件所在组(g)</strong> ：当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用 <code>ls ‐ahl</code>命令可以看到文件的所有组也可以使用 chgrp 组名 文件名来修改文件所在的组。</li>
+<li><strong>其它组(o)</strong> ：除开文件的所有者和所在组的用户外，系统的其它用户都是文件的其它组。</li>
+</ul>
+<blockquote>
+<p>我们再来看看如何修改文件/目录的权限。</p>
+</blockquote>
+<p><strong>修改文件/目录的权限的命令：<code>chmod</code></strong></p>
+<p>示例：修改/test 下的 aaa.txt 的权限为文件所有者有全部权限，文件所有者所在的组有读写权限，其他用户只有读的权限。</p>
+<p><strong><code>chmod u=rwx,g=rw,o=r aaa.txt</code></strong> 或者 <strong><code>chmod 764 aaa.txt</code></strong></p>
+<p><img src="/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3.png"
+	width="525"
+	height="246"
+	srcset="/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_480x0_resize_box_3.png 480w, /p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="213"
+		data-flex-basis="512px"
+	
+></p>
+<p><strong>补充一个比较常用的东西:</strong></p>
+<p>假如我们装了一个 zookeeper，我们每次开机到要求其自动启动该怎么办？</p>
+<ol>
+<li>新建一个脚本 zookeeper</li>
+<li>为新建的脚本 zookeeper 添加可执行权限，命令是:<code>chmod +x zookeeper</code></li>
+<li>把 zookeeper 这个脚本添加到开机启动项里面，命令是：<code>chkconfig --add zookeeper</code></li>
+<li>如果想看看是否添加成功，命令是：<code>chkconfig --list</code></li>
+</ol>
+<h3 id="linux-用户管理">Linux 用户管理</h3>
+<p>Linux 系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
+<p>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。</p>
+<p><strong>Linux 用户管理相关命令:</strong></p>
+<ul>
+<li><code>useradd 选项 用户名</code>:添加用户账号</li>
+<li><code>userdel 选项 用户名</code>:删除用户帐号</li>
+<li><code>usermod 选项 用户名</code>:修改帐号</li>
+<li><code>passwd 用户名</code>:更改或创建用户的密码</li>
+<li><code>passwd -S 用户名</code> :显示用户账号密码信息</li>
+<li><code>passwd -d 用户名</code>: 清除用户密码</li>
+</ul>
+<p><code>useradd</code> 命令用于 Linux 中创建的新的系统用户。<code>useradd</code>可用来建立用户帐号。帐号建好之后，再用<code>passwd</code>设定帐号的密码．而可用<code>userdel</code>删除帐号。使用<code>useradd</code>指令所建立的帐号，实际上是保存在 <code>/etc/passwd</code>文本文件中。</p>
+<p><code>passwd</code>命令用于设置用户的认证信息，包括用户密码、密码过期时间等。系统管理者则能用它管理系统用户的密码。只有管理者可以指定用户名称，一般用户只能变更自己的密码。</p>
+<h3 id="linux-系统用户组的管理">Linux 系统用户组的管理</h3>
+<p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同 Linux 系统对用户组的规定有所不同，如 Linux 下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。</p>
+<p>用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对<code>/etc/group</code>文件的更新。</p>
+<p><strong>Linux 系统用户组的管理相关命令:</strong></p>
+<ul>
+<li><code>groupadd 选项 用户组</code> :增加一个新的用户组</li>
+<li><code>groupdel 用户组</code>:要删除一个已有的用户组</li>
+<li><code>groupmod 选项 用户组</code> : 修改用户组的属性</li>
+</ul>
+<h3 id="其他常用命令">其他常用命令</h3>
+<ul>
+<li>
+<p><strong><code>pwd</code>：</strong> 显示当前所在位置</p>
+</li>
+<li>
+<p><code>sudo + 其他命令</code>：以系统管理者的身份执行指令，也就是说，经由 sudo 所执行的指令就好像是 root 亲自执行。</p>
+</li>
+<li>
+<p><strong><code>grep 要搜索的字符串 要搜索的文件 --color</code>：</strong> 搜索命令，&ndash;color 代表高亮显示</p>
+</li>
+<li>
+<p><strong><code>ps -ef</code>/<code>ps -aux</code>：</strong> 这两个命令都是查看当前系统正在运行进程，两者的区别是展示格式不同。如果想要查看特定的进程可以使用这样的格式：<strong><code>ps aux|grep redis</code></strong> （查看包括 redis 字符串的进程），也可使用 <code>pgrep redis -a</code>。</p>
+<p>注意：如果直接用 ps（（Process Status））命令，会显示所有进程的状态，通常结合 grep 命令查看某进程的状态。</p>
+</li>
+<li>
+<p><strong><code>kill -9 进程的pid</code>：</strong> 杀死进程（-9 表示强制终止。）</p>
+<p>先用 ps 查找进程，然后用 kill 杀掉</p>
+</li>
+<li>
+<p><strong>网络通信命令：</strong></p>
+<ul>
+<li>查看当前系统的网卡信息：ifconfig</li>
+<li>查看与某台机器的连接情况：ping</li>
+<li>查看当前系统的端口使用：netstat -an</li>
+</ul>
+</li>
+<li>
+<p><strong>net-tools 和 iproute2 ：</strong><code>net-tools</code>起源于 BSD 的 TCP/IP 工具箱，后来成为老版本 LinuxLinux 中配置网络功能的工具。但自 2001 年起，Linux 社区已经对其停止维护。同时，一些 Linux 发行版比如 Arch Linux 和 CentOS/RHEL 7 则已经完全抛弃了 net-tools，只支持<code>iproute2</code>。linux ip 命令类似于 ifconfig，但功能更强大，旨在替代它。更多详情请阅读<a class="link" href="https://linoxide.com/linux-command/use-ip-command-linux"  target="_blank" rel="noopener"
+    >如何在 Linux 中使用 IP 命令和示例open in new window</a></p>
+</li>
+<li>
+<p><strong><code>shutdown</code>：</strong> <code>shutdown -h now</code>： 指定现在立即关机；<code>shutdown +5 &quot;System will shutdown after 5 minutes&quot;</code>：指定 5 分钟后关机，同时送出警告信息给登入用户。</p>
+</li>
+<li>
+<p><strong><code>reboot</code>：</strong> <strong><code>reboot</code>：</strong> 重开机。<strong><code>reboot -w</code>：</strong> 做个重开机的模拟（只有纪录并不会真的重开机）。</p>
+</li>
+</ul>
+<h2 id="linux-环境变量">Linux 环境变量</h2>
+<p>在 Linux 系统中，环境变量是用来定义系统运行环境的一些参数，比如每个用户不同的主目录（HOME）。</p>
+<h3 id="环境变量分类">环境变量分类</h3>
+<p>按照作用域来分，环境变量可以简单的分成:</p>
+<ul>
+<li>用户级别环境变量 : <code>~/.bashrc</code>、<code>~/.bash_profile</code>。</li>
+<li>系统级别环境变量 : <code>/etc/bashrc</code>、<code>/etc/environment</code>、<code>/etc/profile</code>、<code>/etc/profile.d</code>。</li>
+</ul>
+<p>上述配置文件执行先后顺序为：<code>/etc/enviroment</code> –&gt; <code>/etc/profile</code> –&gt; <code>/etc/profile.d</code> –&gt; <code>~/.bash_profile</code> –&gt; <code>/etc/bashrc</code> –&gt; <code>~/.bashrc</code></p>
+<p>如果要修改系统级别环境变量文件，需要管理员具备对该文件的写入权限。</p>
+<p>建议用户级别环境变量在 <code>~/.bash_profile</code>中配置，系统级别环境变量在 <code>/etc/profile.d</code> 中配置。</p>
+<p>按照生命周期来分，环境变量可以简单的分成:</p>
+<ul>
+<li>永久的：需要用户修改相关的配置文件，变量永久生效。</li>
+<li>临时的：用户利用 <code>export</code> 命令，在当前终端下声明环境变量，关闭 shell 终端失效。</li>
+</ul>
+<h3 id="读取环境变量">读取环境变量</h3>
+<p>通过 <code>export</code> 命令可以输出当前系统定义的所有环境变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 列出当前的环境变量值
+</span></span><span class="line"><span class="cl">export -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>除了 <code>export</code> 命令之外， <code>env</code> 命令也可以列出所有环境变量。</p>
+<p><code>echo</code> 命令可以输出指定环境变量的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 输出当前的PATH环境变量的值
+</span></span><span class="line"><span class="cl">echo $PATH
+</span></span><span class="line"><span class="cl"># 输出当前的HOME环境变量的值
+</span></span><span class="line"><span class="cl">echo $HOME
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="环境变量修改">环境变量修改</h3>
+<p>通过 <code>export</code>命令可以修改指定的环境变量。不过，这种方式修改环境变量仅仅对当前 shell 终端生效，关闭 shell 终端就会失效。修改完成之后，立即生效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export CLASSPATH=./JAVA_HOME/lib;$JAVA_HOME/jre/lib
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>vim</code> 命令修改环境变量配置文件。这种方式修改环境变量永久有效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim ~/.bash_profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果修改的是系统级别环境变量则对所有用户生效，如果修改的是用户级别环境变量则仅对当前用户生效。</p>
+<p>修改完成之后，需要 <code>source</code> 命令让其生效或者关闭 shell 终端重新登录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source /etc/profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>

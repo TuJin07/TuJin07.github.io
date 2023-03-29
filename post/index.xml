@@ -6,7 +6,160 @@
         <description>Recent content in Posts on 荼锦</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 11 Mar 2023 21:00:45 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 29 Mar 2023 15:40:55 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>输入SELECT后，数据库发生了什么</title>
+        <link>https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/</link>
+        <pubDate>Wed, 29 Mar 2023 15:40:55 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover.jpeg" alt="Featured image of post 输入SELECT后，数据库发生了什么" /&gt;&lt;h1 id=&#34;当你输入-select-后数据库发生了什么&#34;&gt;当你输入 SELECT 后，数据库发生了什么&lt;/h1&gt;
+&lt;p&gt;本文章基于&lt;a class=&#34;link&#34; href=&#34;https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;当我们输入一条 SQL 查询语句时，发生了什么？&lt;/a&gt;这篇文章的思路，做进一步的归纳总结和留档。部分引用原文图片与文本。&lt;/p&gt;
+&lt;h2 id=&#34;mysql-的基本架构&#34;&gt;MySQL 的基本架构&lt;/h2&gt;
+&lt;p&gt;首先，在我们分析输入SELECT后DBMS的操作前，我们需要对DBMS的基本架构有一个认识。以MySQL为例，MySQL是一种开源的关系型数据库管理系统（RDBMS），其基本架构由多个组件组成，各组件的作用如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;连接器（Connection Manager）&lt;/strong&gt;：连接器是客户端和服务器端之间的桥梁，它负责建立连接、验证用户身份、维护会话状态等工作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;语法分析器（Parser）&lt;/strong&gt;：将SQL语句进行词法分析和语法分析以及语义分析，生成解析树，以确保语法正确性和安全性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优化器（Optimizer）&lt;/strong&gt;：会在语法分析器完成之后，根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行器（Executor）&lt;/strong&gt;：执行器会根据优化器生成的执行计划，执行具体的操作，如查询、插入、删除、更新等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储引擎（Storage Engine）&lt;/strong&gt;：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎是MySQL中最重要的组件之一，它负责具体的数据存储和管理工作，不同的存储引擎有不同的特点和优缺点，MySQL支持多种存储引擎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些组件一起协同工作，将SQL语句转化成最终的结果集。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8.png&#34;
+	width=&#34;2048&#34;
+	height=&#34;1536&#34;
+	srcset=&#34;https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图片来源：&lt;a class=&#34;link&#34; href=&#34;https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;当我们输入一条 SQL 查询语句时，发生了什么？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如上图所示，我们可以把上述组件分成两个层面。即MySQL的架构可以分为两层：服务层和存储引擎层。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务层：包括连接器、查询缓存、分析器、优化器和执行器等组件，负责SQL的解析、优化和执行等工作。涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），&lt;strong&gt;所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;存储引擎：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎层支持多种不同的存储引擎，每种存储引擎都有其独特的特点和优缺点。引擎层的架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不同的存储引擎共用一个服务层，也就是从连接器到执行器的部分。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查询全流程&#34;&gt;查询全流程&lt;/h2&gt;
+&lt;h3 id=&#34;连接器connection-manager&#34;&gt;连接器（Connection Manager）&lt;/h3&gt;
+&lt;p&gt;当我们尝试登陆连接到MySQL上时，首先接收客户端的处理连接请求的就是连接器。连接器会根据客户端发来的请求，验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mysql -h &lt;span class=&#34;nv&#34;&gt;$ip&lt;/span&gt; -P &lt;span class=&#34;nv&#34;&gt;$port&lt;/span&gt; -u &lt;span class=&#34;nv&#34;&gt;$user&lt;/span&gt; -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;如果用户名或密码不对，你将会收到一个&amp;quot;Access denied for user&amp;quot;的错误，然后客户端程序结束执行。&lt;/li&gt;
+&lt;li&gt;如果用户名密码认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这就意味着，一个用户成功建立连接后，即使你用管理员账号对这个用户的权限做了修改，也不会影响已经存在连接的权限。修改完成后，只有再新建的连接才会使用新的权限设置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;查询缓存&#34;&gt;查询缓存&lt;/h3&gt;
+&lt;p&gt;MySQL连接器会首先检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。&lt;/p&gt;
+&lt;p&gt;但是，查询缓存并不总是适用的，因为如果表中的任何数据一旦发生变化，缓存的结果就会失效，这时就需要重新执行查询语句，这可能会导致查询缓存带来的性能提升被抵消掉，对于更新压力大的数据库来说，查询缓存的命中率会非常低。&lt;/p&gt;
+&lt;p&gt;MySQL也提供了这种“按需使用”的方式。你可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于你确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定，像下面这个语句一样：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SQL_CACHE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;；&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;MySQL 8.0 版本直接将查询缓存的整块功能删掉了，也就是说 8.0 开始彻底没有这个功能了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;语法分析器parser&#34;&gt;语法分析器（Parser）&lt;/h3&gt;
+&lt;p&gt;如果没有命中查询缓存，就要开始真正执行语句了。&lt;/p&gt;
+&lt;p&gt;语法分析器会对SELECT语句进行词法分析和语法分析，生成解析树。词法分析器会将SELECT语句中的字符序列转换成一个个的单词，然后生成一个个的记号。语法分析器会根据记号序列生成解析树，同时会验证SELECT语句的语法正确性和安全性。&lt;/p&gt;
+&lt;h3 id=&#34;优化器optimizer&#34;&gt;优化器（Optimizer）&lt;/h3&gt;
+&lt;p&gt;经过了分析器，MySQL 就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。&lt;/p&gt;
+&lt;p&gt;优化器会根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。优化器的主要作用是优化查询语句的执行效率，从而提高数据库的性能。为了实现这个目标，优化器会采用多种技术，如索引选择、查询重写、表连接优化等，从而生成最优的执行计划。通过优化器的优化，可以大大提高查询效率，减少数据库的响应时间，提升系统的整体性能。&lt;/p&gt;
+&lt;p&gt;需要注意的是，优化器并不总是能够生成最优的执行计划，因为查询语句的执行效率受到多种因素的影响，如查询语句的复杂度、表的大小、索引的选择等。因此，在实际应用中，需要根据具体情况对优化器的性能进行评估，选择合适的优化策略，从而达到最佳的查询性能。&lt;/p&gt;
+&lt;p&gt;比如你执行下面这样的语句，这个语句是执行两个表的 join：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;既可以先从表 t1 里面取出 c=10 的记录的 ID 值，再根据 ID 值关联到表 t2，再判断 t2 里面 d 的值是否等于 20。&lt;/li&gt;
+&lt;li&gt;也可以先从表 t2 里面取出 d=20 的记录的 ID 值，再根据 ID 值关联到 t1，再判断 t1 里面 c 的值是否等于 10。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两种执行方法的逻辑结果是一样的，但是执行的效率会有不同，而优化器的作用就是决定选择使用哪一个方案。&lt;/p&gt;
+&lt;h3 id=&#34;执行器executor&#34;&gt;执行器（Executor）&lt;/h3&gt;
+&lt;p&gt;MySQL 通过分析器知道了你要做什么，通过优化器知道了该怎么做，于是就进入了执行器阶段，开始执行语句。开始执行的时候，要先判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ERROR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1142&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;42000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;denied&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;to&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;T&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在执行查询操作时，执行器会在存储引擎返回的行数据中进行过滤和排序等操作，然后将结果返回给客户端。在执行插入、删除和更新操作时，执行器会调用存储引擎提供的接口，将操作请求转换成具体存储引擎可以理解的操作，然后存储引擎会执行对应的操作并返回操作结果给执行器。执行器再将操作结果返回给连接器，连接器将结果返回给客户端。&lt;/p&gt;
+&lt;p&gt;执行器和存储引擎是相互依赖的关系，执行器负责处理客户端请求并调用存储引擎提供的接口，存储引擎负责具体的数据存储和管理工作。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;输入SELECT语句后，MySQL会进行以下步骤完成查询：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;连接器：验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。&lt;/li&gt;
+&lt;li&gt;查询缓存：检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。&lt;/li&gt;
+&lt;li&gt;语法分析器：对SELECT语句进行词法分析和语法分析，生成解析树。&lt;/li&gt;
+&lt;li&gt;优化器：根据解析树和表的元数据，生成不同的执行计划，并选择成本最小的执行计划。&lt;/li&gt;
+&lt;li&gt;执行器：执行SQL语句的具体操作，如查询、插入、删除、更新等。执行器会调用存储引擎提供的接口，将查询请求转换成具体存储引擎可以理解的操作，然后存储引擎会返回操作结果给执行器。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>RPC与HTTP在接口实现上的区别</title>
+        <link>https://TuJin07.github.io/p/rpc%E4%B8%8Ehttp%E5%9C%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Wed, 29 Mar 2023 14:06:18 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/rpc%E4%B8%8Ehttp%E5%9C%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/rpc%E4%B8%8Ehttp%E5%9C%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB/cover.jpeg" alt="Featured image of post RPC与HTTP在接口实现上的区别" /&gt;&lt;h1 id=&#34;从本质出发探讨rpc与http在接口实现上的区别&#34;&gt;从本质出发，探讨RPC与HTTP在接口实现上的区别&lt;/h1&gt;
+&lt;p&gt;当谈到 RPC 和 HTTP 时，实际上谈的是两种不同的通信模型和协议。这两种协议有着不同的设计原则和用途，因此应用场景和优劣也有所不同。&lt;/p&gt;
+&lt;h2 id=&#34;二者的通信模型定义&#34;&gt;二者的通信模型定义&lt;/h2&gt;
+&lt;h3 id=&#34;rpc远程方法调用&#34;&gt;RPC：远程方法调用&lt;/h3&gt;
+&lt;p&gt;**RPC 是一种面向远程对象的通信模型，它的核心思想是远程方法调用。**RPC 意在简化调用远程对象提供的方法的过程，客户端通过调用远程函数并传递参数来发起请求，服务器将响应返回给客户端。RPC 通常使用二进制格式序列化数据，以提高效率。RPC 有多种实现，如 gRPC、Thrift 等。&lt;/p&gt;
+&lt;h3 id=&#34;http通信协议&#34;&gt;HTTP：通信协议&lt;/h3&gt;
+&lt;p&gt;**HTTP 本质上是一种通信协议，它约定了一种通信的格式。我们常用的基于 HTTP 的通信模型是一种面向资源的通信模型，它的核心思想是客户端通过 URL 来标识服务器上的资源，并使用不同的 HTTP 方法（如 GET、POST、PUT、DELETE 等）来操作这些资源。**HTTP 通常使用文本格式传输数据，如 JSON、XML 等。HTTP 是一种通用的协议，广泛应用于 Web 开发和移动应用程序开发。&lt;/p&gt;
+&lt;h2 id=&#34;从协议设计原则出发&#34;&gt;从协议设计原则出发&lt;/h2&gt;
+&lt;h3 id=&#34;rpc简洁高效且易用让远程过程调用更简单&#34;&gt;RPC：简洁、高效且易用，让远程过程调用更简单&lt;/h3&gt;
+&lt;p&gt;RPC 的设计原则是**简洁、高效和易用。**RPC 的设计思想是将远程过程调用封装成本地方法调用，让远程调用看起来像是本地调用一样简单。在 RPC 的设计中，客户端和服务端之间的通信方式类似于函数调用，客户端向服务端发送请求消息，服务端接收到请求后处理请求并返回响应消息给客户端。&lt;/p&gt;
+&lt;p&gt;**RPC 的设计目标是让远程过程调用的使用尽量像本地过程调用，从而使得使用RPC的程序员能够更容易地进行程序设计。**RPC 通常使用二进制格式传输数据，以减少传输数据量和提高传输效率。RPC 的实现通常会考虑传输协议、编解码器、服务定义和序列化等方面的问题，以提供完整的远程调用方案。&lt;/p&gt;
+&lt;h3 id=&#34;http灵活与可拓展性广泛使用的通用协议&#34;&gt;HTTP：灵活与可拓展性，广泛使用的通用协议&lt;/h3&gt;
+&lt;p&gt;HTTP 的设计原则是**灵活和可扩展。**HTTP 支持多种数据格式和编码方式，支持多种传输协议（如 TCP、UDP、WebSocket 等）。HTTP 可以与不同的编程语言和框架配合使用，以提供多样化的 Web 服务。HTTP 的设计思想是基于万维网的分布式体系结构。**HTTP的核心是客户端和服务器之间的请求和响应模型。&lt;/p&gt;
+&lt;h2 id=&#34;结合优劣二者在应用领域上的差别&#34;&gt;结合优劣，二者在应用领域上的差别&lt;/h2&gt;
+&lt;p&gt;**RPC通常应用于需要高效远程调用的场景，例如微服务，分布式系统和大型Web应用程序。**RPC可以支持多种传输协议，以适应不同的网络环境和应用场景。&lt;strong&gt;RPC的优点是效率高、易用性好，缺点是不够灵活，需要进行复杂的协议设计和管理。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**HTTP通常用于Web应用程序和移动应用程序的开发。**HTTP的请求-响应模型简单直接，易于理解和实现。HTTP具有广泛的支持和易于扩展的特点，因此它是互联网上最常用的协议之一。&lt;strong&gt;HTTP的优点是通用性好、易于使用，缺点是效率相对较低，需要使用文本格式进行数据传输。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;有 HTTP 了，为什么还需要 RPC？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本段来源：&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/fe5ccfc5d7bd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HTTP 的本质？HTTP 和 RPC 的区别？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可能你常听到什么什么之间是 RPC 调用的，那你有没有想过为什么要 RPC， 我们直接 WebClient HTTP 调用不行么？&lt;/p&gt;
+&lt;p&gt;其实 RPC 调用是因为服务的拆分，或者本身公司内部的多个服务之间的通信。服务的拆分独立部署，那服务间的调用就必然需要网络通信，用 WebClient 调用当然可行，但是比较麻烦。我们想即使服务被拆分了但是&lt;strong&gt;使用起来还是和之前本地调用一样方便&lt;/strong&gt;。所以就出现了 RPC 框架，来屏蔽这些底层调用细节，使得我们编码上还是和之前本地调用相差不多。&lt;/p&gt;
+&lt;p&gt;并且 HTTP 协议比较的冗余，RPC 都是内部调用所以不需要太考虑通用性，只要公司内部保持格式统一即可。所以可以&lt;strong&gt;做各种定制化的协议来使得通信更高效&lt;/strong&gt;。比如规定 yes 代表 yes的练级攻略，你看是不是更高效了，少传输的 5 个字。就像特殊行动的暗号，高效简洁！&lt;/p&gt;
+&lt;p&gt;所以公司内部服务的调用一般都用 RPC，而 HTTP 的优势在于通用，大家都认可这个协议，所以&lt;strong&gt;三方平台提供的接口都是通过 HTTP 协议调用的&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>Golang中channel搭配select、range的使用</title>
         <link>https://TuJin07.github.io/p/golang%E4%B8%ADchannel%E6%90%AD%E9%85%8Dselectrange%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Sat, 11 Mar 2023 21:00:45 +0800</pubDate>
@@ -2108,6 +2261,686 @@
 &lt;li&gt;&lt;code&gt;main()&lt;/code&gt;函数只能定义在&lt;code&gt;main&lt;/code&gt;包中，而&lt;code&gt;init()&lt;/code&gt;函数可以定义在任何包中。&lt;/li&gt;
 &lt;li&gt;一个Go程序只能有一个&lt;code&gt;main()&lt;/code&gt;函数，但可以有多个&lt;code&gt;init()&lt;/code&gt;函数。&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux基础</title>
+        <link>https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/</link>
+        <pubDate>Tue, 13 Dec 2022 20:48:59 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/cover.jpeg" alt="Featured image of post Linux基础" /&gt;&lt;h1 id=&#34;linux-基础&#34;&gt;Linux 基础&lt;/h1&gt;
+&lt;h2 id=&#34;常见的linux发行版&#34;&gt;常见的Linux发行版&lt;/h2&gt;
+&lt;p&gt;Linux发行版大致可以分为两类：商业发行版和社区发行版。&lt;/p&gt;
+&lt;p&gt;商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。&lt;/p&gt;
+&lt;p&gt;社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。&lt;/p&gt;
+&lt;h2 id=&#34;操作系统内核&#34;&gt;操作系统内核&lt;/h2&gt;
+&lt;p&gt;操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;进程管理：&lt;/strong&gt; 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储管理：&lt;/strong&gt; 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件系统管理：&lt;/strong&gt; 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设备驱动程序：&lt;/strong&gt; 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络管理：&lt;/strong&gt; 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。&lt;/p&gt;
+&lt;p&gt;概括两点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;中央处理器&#34;&gt;中央处理器&lt;/h2&gt;
+&lt;p&gt;中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;运算器（ALU）：&lt;/strong&gt; 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制器（CU）：&lt;/strong&gt; 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器（Register）：&lt;/strong&gt; 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高速缓存（Cache）：&lt;/strong&gt; 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;总线（Bus）：&lt;/strong&gt; 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。&lt;/p&gt;
+&lt;h2 id=&#34;linux-文件系统&#34;&gt;Linux 文件系统&lt;/h2&gt;
+&lt;p&gt;转载原文来源：&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/cs-basics/operating-system/linux-intro.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux 基础知识总结&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux-文件系统简介&#34;&gt;Linux 文件系统简介&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。&lt;/strong&gt; 也就是说在 Linux 系统中有一个重要的概念：&lt;strong&gt;一切都是文件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。&lt;/p&gt;
+&lt;h3 id=&#34;node-介绍&#34;&gt;node 介绍&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。&lt;/p&gt;
+&lt;p&gt;虽然，我们将文件存储在了块(block)中，但是我们还需要一个空间来存储文件的 &lt;strong&gt;元信息 metadata&lt;/strong&gt; ：如某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等。这种 &lt;strong&gt;存储文件元信息的区域就叫 inode&lt;/strong&gt;，译为索引节点：&lt;strong&gt;i（index）+node&lt;/strong&gt;。 每个文件都有一个 inode，存储文件的元信息。&lt;/p&gt;
+&lt;p&gt;可以使用 &lt;code&gt;stat&lt;/code&gt; 命令可以查看文件的 inode 信息。每个 inode 都有一个号码，Linux/Unix 操作系统不使用文件名来区分文件，而是使用 inode 号码区分不同的文件。&lt;/p&gt;
+&lt;p&gt;简单来说：inode 就是用来维护某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等信息。&lt;/p&gt;
+&lt;p&gt;简单总结一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;inode&lt;/strong&gt; ：记录文件的属性信息，可以使用 stat 命令查看 inode 信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;block&lt;/strong&gt; ：实际文件的内容，如果一个文件大于一个块时候，那么将占用多个 block，但是一个块只能存放一个文件。（因为数据是由 inode 指向的，如果有两个文件的数据存放在同一个块中，就会乱套了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg.png&#34;
+	width=&#34;728&#34;
+	height=&#34;311&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;234&#34;
+		data-flex-basis=&#34;561px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux-文件类型&#34;&gt;Linux 文件类型&lt;/h3&gt;
+&lt;p&gt;Linux 支持很多文件类型，其中非常重要的文件类型有: &lt;strong&gt;普通文件&lt;/strong&gt;，&lt;strong&gt;目录文件&lt;/strong&gt;，&lt;strong&gt;链接文件&lt;/strong&gt;，&lt;strong&gt;设备文件&lt;/strong&gt;，&lt;strong&gt;管道文件&lt;/strong&gt;，&lt;strong&gt;Socket 套接字文件&lt;/strong&gt;等。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通文件（-）&lt;/strong&gt; ： 用于存储信息和数据， Linux 用户可以根据访问权限对普通文件进行查看、更改和删除。比如：图片、声音、PDF、text、视频、源代码等等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目录文件（d，directory file）&lt;/strong&gt; ：目录也是文件的一种，用于表示和管理系统中的文件，目录文件中包含一些文件名和子目录名。打开目录事实上就是打开目录文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;符号链接文件（l，symbolic link）&lt;/strong&gt; ：保留了指向文件的地址而不是文件本身。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;字符设备（c，char）&lt;/strong&gt; ：用来访问字符设备比如键盘。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设备文件（b，block）&lt;/strong&gt; ： 用来访问块设备比如硬盘、软盘。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管道文件(p,pipe)&lt;/strong&gt; : 一种特殊类型的文件，用于进程之间的通信。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;套接字(s,socket)&lt;/strong&gt; ：用于进程间的网络通信，也可以用于本机之间的非网络通信。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linux-目录树&#34;&gt;Linux 目录树&lt;/h3&gt;
+&lt;p&gt;所有可操作的计算机资源都存在于目录树这个结构中，对计算资源的访问，可以看做是对这棵目录树的访问。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 的目录结构如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux 文件系统的结构层次鲜明，就像一棵倒立的树，最顶层是其根目录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree.png&#34;
+	width=&#34;823&#34;
+	height=&#34;315&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;261&#34;
+		data-flex-basis=&#34;627px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;常见目录说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/bin：&lt;/strong&gt; 存放二进制可执行文件(ls、cat、mkdir 等)，常用命令一般都在这里；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc：&lt;/strong&gt; 存放系统管理和配置文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/home：&lt;/strong&gt; 存放所有用户文件的根目录，是用户主目录的基点，比如用户 user 的主目录就是/home/user，可以用~user 表示；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr ：&lt;/strong&gt; 用于存放系统应用程序；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/opt：&lt;/strong&gt; 额外安装的可选应用程序包所放置的位置。一般情况下，我们可以把 tomcat 等都安装到这里；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc：&lt;/strong&gt; 虚拟文件系统目录，是系统内存的映射。可直接访问这个目录来获取系统信息；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/root：&lt;/strong&gt; 超级用户（系统管理员）的主目录（特权阶级^o^）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/sbin:&lt;/strong&gt; 存放二进制可执行文件，只有 root 才能访问。这里存放的是系统管理员使用的系统级别的管理命令和程序。如 ifconfig 等；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev：&lt;/strong&gt; 用于存放设备文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/mnt：&lt;/strong&gt; 系统管理员安装临时文件系统的安装点，系统提供这个目录是让用户临时挂载其他的文件系统；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/boot：&lt;/strong&gt; 存放用于系统引导时使用的各种文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/lib ：&lt;/strong&gt; 存放着和系统运行相关的库文件 ；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/tmp：&lt;/strong&gt; 用于存放各种临时文件，是公用的临时文件存储点；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var：&lt;/strong&gt; 用于存放运行时需要改变数据的文件，也是某些大文件的溢出区，比方说各种服务的日志文件（系统启动日志等。）等；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/lost+found：&lt;/strong&gt; 这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows 下叫什么.chk）就在这里。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux-基本命令&#34;&gt;Linux 基本命令&lt;/h2&gt;
+&lt;p&gt;下面只是给出了一些比较常用的命令。 。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.shell.how/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;shell.howopen in new window&lt;/a&gt; 这个网站可以用来解释常见命令的意思，对你学习 Linux 基本命令以及其他常用命令（如 Git、NPM）。&lt;/p&gt;
+&lt;h3 id=&#34;目录切换命令&#34;&gt;目录切换命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd usr&lt;/code&gt;：&lt;/strong&gt; 切换到该目录下 usr 目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd ..（或cd../）&lt;/code&gt;：&lt;/strong&gt; 切换到上一层目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd /&lt;/code&gt;：&lt;/strong&gt; 切换到系统根目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd ~&lt;/code&gt;：&lt;/strong&gt; 切换到用户主目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd -&lt;/code&gt;：&lt;/strong&gt; 切换到上一个操作所在目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;目录的操作命令增删改查&#34;&gt;目录的操作命令(增删改查)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mkdir 目录名称&lt;/code&gt;：&lt;/strong&gt; 增加目录。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;ls/ll&lt;/code&gt;&lt;/strong&gt;（ll 是 ls -l 的别名，ll 命令可以看到该目录下的所有目录和文件的详细信息）：查看目录信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;find 目录 参数&lt;/code&gt;：&lt;/strong&gt; 寻找目录（查）。示例：① 列出当前目录及子目录下所有文件和文件夹: &lt;code&gt;find .&lt;/code&gt;；② 在&lt;code&gt;/home&lt;/code&gt;目录下查找以.txt 结尾的文件名:&lt;code&gt;find /home -name &amp;quot;*.txt&amp;quot;&lt;/code&gt; ,忽略大小写: &lt;code&gt;find /home -iname &amp;quot;*.txt&amp;quot;&lt;/code&gt; ；③ 当前目录及子目录下查找所有以.txt 和.pdf 结尾的文件:&lt;code&gt;find . \\( -name &amp;quot;*.txt&amp;quot; -o -name &amp;quot;*.pdf&amp;quot; \\)&lt;/code&gt;或&lt;code&gt;find . -name &amp;quot;*.txt&amp;quot; -o -name &amp;quot;*.pdf&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mv 目录名称 新目录名称&lt;/code&gt;：&lt;/strong&gt; 修改目录的名称（改）。注意：mv 的语法不仅可以对目录进行重命名而且也可以对各种文件，压缩包等进行 重命名的操作。mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。后面会介绍到 mv 命令的另一个用法。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mv 目录名称 目录的新位置&lt;/code&gt;：&lt;/strong&gt; 移动目录的位置&amp;mdash;剪切（改）。注意：mv 语法不仅可以对目录进行剪切操作，对文件和压缩包等都可执行剪切操作。另外 mv 与 cp 的结果不同，mv 好像文件“搬家”，文件个数并未增加。而 cp 对文件进行复制，文件个数增加了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cp -r 目录名称 目录拷贝的目标位置&lt;/code&gt;：&lt;/strong&gt; 拷贝目录（改），-r 代表递归拷贝 。注意：cp 命令不仅可以拷贝目录还可以拷贝文件，压缩包等，拷贝文件和压缩包时不 用写-r 递归。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;rm [-rf] 目录&lt;/code&gt; :&lt;/strong&gt; 删除目录（删）。注意：rm 不仅可以删除目录，也可以删除其他文件或压缩包，为了增强大家的记忆， 无论删除任何目录或文件，都直接使用&lt;code&gt;rm -rf&lt;/code&gt; 目录/文件/压缩包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文件的操作命令增删改查&#34;&gt;文件的操作命令(增删改查)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;touch 文件名称&lt;/code&gt;:&lt;/strong&gt; 文件的创建（增）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cat/more/less/tail 文件名称&lt;/code&gt;&lt;/strong&gt; ：文件的查看（查） 。命令 &lt;code&gt;tail -f 文件&lt;/code&gt; 可以对某个文件进行动态监控，例如 tomcat 的日志文件， 会随着程序的运行，日志会变化，可以使用 &lt;code&gt;tail -f catalina-2016-11-11.log&lt;/code&gt; 监控 文 件的变化 。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;vim 文件&lt;/code&gt;：&lt;/strong&gt; 修改文件的内容（改）。vim 编辑器是 Linux 中的强大组件，是 vi 编辑器的加强版，vim 编辑器的命令和快捷方式有很多，但此处不一一阐述，大家也无需研究的很透彻，使用 vim 编辑修改文件的方式基本会使用就可以了。在实际开发中，使用 vim 编辑器主要作用就是修改配置文件，下面是一般步骤： &lt;code&gt;vim 文件------&amp;gt;进入文件-----&amp;gt;命令模式------&amp;gt;按i进入编辑模式-----&amp;gt;编辑文件 -------&amp;gt;按Esc进入底行模式-----&amp;gt;输入：wq/q!&lt;/code&gt; （输入 wq 代表写入内容并退出，即保存；输入 q!代表强制退出不保存）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;rm -rf 文件&lt;/code&gt;：&lt;/strong&gt; 删除文件（删）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;压缩文件的操作命令&#34;&gt;压缩文件的操作命令&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1）打包并压缩文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux 中的打包文件一般是以.tar 结尾的，压缩的命令一般是以.gz 结尾的。而一般情况下打包和压缩是一起进行的，打包并压缩后的文件的后缀名一般.tar.gz。 命令：&lt;code&gt;tar -zcvf 打包压缩后的文件名 要打包压缩的文件&lt;/code&gt; ，其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;z：调用 gzip 压缩命令进行压缩&lt;/li&gt;
+&lt;li&gt;c：打包文件&lt;/li&gt;
+&lt;li&gt;v：显示运行过程&lt;/li&gt;
+&lt;li&gt;f：指定文件名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如：假如 test 目录下有三个文件分别是：aaa.txt bbb.txt ccc.txt，如果我们要打包 test 目录并指定压缩后的压缩包名称为 test.tar.gz 可以使用命令：&lt;strong&gt;&lt;code&gt;tar -zcvf test.tar.gz aaa.txt bbb.txt ccc.txt&lt;/code&gt; 或 &lt;code&gt;tar -zcvf test.tar.gz /test/&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2）解压压缩包：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;命令：&lt;code&gt;tar [-xvf] 压缩文件&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中：x：代表解压&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将 /test 下的 test.tar.gz 解压到当前目录下可以使用命令：&lt;strong&gt;&lt;code&gt;tar -xvf test.tar.gz&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;将 /test 下的 test.tar.gz 解压到根目录/usr 下:&lt;strong&gt;&lt;code&gt;tar -xvf test.tar.gz -C /usr&lt;/code&gt;&lt;/strong&gt;（- C 代表指定解压的位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linux-的权限命令&#34;&gt;Linux 的权限命令&lt;/h3&gt;
+&lt;p&gt;操作系统中每个文件都拥有特定的权限、所属用户和所属组。权限是操作系统用来限制资源访问的机制，在 Linux 中权限一般分为读(readable)、写(writable)和执行(excutable)，分为三组。分别对应文件的属主(owner)，属组(group)和其他用户(other)，通过这样的机制来限制哪些用户、哪些组可以对特定的文件进行什么样的操作。&lt;/p&gt;
+&lt;p&gt;通过 &lt;strong&gt;&lt;code&gt;ls -l&lt;/code&gt;&lt;/strong&gt; 命令我们可以 查看某个目录下的文件或目录的权限&lt;/p&gt;
+&lt;p&gt;示例：在随意某个目录下&lt;code&gt;ls -l&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40.png&#34;
+	width=&#34;589&#34;
+	height=&#34;228&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;258&#34;
+		data-flex-basis=&#34;620px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第一列的内容的信息解释如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod.png&#34;
+	width=&#34;489&#34;
+	height=&#34;209&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;561px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面将详细讲解文件的类型、Linux 中权限以及文件有所有者、所在组、其它组具体是什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;文件的类型：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;d： 代表目录&lt;/li&gt;
+&lt;li&gt;： 代表文件&lt;/li&gt;
+&lt;li&gt;l： 代表软链接（可以认为是 window 中的快捷方式）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux 中权限分为以下几种：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;r：代表权限是可读，r 也可以用数字 4 表示&lt;/li&gt;
+&lt;li&gt;w：代表权限是可写，w 也可以用数字 2 表示&lt;/li&gt;
+&lt;li&gt;x：代表权限是可执行，x 也可以用数字 1 表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;文件和目录权限的区别：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对文件和目录而言，读写执行表示不同的意义。&lt;/p&gt;
+&lt;p&gt;对于文件：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限名称&lt;/th&gt;
+&lt;th&gt;可执行操作&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;可以使用 cat 查看文件的内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;可以修改文件的内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;可以将其运行为二进制文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;对于目录：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限名称&lt;/th&gt;
+&lt;th&gt;可执行操作&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;可以查看目录下列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;可以创建和删除目录下文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;可以使用 cd 进入目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;需要注意的是： &lt;strong&gt;超级用户可以无视普通用户的权限，即使文件目录权限是 000，依旧可以访问。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在 linux 中的每个用户必须属于一个组，不能独立于组外。在 linux 中每个文件有所有者、所在组、其它组的概念。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;所有者(u)&lt;/strong&gt; ：一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者，用 &lt;code&gt;ls ‐ahl&lt;/code&gt; 命令可以看到文件的所有者 也可以使用 chown 用户名 文件名来修改文件的所有者 。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件所在组(g)&lt;/strong&gt; ：当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用 &lt;code&gt;ls ‐ahl&lt;/code&gt;命令可以看到文件的所有组也可以使用 chgrp 组名 文件名来修改文件所在的组。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;其它组(o)&lt;/strong&gt; ：除开文件的所有者和所在组的用户外，系统的其它用户都是文件的其它组。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们再来看看如何修改文件/目录的权限。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;修改文件/目录的权限的命令：&lt;code&gt;chmod&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;示例：修改/test 下的 aaa.txt 的权限为文件所有者有全部权限，文件所有者所在的组有读写权限，其他用户只有读的权限。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;chmod u=rwx,g=rw,o=r aaa.txt&lt;/code&gt;&lt;/strong&gt; 或者 &lt;strong&gt;&lt;code&gt;chmod 764 aaa.txt&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3.png&#34;
+	width=&#34;525&#34;
+	height=&#34;246&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;213&#34;
+		data-flex-basis=&#34;512px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;补充一个比较常用的东西:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假如我们装了一个 zookeeper，我们每次开机到要求其自动启动该怎么办？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;新建一个脚本 zookeeper&lt;/li&gt;
+&lt;li&gt;为新建的脚本 zookeeper 添加可执行权限，命令是:&lt;code&gt;chmod +x zookeeper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;把 zookeeper 这个脚本添加到开机启动项里面，命令是：&lt;code&gt;chkconfig --add zookeeper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果想看看是否添加成功，命令是：&lt;code&gt;chkconfig --list&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;linux-用户管理&#34;&gt;Linux 用户管理&lt;/h3&gt;
+&lt;p&gt;Linux 系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。&lt;/p&gt;
+&lt;p&gt;用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 用户管理相关命令:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;useradd 选项 用户名&lt;/code&gt;:添加用户账号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;userdel 选项 用户名&lt;/code&gt;:删除用户帐号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;usermod 选项 用户名&lt;/code&gt;:修改帐号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd 用户名&lt;/code&gt;:更改或创建用户的密码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd -S 用户名&lt;/code&gt; :显示用户账号密码信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd -d 用户名&lt;/code&gt;: 清除用户密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;useradd&lt;/code&gt; 命令用于 Linux 中创建的新的系统用户。&lt;code&gt;useradd&lt;/code&gt;可用来建立用户帐号。帐号建好之后，再用&lt;code&gt;passwd&lt;/code&gt;设定帐号的密码．而可用&lt;code&gt;userdel&lt;/code&gt;删除帐号。使用&lt;code&gt;useradd&lt;/code&gt;指令所建立的帐号，实际上是保存在 &lt;code&gt;/etc/passwd&lt;/code&gt;文本文件中。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;passwd&lt;/code&gt;命令用于设置用户的认证信息，包括用户密码、密码过期时间等。系统管理者则能用它管理系统用户的密码。只有管理者可以指定用户名称，一般用户只能变更自己的密码。&lt;/p&gt;
+&lt;h3 id=&#34;linux-系统用户组的管理&#34;&gt;Linux 系统用户组的管理&lt;/h3&gt;
+&lt;p&gt;每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同 Linux 系统对用户组的规定有所不同，如 Linux 下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。&lt;/p&gt;
+&lt;p&gt;用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对&lt;code&gt;/etc/group&lt;/code&gt;文件的更新。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 系统用户组的管理相关命令:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;groupadd 选项 用户组&lt;/code&gt; :增加一个新的用户组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;groupdel 用户组&lt;/code&gt;:要删除一个已有的用户组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;groupmod 选项 用户组&lt;/code&gt; : 修改用户组的属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他常用命令&#34;&gt;其他常用命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;pwd&lt;/code&gt;：&lt;/strong&gt; 显示当前所在位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sudo + 其他命令&lt;/code&gt;：以系统管理者的身份执行指令，也就是说，经由 sudo 所执行的指令就好像是 root 亲自执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;grep 要搜索的字符串 要搜索的文件 --color&lt;/code&gt;：&lt;/strong&gt; 搜索命令，&amp;ndash;color 代表高亮显示&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ps -ef&lt;/code&gt;/&lt;code&gt;ps -aux&lt;/code&gt;：&lt;/strong&gt; 这两个命令都是查看当前系统正在运行进程，两者的区别是展示格式不同。如果想要查看特定的进程可以使用这样的格式：&lt;strong&gt;&lt;code&gt;ps aux|grep redis&lt;/code&gt;&lt;/strong&gt; （查看包括 redis 字符串的进程），也可使用 &lt;code&gt;pgrep redis -a&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;注意：如果直接用 ps（（Process Status））命令，会显示所有进程的状态，通常结合 grep 命令查看某进程的状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;kill -9 进程的pid&lt;/code&gt;：&lt;/strong&gt; 杀死进程（-9 表示强制终止。）&lt;/p&gt;
+&lt;p&gt;先用 ps 查找进程，然后用 kill 杀掉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络通信命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看当前系统的网卡信息：ifconfig&lt;/li&gt;
+&lt;li&gt;查看与某台机器的连接情况：ping&lt;/li&gt;
+&lt;li&gt;查看当前系统的端口使用：netstat -an&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;net-tools 和 iproute2 ：&lt;/strong&gt;&lt;code&gt;net-tools&lt;/code&gt;起源于 BSD 的 TCP/IP 工具箱，后来成为老版本 LinuxLinux 中配置网络功能的工具。但自 2001 年起，Linux 社区已经对其停止维护。同时，一些 Linux 发行版比如 Arch Linux 和 CentOS/RHEL 7 则已经完全抛弃了 net-tools，只支持&lt;code&gt;iproute2&lt;/code&gt;。linux ip 命令类似于 ifconfig，但功能更强大，旨在替代它。更多详情请阅读&lt;a class=&#34;link&#34; href=&#34;https://linoxide.com/linux-command/use-ip-command-linux&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何在 Linux 中使用 IP 命令和示例open in new window&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;shutdown&lt;/code&gt;：&lt;/strong&gt; &lt;code&gt;shutdown -h now&lt;/code&gt;： 指定现在立即关机；&lt;code&gt;shutdown +5 &amp;quot;System will shutdown after 5 minutes&amp;quot;&lt;/code&gt;：指定 5 分钟后关机，同时送出警告信息给登入用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;reboot&lt;/code&gt;：&lt;/strong&gt; &lt;strong&gt;&lt;code&gt;reboot&lt;/code&gt;：&lt;/strong&gt; 重开机。&lt;strong&gt;&lt;code&gt;reboot -w&lt;/code&gt;：&lt;/strong&gt; 做个重开机的模拟（只有纪录并不会真的重开机）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux-环境变量&#34;&gt;Linux 环境变量&lt;/h2&gt;
+&lt;p&gt;在 Linux 系统中，环境变量是用来定义系统运行环境的一些参数，比如每个用户不同的主目录（HOME）。&lt;/p&gt;
+&lt;h3 id=&#34;环境变量分类&#34;&gt;环境变量分类&lt;/h3&gt;
+&lt;p&gt;按照作用域来分，环境变量可以简单的分成:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户级别环境变量 : &lt;code&gt;~/.bashrc&lt;/code&gt;、&lt;code&gt;~/.bash_profile&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;系统级别环境变量 : &lt;code&gt;/etc/bashrc&lt;/code&gt;、&lt;code&gt;/etc/environment&lt;/code&gt;、&lt;code&gt;/etc/profile&lt;/code&gt;、&lt;code&gt;/etc/profile.d&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上述配置文件执行先后顺序为：&lt;code&gt;/etc/enviroment&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/profile&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/profile.d&lt;/code&gt; –&amp;gt; &lt;code&gt;~/.bash_profile&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/bashrc&lt;/code&gt; –&amp;gt; &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果要修改系统级别环境变量文件，需要管理员具备对该文件的写入权限。&lt;/p&gt;
+&lt;p&gt;建议用户级别环境变量在 &lt;code&gt;~/.bash_profile&lt;/code&gt;中配置，系统级别环境变量在 &lt;code&gt;/etc/profile.d&lt;/code&gt; 中配置。&lt;/p&gt;
+&lt;p&gt;按照生命周期来分，环境变量可以简单的分成:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;永久的：需要用户修改相关的配置文件，变量永久生效。&lt;/li&gt;
+&lt;li&gt;临时的：用户利用 &lt;code&gt;export&lt;/code&gt; 命令，在当前终端下声明环境变量，关闭 shell 终端失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;读取环境变量&#34;&gt;读取环境变量&lt;/h3&gt;
+&lt;p&gt;通过 &lt;code&gt;export&lt;/code&gt; 命令可以输出当前系统定义的所有环境变量。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 列出当前的环境变量值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;除了 &lt;code&gt;export&lt;/code&gt; 命令之外， &lt;code&gt;env&lt;/code&gt; 命令也可以列出所有环境变量。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo&lt;/code&gt; 命令可以输出指定环境变量的值。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 输出当前的PATH环境变量的值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo $PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 输出当前的HOME环境变量的值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo $HOME
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;环境变量修改&#34;&gt;环境变量修改&lt;/h3&gt;
+&lt;p&gt;通过 &lt;code&gt;export&lt;/code&gt;命令可以修改指定的环境变量。不过，这种方式修改环境变量仅仅对当前 shell 终端生效，关闭 shell 终端就会失效。修改完成之后，立即生效。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export CLASSPATH=./JAVA_HOME/lib;$JAVA_HOME/jre/lib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过 &lt;code&gt;vim&lt;/code&gt; 命令修改环境变量配置文件。这种方式修改环境变量永久有效。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim ~/.bash_profile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果修改的是系统级别环境变量则对所有用户生效，如果修改的是用户级别环境变量则仅对当前用户生效。&lt;/p&gt;
+&lt;p&gt;修改完成之后，需要 &lt;code&gt;source&lt;/code&gt; 命令让其生效或者关闭 shell 终端重新登录。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;source /etc/profile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>操作系统课程总结</title>
+        <link>https://TuJin07.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Sun, 27 Nov 2022 21:07:47 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/cover.jpeg" alt="Featured image of post 操作系统课程总结" /&gt;&lt;h1 id=&#34;操作系统基础总结&#34;&gt;操作系统基础总结&lt;/h1&gt;
+&lt;h2 id=&#34;操作系统发基本概念&#34;&gt;操作系统发基本概念&lt;/h2&gt;
+&lt;h3 id=&#34;什么是操作系统&#34;&gt;什么是操作系统&lt;/h3&gt;
+&lt;p&gt;操作系统是计算机系统中的一种重要&lt;strong&gt;软件&lt;/strong&gt;，它管理和控制计算机系统中的资源，为用户和其他软件提供服务。操作系统主要负责&lt;strong&gt;内存管理、进程管理、文件系统管理、设备管理&lt;/strong&gt;等方面的工作。&lt;/p&gt;
+&lt;h3 id=&#34;内核态和用户态&#34;&gt;内核态和用户态&lt;/h3&gt;
+&lt;p&gt;操作系统中，内核态和用户态是两种不同的执行状态，主要区别在于访问系统资源的权限不同。内核态是操作系统核心代码运行的状态，具有访问系统资源的最高权限，包括访问硬件设备和修改操作系统的状态等。而用户态是普通程序的运行状态，只能访问用户空间的资源，无法直接访问内核空间，需要通过系统调用的方式向操作系统发出请求，以获取相关资源。&lt;/p&gt;
+&lt;p&gt;根据进程所能访问到的资源的特点，可以依据进程在系统上的运行状态，分为用户态与内核态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;用户态进程只能访问一些用户程序的数据。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内核态进程几乎可以访问到计算机的任何资源。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们平时运行的程序出于安全考虑，基本都是运行在用户态，他们没有权限调用系统级别的功能。比如说文件管理，进程控制等。而必须要使用到操作系统提供的这些功能时，就需要用到&lt;strong&gt;系统调用&lt;/strong&gt;了。&lt;/p&gt;
+&lt;h3 id=&#34;系统调用&#34;&gt;系统调用&lt;/h3&gt;
+&lt;p&gt;系统调用是&lt;strong&gt;操作系统提供的一组接口&lt;/strong&gt;，用于让用户程序可以访问操作系统内核中的服务。操作系统提供了多种系统调用，如文件操作、进程管理、网络通信等。用户程序可以通过调用相应的系统调用，向操作系统发出请求，获取相关的服务。&lt;/p&gt;
+&lt;p&gt;系统调用的工作原理是，**当用户程序需要访问操作系统内核中的服务时，需要通过特定的指令或者是函数调用，进入内核态执行相应的系统调用操作。**系统调用操作完成后，操作系统再将结果返回用户程序，用户程序继续在用户态执行。&lt;/p&gt;
+&lt;p&gt;系统调用的实现方式有两种：一种是软中断，一种是陷阱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;软中断是指用户程序通过软件指令，向操作系统发出中断请求。操作系统收到请求后，暂停当前进程的执行，转而执行相应的系统调用操作，完成后再返回用户程序。&lt;/li&gt;
+&lt;li&gt;陷阱是指用户程序执行到陷阱指令时，CPU会将控制权限转交给操作系统，让操作系统执行相应的系统调用操作。操作系统完成操作后，再将结果返回用户程序，让用户程序继续执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在实际的系统中，系统调用的实现方式通常是与硬件的中断机制相结合，通过硬件中断的方式触发系统调用，使用软中断和陷阱来实现系统调用的具体操作。&lt;/p&gt;
+&lt;h2 id=&#34;进程与线程&#34;&gt;进程与线程&lt;/h2&gt;
+&lt;h3 id=&#34;进程和线程的区别&#34;&gt;进程和线程的区别&lt;/h3&gt;
+&lt;p&gt;进程是操作系统中的基本概念，它是指正在运行的程序的实例。进程拥有自己的内存空间、文件句柄、系统资源等。线程是进程的一个执行单元，每个进程中至少有一个线程。线程共享进程的资源，并拥有自己的执行栈和程序计数器。&lt;/p&gt;
+&lt;p&gt;进程和线程的主要区别在于，进程是资源分配的基本单位，而线程是CPU调度和执行的基本单位。进程之间相互独立，互不干扰，而线程之间共享进程的资源，因此线程之间的切换开销比进程小，效率更高。&lt;/p&gt;
+&lt;h3 id=&#34;进程的5种状态&#34;&gt;进程的5种状态&lt;/h3&gt;
+&lt;p&gt;进程的5种状态包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;就绪状态：进程已经准备好被执行，等待CPU分配时间片。&lt;/li&gt;
+&lt;li&gt;运行状态：进程正在CPU上执行指令。&lt;/li&gt;
+&lt;li&gt;阻塞状态：进程因为某些原因（如等待I/O操作）而暂时停止执行。&lt;/li&gt;
+&lt;li&gt;创建状态：操作系统正在创建新进程。&lt;/li&gt;
+&lt;li&gt;终止状态：进程已经完成执行或因为某些原因被中止。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;进程间的通信方式&#34;&gt;进程间的通信方式&lt;/h3&gt;
+&lt;p&gt;进程间的通信方式主要有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;管道通信：通过创建一个管道实现两个进程间的通信。是一种&lt;strong&gt;半双工&lt;/strong&gt;的通信方式，通常用于父子进程间或者兄弟进程之间的通信。&lt;/li&gt;
+&lt;li&gt;有名管道：有名管道不同于匿名管道之处在于它提供了一个路径名与其关联，使得不存在亲缘关系的进程间也可以通过有名管道进行通信。有名管道严格遵循&lt;strong&gt;先进先出(first in first out)&lt;/strong&gt; 。有名管道的名字存放于文件系统中，内容存放于内存中。&lt;/li&gt;
+&lt;li&gt;共享内存通信：两个进程共享同一块内存空间，可以直接读写对方进程的内存数据。不同进程可以及时看到对方进程中对共享内存中数据的更新。这种方式需要依靠某种同步操作，如互斥锁和信号量等。这是最快的进程间通信方式。&lt;/li&gt;
+&lt;li&gt;消息队列通信：消息队列是消息的链表，存放在内存中并由消息队列标识符标识。MQ对比于Pipe的优点在于如下几点。
+&lt;ol&gt;
+&lt;li&gt;MQ是&lt;strong&gt;双向的&lt;/strong&gt;，双方都可以收发消息，Pipe是单向的。&lt;/li&gt;
+&lt;li&gt;MQ可以按&lt;strong&gt;特定的类型进行消息读取&lt;/strong&gt;，Pipe读取顺序必须为先进先出的顺序。&lt;/li&gt;
+&lt;li&gt;MQ可以为消息&lt;strong&gt;分配优先级&lt;/strong&gt;，消费者可以按优先级顺序获取消息，Pipe不行。&lt;/li&gt;
+&lt;li&gt;MQ可以完成消息的&lt;strong&gt;异步发送&lt;/strong&gt;，Pipe收发消息时是阻塞的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;信号通信：信号是一种比较复杂的异步通信方式，它是&lt;strong&gt;软件层次上对中断机制的一种模拟&lt;/strong&gt;。信号可以有硬件和软件两个来源，经由操作系统传递，通知接收信号的进程某个事件已经发生。&lt;/li&gt;
+&lt;li&gt;Socket通信：主要用于在&lt;strong&gt;客户端进程和服务器进程之间通过网络进行通信。&lt;/strong&gt; 套接字是支持 TCP/IP 的网络通信的基本操作单元，可以看做是不同主机之间的进程进行双向通信的端点，简单的说就是通信的两方的一种约定，用套接字中的相关函数来完成通信过程。。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;线程间的同步方式&#34;&gt;线程间的同步方式&lt;/h3&gt;
+&lt;p&gt;线程同步适用于多个共享关键资源的线程并发执行，同步线程可以避免关键资源使用的冲突。线程间的同步方式主要有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;互斥锁（Mute）：通过加锁的方式保证同一时间只能有一个线程访问共享资源，只有持有互斥对象的线程才可以访问共享资源，而互斥对象只有一个，所以可以保证共享资源同一时间内最多被一个线程访问。&lt;/li&gt;
+&lt;li&gt;信号量（Semaphores）：用于控制多个线程对共享资源的访问，通过信号量的值来判断是否可以访问共享资源。在信号量有余粮的前提下，可以允许多个线程在同一时刻访问同一共享资源。&lt;/li&gt;
+&lt;li&gt;事件（Event）：线程间可以通过事件来互相通知，即所谓的 Wait / Notify 操作，通过线程之间相互通知的方式保持线程同步。&lt;/li&gt;
+&lt;li&gt;临界区：通过将共享资源保护在临界区内，使得只能有一个线程同时进入临界区，其他线程需要等待。实际上也是一种互斥锁的实现。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;进程调度算法&#34;&gt;进程调度算法&lt;/h3&gt;
+&lt;p&gt;进程调度算法有多种，其中比较常见的有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先来先服务调度算法（FCFS）：按照进程到达的顺序进行调度，先到达的进程先执行。&lt;/li&gt;
+&lt;li&gt;短作业优先调度算法（SJF）：按照进程需要的执行时间进行排序，执行时间短的进程先执行。&lt;/li&gt;
+&lt;li&gt;优先级调度算法：为每个进程赋予一个优先级，优先级高的进程先执行。&lt;/li&gt;
+&lt;li&gt;时间片轮转调度算法：为每个进程分配一个时间片，当时间片用完后，就停止当前进程的执行，将CPU分配给下一个进程。&lt;/li&gt;
+&lt;li&gt;多级反馈队列调度算法：将进程划分为多个队列，每个队列有不同的时间片大小和优先级，进程开始在第一个队列中运行，如果用完了时间片仍然没有执行完，则被移动到下一个队列，直到执行完毕。多级反馈队列调度算法通过一些反馈机制，可以保证高优先级的作业得到响应，又能使得短作业迅速完成，目前被公认为较好的一种调度算法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;多级反馈队列调度算法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;多级反馈队列调度算法是一种比较流行的调度算法，其主要思想是根据进程的优先级和使用的时间片大小来决定调度顺序。多级反馈队列调度算法将进程划分为多个队列，每个队列具有不同的时间片大小和优先级，首先进入第一级队列中的进程具有最高的优先级，并拥有最小的时间片大小，如果在这个时间片内没有执行完毕，则将其移动到下一个优先级更低的队列中，以便其他进程有机会运行。每个队列中的时间片大小越来越大，优先级越来越低，因此在队列层次结构中，出现相应的优先级和时间片大小的变化。&lt;/p&gt;
+&lt;p&gt;多级反馈队列调度算法的优点在于可以确保高优先级的进程优先运行，并且可以提高系统的响应性能。但是，该算法也存在着一些问题，如时间片大小的选择可能会影响系统的性能和响应时间，因此需要根据不同的应用场景进行调整。此外，该算法的实现也比较复杂，需要考虑多个队列之间的切换以及进程的状态转换等问题。&lt;/p&gt;
+&lt;p&gt;总的来说，多级反馈队列调度算法是一种灵活性较强的调度算法，可以根据不同的应用场景进行调整，以便更好地满足系统的需求。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;死锁&#34;&gt;死锁&lt;/h2&gt;
+&lt;p&gt;死锁是指两个或多个进程在执行过程中，因争夺资源而造成的一种相互等待的现象，若无外力作用，这些进程都将无法向前推进。简单来说，死锁是由于两个或多个进程都在等待系统中的某个资源而造成的一种僵局，这些进程都无法继续执行，并且也无法释放已经占有的资源。死锁的发生可能会导致系统崩溃，因此必须采取措施避免死锁的发生。&lt;/p&gt;
+&lt;h3 id=&#34;死锁产生的四个条件&#34;&gt;死锁产生的四个条件&lt;/h3&gt;
+&lt;p&gt;死锁产生的四个必要条件包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;互斥条件：**资源不能被共享，只有一个进程能够占用，**其它进程申请该资源，必须等待直到资源释放。&lt;/li&gt;
+&lt;li&gt;请求与保持条件：已经占用资源的进程可以&lt;strong&gt;继续请求其他资源而不释放已占有的资源&lt;/strong&gt;，即使该进程请求资源而阻塞时，对已获得的资源也不会释放。&lt;/li&gt;
+&lt;li&gt;非抢占条件：已经分配的&lt;strong&gt;资源不能被剥夺&lt;/strong&gt;，只能由占有资源的进程自己释放。&lt;/li&gt;
+&lt;li&gt;循环等待条件：多个进程之间形成&lt;strong&gt;头尾相连的循环等待资源关系&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;四个条件需要同时满足时，才有可能发生死锁。&lt;/p&gt;
+&lt;h3 id=&#34;解决死锁的四种方法&#34;&gt;解决死锁的四种方法&lt;/h3&gt;
+&lt;p&gt;解决死锁的方法可以从&lt;strong&gt;预防&lt;/strong&gt;，&lt;strong&gt;避免&lt;/strong&gt;，&lt;strong&gt;检测&lt;/strong&gt;以及&lt;strong&gt;解除&lt;/strong&gt;这四个角度分析。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;预防死锁：针对死锁产生的四个条件，采取相应的预防措施，以避免死锁的发生。&lt;/li&gt;
+&lt;li&gt;避免死锁：在资源分配之前，对资源的请求进行预判，只分配不会导致死锁的资源请求。&lt;/li&gt;
+&lt;li&gt;检测死锁：通过检测算法，检测系统中是否存在死锁，如果发现死锁，则采取相应的措施打破死锁。&lt;/li&gt;
+&lt;li&gt;解除死锁：采用撤销进程、资源抢占等方法，打破死锁循环等待条件。其中，撤销进程和资源抢占是比较有效的解除死锁方法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;死锁的预防&#34;&gt;死锁的预防&lt;/h3&gt;
+&lt;p&gt;死锁预防聚焦于破坏四个必要条件中任意一个，就可以预防死锁发生。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;破坏&lt;strong&gt;第一个条件（互斥条件）：使得资源可以同时访问。最简单，但很多资源的特性，以及一些线程同步问题导致其并不能同时访问。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;破坏&lt;strong&gt;第三个条件（非抢占）：采用剥夺式的调度算法，但一般只适用于主存和CPU资源的分配，不适合所有的资源，而且可能会导致资源利用率下降。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上两种方法因为自身的一些缺陷不太实用，一般比较实用的预防方法，是考虑破坏&lt;strong&gt;第二个和第四个条件&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;破坏&lt;strong&gt;第二个条件（请求并保持）：静态分配策略&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;静态分配策略&lt;/strong&gt;破坏了死锁产生的第二个条件。一个进程开始执行前，就提前申请到它执行过程中所需要用到的所有资源。进程要么占有其所需要的所有资源后开始执行，要么不占有任何资源并不执行，就不会出现持有一些资源而等待另一些资源的情况。&lt;/p&gt;
+&lt;p&gt;静态分配策略逻辑和实现都很简单，但缺点是&lt;strong&gt;严重降低了资源利用率&lt;/strong&gt;。一个进程需要的资源中有些可能只会使用非常短的时间然后闲置，或者说是额外情况下才会使用的，这就导致了进程占用一些&lt;strong&gt;本身很少用到的资源&lt;/strong&gt;，其它进程需要等待的情况，降低了系统的并发性能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第四个条件（循环等待）：层次分配策略&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;层次分配策略&lt;/strong&gt;破坏了死锁产生的第四个条件。层次分配策略将所有资源分成多个层次，一个进程得到一个资源后，&lt;strong&gt;只能再申请较高一层的资源&lt;/strong&gt;；而当进程要释放一个资源时，同时也要先释放占用的较高层的资源。通过预定义的资源申请层次，可以避免出现循环等待链。&lt;/p&gt;
+&lt;h3 id=&#34;死锁的避免&#34;&gt;死锁的避免&lt;/h3&gt;
+&lt;p&gt;死锁的预防的思想是破坏死锁的四个必要条件之一就可以预防系统发生死锁。但会导致&lt;strong&gt;资源利用率较低&lt;/strong&gt;以及&lt;strong&gt;进程并发度不高&lt;/strong&gt;等问题。而死锁的避免则允许系统中存在四个必要条件，关键在于掌握并发进程中资源申请和分配情况，作出合理的选择，同样能避免发生死锁。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;银行家算法&lt;/strong&gt;：系统的状态可以分为&lt;strong&gt;安全状态&lt;/strong&gt;和&lt;strong&gt;不安全状态&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安全状态：OS 可以保证所有的进程在有限时间内能得到各自所需要的全部资源，系统处于安全状态，此时不会发生死锁。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不安全状态：与安全状态相反，可能会发生死锁。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每当需要为进程分配资源时，会通过&lt;strong&gt;银行家算法&lt;/strong&gt;先&lt;strong&gt;试探为该进程分配资源&lt;/strong&gt;，然后通过&lt;strong&gt;安全性算法&lt;/strong&gt;判断&lt;strong&gt;分配资源后系统是否处于安全状态&lt;/strong&gt;，如果不安全则不进行分配，进程继续等待，若还能处于安全状态，则分配资源给进程。&lt;/p&gt;
+&lt;p&gt;死锁的避免可以解决&lt;strong&gt;资源利用率低&lt;/strong&gt;的问题，但需要不断检测每个进程对各类资源占用和申请情况，以及做&lt;strong&gt;安全性检测&lt;/strong&gt;，也需要耗费较多额外的效率。&lt;/p&gt;
+&lt;h3 id=&#34;死锁的检测--死锁的解除&#34;&gt;死锁的检测 &amp;amp; 死锁的解除&lt;/h3&gt;
+&lt;p&gt;对资源分配加以限制可以&lt;strong&gt;预防或避免&lt;/strong&gt;死锁发生，但都不利于&lt;strong&gt;系统资源的充分共享&lt;/strong&gt;。另一条途径是采用**死锁的检测与解除：*&lt;em&gt;对资源分配不作任何限制，不避免死锁的产生。系统*&lt;em&gt;定期会执行一个“死锁检测”程序&lt;/em&gt;&lt;/em&gt;，判断是否出现死锁，如检测出现死锁再加以解除。&lt;/p&gt;
+&lt;p&gt;死锁的检测依据&lt;strong&gt;进程-资源分配图&lt;/strong&gt;，OS 中每一时刻的&lt;strong&gt;系统状态&lt;/strong&gt;都可以使用该图来表示，这是一种&lt;strong&gt;描述进程对资源申请以及分配关系的一种有向图&lt;/strong&gt;，可以用于检测系统是否处于死锁状态。&lt;/p&gt;
+&lt;p&gt;当检测到存在死锁时，应设法让其解除。通常有以下四种方法。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;结束所有进程的执行，重启 OS：简单粗暴，但未保存的所有进度会丢失，损失巨大。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;撤销涉及死锁的所有进程，解除死锁后继续运行：可以打破死锁的循环等待条件，但代价也很大，某些进程已经计算很长时间，撤销后使得之前的计算也浪费了。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逐个撤销涉及死锁的进程，回收资源直到死锁解除：相较于上一种方法更为温和，很多情况下只要撤销部分进程后，死锁就得以解除，剩余进程可以继续运行。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;抢占资源：从涉及死锁的进程中抢占资源，夺得资源再分配给涉及死锁的进程直到解除死锁。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;内存管理&#34;&gt;内存管理&lt;/h2&gt;
+&lt;h3 id=&#34;操作系统内存管理的作用&#34;&gt;操作系统内存管理的作用&lt;/h3&gt;
+&lt;p&gt;操作系统内存管理的作用是为了让多个进程可以同时运行，并且不会相互干扰。内存管理的主要任务包括&lt;strong&gt;内存分配和内存回收&lt;/strong&gt;。内存分配是指为进程分配内存空间，而内存回收是指释放进程占用的内存空间。操作系统需要实现&lt;strong&gt;虚拟内存、页面置换、内存保护&lt;/strong&gt;等功能，以确保系统运行的稳定性和安全性。&lt;/p&gt;
+&lt;h3 id=&#34;内存管理机制&#34;&gt;内存管理机制&lt;/h3&gt;
+&lt;p&gt;内存的管理机制可以简单分为&lt;strong&gt;连续分配管理方式&lt;/strong&gt;和&lt;strong&gt;非连续分配管理&lt;/strong&gt;方式这两种管理机制。连续分配管理方式是指为一个用户程序分配一块连续的内存空间，常见的如&lt;strong&gt;块式内存管理&lt;/strong&gt;。非连续分配管理方式允许一个程序使用的内存分布在离散或者说不相邻的物理内存中，常见的如&lt;strong&gt;页式内存管理&lt;/strong&gt;和&lt;strong&gt;段式内存管理&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;块式内存管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;块式内存管理是一种最早期的内存管理方式，主要应用于早期计算机操作系统中。该方法将内存划分为固定大小的块，每个块中只包含一个进程，不同进程之间的内存空间是独立的。如果程序需要更多的内存，操作系统将分配给它一个块，如果程序需要的内存很小，那么分配给它的块就会浪费一部分内存，这些未被利用的空间被称为碎片。&lt;/p&gt;
+&lt;p&gt;块式内存管理的优点是实现简单，易于操作和维护。而且，这种方法在早期计算机硬件资源受限的情况下，可以有效地利用内存。然而，块式内存管理也存在一些缺点，其中最大的缺点就是&lt;strong&gt;内存浪费问题。如果程序只需要很少的内存空间，那么它将占用整个块，即使其中大部分空间是未被利用的。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;页式内存管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;页式内存管理是一种采用固定大小的页面来划分内存空间的管理方式。在页式内存管理中，物理内存空间被划分为固定大小的块，每一块被称为一页，而逻辑内存空间也被划分为固定大小的块，每一块被称为一个页面。当一个进程需要使用内存时，&lt;strong&gt;操作系统将为其分配一个或多个页面，当进程访问某个页面时，操作系统通过页面映射机制将逻辑地址转换为物理地址，以实现对内存的访问。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;页式内存管理的优点是&lt;strong&gt;可以有效地解决内存浪费问题&lt;/strong&gt;，因为它可以动态地分配内存空间，精确地满足进程的内存需求。此外，页式内存管理还可以实现内存保护和共享，提高系统的稳定性和安全性。缺点是在&lt;strong&gt;页面置换时可能会出现性能问题&lt;/strong&gt;，因为页面置换需要将页面从磁盘中读入内存，这可能会影响系统的性能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;段式内存管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;页式管理虽然提高了内存利用率，但是页式管理其中的页实际并无任何实际意义。段式内存管理是一种较为复杂的内存管理方式，**段式管理把主存分为一段段的，段是有实际意义的，**每个段具有不同的长度和访问权限，而不是像页式内存管理那样划分为固定大小的块。例如,有主程序段 MAIN、子程序段 X、数据段 D 及栈段 S 等。&lt;/p&gt;
+&lt;p&gt;简单来说：&lt;strong&gt;页是物理单位，段是逻辑单位。分页可以有效提高内存利用率，分段可以更好满足用户需求。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;段页式内存管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;段页式管理机制结合了段式管理和页式管理的优点&lt;/strong&gt;。段页式管理机制把内存先分成若干段，每个段又分成若干页，也就是说段页式管理机制中段与段之间以及段的内部的都是离散的。&lt;strong&gt;既可以实现内存的动态分配，又可以满足不同进程对内存空间的需求。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;分页机制和分段机制的区别与共同点&#34;&gt;分页机制和分段机制的区别与共同点&lt;/h3&gt;
+&lt;p&gt;分页机制和分段机制都是&lt;strong&gt;内存离散管理&lt;/strong&gt;的方式，其中分页机制是将&lt;strong&gt;物理内存划分为大小相等的页框，将逻辑地址划分为大小相等的页&lt;/strong&gt;；而分段机制是将&lt;strong&gt;逻辑地址划分为大小不等、具有不同含义的段，每个段可以动态地分配不同大小的内存空间。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它们的区别在于，**分页机制中页是物理单位，是操作系统管理内存的基本单位，*&lt;em&gt;每个页都有相同的大小；而*&lt;em&gt;分段机制中段是逻辑单位，是用户程序管理内存的基本单位，每个段具有不同的大小和含义。&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;物理地址与虚拟地址逻辑地址虚拟内存&#34;&gt;物理地址与虚拟地址（逻辑地址/虚拟内存）&lt;/h3&gt;
+&lt;p&gt;物理地址，即计算机硬件中内存的真正编址。而所谓虚拟地址，即操作系统将实际的物理物理地址抽象为范围更大的一个地址空间给予进程使用，进程所能看到的地址空间都是虚拟地址。&lt;/p&gt;
+&lt;p&gt;我们编程一般只有可能和虚拟地址打交道，比如在C语言中，指针里面存储的数值就可以理解成为内存里的一个地址，这个地址也就是我们说的虚拟地址，虚拟地址由操作系统决定。物理地址指的是真实物理内存中地址，更具体一点来说就是内存地址寄存器中的地址。物理地址是内存单元真正的地址。虚拟&lt;strong&gt;地址由操作系统统一管理物理内存分配，使得程序更具有安全性。操作系统如何从虚拟地址定位到实际的物理地址，则需要通过页表的帮助。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;cpu如何寻址&#34;&gt;CPU如何寻址&lt;/h3&gt;
+&lt;p&gt;所谓的 CPU 寻址，就是通过 CPU 完成虚拟地址到物理地址的转换。&lt;/p&gt;
+&lt;p&gt;现代处理器使用的是一种称为 &lt;strong&gt;虚拟寻址(Virtual Addressing)&lt;/strong&gt; 的寻址方式。&lt;strong&gt;使用虚拟寻址，CPU 需要将虚拟地址翻译成物理地址，这样才能访问到真实的物理内存。&lt;/strong&gt; 实际上完成虚拟地址转换为物理地址转换的硬件是 CPU 中含有一个被称为 &lt;strong&gt;内存管理单元（Memory Management Unit, MMU）&lt;/strong&gt; 的硬件。&lt;/p&gt;
+&lt;p&gt;以下来源于：&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/63375062/answer/1403291487&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;操作系统中的多级页表到底是为了解决什么问题？ - axiqia的回答 - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一般来说，任何进程切换都会暗示着更换活动页表集。Linux内核为每一个进程维护一个task_struct结构体（即进程描述符PCB），task_struct-&amp;gt;mm_struct结构体成员用来保存该进程的页表。**在进程切换的过程中，内核把新的页表的地址写入CR3控制寄存器。**CR3中含有页目录表的物理内存基地址，因此该寄存器也被称为页目录基地址寄存器PDBR（Page-Directory Base address Register）。&lt;/p&gt;
+&lt;p&gt;每个处理器core都有一个MMU，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TLB：是页表的高速缓存，存储着最近转化的一些目录项。&lt;/li&gt;
+&lt;li&gt;Table Walk Unit：负责从页表中读取虚拟地址对应的物理地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于每次转换，MMU首先在TLB中检查现有的缓存。如果没有命中，根据CR3寄存器，Table Walk Unit将从内存中的页表查询。&lt;/p&gt;
+&lt;h3 id=&#34;虚拟地址空间的意义&#34;&gt;虚拟地址空间的意义&lt;/h3&gt;
+&lt;p&gt;没有虚拟地址空间的时候，&lt;strong&gt;程序都是直接访问和操作的都是物理内存&lt;/strong&gt; 。这样会导致一些问题。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;用户程序可以访问任意内存、寻址内存的每个字节，这样就很容易（有意或者无意）破坏操作系统，造成操作系统崩溃。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地址空间不存在隔离，想要同时运行多个程序特别困难，程序间会对各自的内存空间进行干扰。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;**总结来说：*&lt;em&gt;如果*&lt;em&gt;直接把物理地址暴露出来的话会带来严重问题&lt;/em&gt;&lt;/em&gt;，比如可能对操作系统造成伤害以及给同时运行多个程序造成困难。&lt;/p&gt;
+&lt;p&gt;通过虚拟地址访问内存有以下优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;程序可以使用一系列相邻的虚拟地址来访问物理内存中不相邻的大内存缓冲区。对于程序员而言，&lt;strong&gt;看到的都是连续的地址空间，方便程序的编写。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;程序可以使用一系列虚拟地址来访问大于可用物理内存的内存缓冲区&lt;/strong&gt;。当物理内存的供应量变小时，内存管理器会将物理内存页（通常大小为 4 KB）保存到磁盘文件。数据或代码页会根据需要在物理内存与磁盘之间移动。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;**不同进程使用的虚拟地址彼此隔离。**一个进程中的代码无法更改正在由另一进程或操作系统使用的物理内存，为进程并发提供了可能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;虚拟内存 使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。&lt;/p&gt;
+&lt;p&gt;与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如 RAM）的使用也更有效率。目前，大多数操作系统都使用了虚拟内存，如 Windows 家族的“虚拟内存”；Linux 的“交换空间”等。From:&lt;a class=&#34;link&#34; href=&#34;https://zh.wikipedia.org/wiki/%e8%99%9a%e6%8b%9f%e5%86%85%e5%ad%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zh.wikipedia.org/wiki/虚拟内存&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;快表-tlb&#34;&gt;快表 TLB&lt;/h3&gt;
+&lt;p&gt;为了解决虚拟地址到物理地址的转换速度，操作系统在 &lt;strong&gt;页表方案&lt;/strong&gt;基础之上引入了 &lt;strong&gt;快表&lt;/strong&gt;来加速虚拟地址到物理地址的转换。我们可以把快表理解为一种特殊的高速缓冲存储器（Cache），其中的&lt;strong&gt;内容是页表的一部分或者全部内容&lt;/strong&gt;。作为页表的 Cache，它的作用与页表相似，但是提高了访问速率。由于&lt;strong&gt;采用页表做地址转换，读写内存数据时 CPU 要访问两次主存。有了快表，有时只要访问一次高速缓冲存储器，一次主存&lt;/strong&gt;，这样可加速查找并提高指令执行速度。&lt;/p&gt;
+&lt;p&gt;使用快表之后的地址转换流程是这样的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;根据虚拟地址中的页号查快表；&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果该页在快表中，直接从快表中读取相应的物理地址；&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果该页不在快表中，就访问内存中的页表，再从页表中得到物理地址，同时将页表中的该映射表项添加到快表中；&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;当快表填满后，又要登记新页时，就按照一定的淘汰策略淘汰掉快表中的一个页。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你会发现快表和我们平时经常在我们开发的系统使用的缓存（比如 Redis）很像，的确是这样的，操作系统中的很多思想、很多经典的算法，你都可以在我们日常开发使用的各种工具或者框架中找到它们的影子。&lt;/p&gt;
+&lt;h3 id=&#34;多级页表&#34;&gt;多级页表&lt;/h3&gt;
+&lt;p&gt;引入多级页表的主要目的是为了避免把全部页表一直放在内存中占用过多空间，特别是那些根本就不需要的页表就不需要保留在内存中。多级页表属于时间换空间的典型场景。具体的多级页表如何节省空间，可以见下面这篇文章。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/63375062/answer/1403291487&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;操作系统中的多级页表到底是为了解决什么问题？ - axiqia的回答 - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;局部性原理&#34;&gt;局部性原理&lt;/h3&gt;
+&lt;p&gt;局部性原理是虚拟内存技术的基础，&lt;strong&gt;正是因为程序运行具有局部性原理，才可以只装入部分程序到内存就开始运行。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;“早在 1968 年的时候，就有人指出我们的程序在执行的时候往往呈现局部性规律，也就是说在某个较短的时间段内，程序执行局限于某一小部分，程序访问的存储空间也局限于某个区域。”&lt;/p&gt;
+&lt;p&gt;局部性原理表现在以下两个方面：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;时间局部性 ：如果程序中的某条指令一旦执行，不久以后该指令可能再次执行；如果某数据被访问过，不久以后该数据可能再次被访问。产生时间局部性的典型原因，是由于在程序中存在着大量的循环操作。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;空间局部性 ：一旦程序访问了某个存储单元，在不久之后，其附近的存储单元也将被访问，即程序在一段时间内所访问的地址，可能集中在一定的范围之内，这是因为指令通常是顺序存放、顺序执行的，数据也一般是以向量、数组、表等形式簇聚存储的。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;时间局部性是通过将&lt;strong&gt;近来使用的指令和数据保存到高速缓存存储器中，并使用高速缓存的层次结构实现&lt;/strong&gt;。空间局部性通常是使&lt;strong&gt;用较大的高速缓存，并将预取机制集成到高速缓存控制逻辑中实现。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;虚拟内存技术实际上就是建立了**“内存一外存”**的两级存储器的结构，利用局部性原理实现髙速缓存。&lt;/p&gt;
+&lt;h3 id=&#34;虚拟内存的技术实现&#34;&gt;虚拟内存的技术实现&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;虚拟内存的实现需要建立在离散分配的内存管理方式的基础上。&lt;/strong&gt; 虚拟内存的实现有以下三种方式：&lt;/p&gt;
+&lt;p&gt;请求分页存储管理&lt;/p&gt;
+&lt;p&gt;请求调页功能和页面置换功能。请求分页是目前最常用的一种实现虚拟存储器的方法。请求分页存储管理系统中，在作业开始运行之前，仅装入当前要执行的部分段即可运行。假如在作业运行的过程中发现要访问的页面不在内存，则由处理器通知操作系统按照对应的&lt;strong&gt;页面置换算法&lt;/strong&gt;将相应的页面调入到主存，同时操作系统也可以将暂时不用的页面置换到外存中。&lt;/p&gt;
+&lt;p&gt;请求分段存储管理&lt;/p&gt;
+&lt;p&gt;请求调段功能、分段置换功能。请求分段储存管理方式就如同请求分页储存管理方式一样，在作业开始运行之前，仅装入当前要执行的部分段即可运行；在执行过程中，可使用请求调入中断动态装入要访问但又不在内存的程序段；当内存空间已满，而又需要装入新的段时，根据置换功能适当调出某个段，以便腾出空间而装入新的段。&lt;/p&gt;
+&lt;p&gt;请求段页式存储管理&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请求分页管理与分页管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**请求分页存储管理建立在分页管理之上。*&lt;em&gt;他们的根本区别是*&lt;em&gt;是否将程序全部所需的全部地址空间都装入主存，这也是请求分页存储管理可以提供虚拟内存的原因&lt;/em&gt;&lt;/em&gt;，我们在上面已经分析过了。&lt;/p&gt;
+&lt;p&gt;它们之间的根本区别在于是否将作业的全部地址空间同时装入主存。请求分页存储管理不要求将作业全部地址空间同时装入主存。基于这一点，请求分页存储管理可以提供虚拟内存，而分页存储管理却不能提供虚存。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不管是上面那种实现方式，我们一般都需要&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**一定容量的内存和外存：**在载入程序的时候，只需要将程序的一部分装入内存，而将其他部分留在外存，然后程序就可以执行了；&lt;/li&gt;
+&lt;li&gt;**缺页中断：**如果需执行的指令或访问的数据尚未在内存（称为缺页或缺段），则由处理器通知操作系统将相应的页面或段调入到内存，然后继续执行程序；&lt;/li&gt;
+&lt;li&gt;**虚拟地址空间 ：**逻辑地址到物理地址的变换。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;页面置换算法&#34;&gt;页面置换算法&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;地址映射&lt;/strong&gt;过程中，若在页面中发现所要访问的页面不在内存中，则发生&lt;strong&gt;缺页中断&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;当发生缺页中断时，如果当前内存中并没有空闲的页面，操作系统就必须在内存选择一个页面将其移出内存，以便为即将调入的页面让出空间。&lt;strong&gt;用来选择淘汰哪一页的规则叫做页面置换算法，我们可以把页面置换算法看成是淘汰页面的规则。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;页面置换算法是在虚拟内存管理中使用的一种算法，用于在缺页中断时选择一个页面进行置换。以下是几种常见的页面置换算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;最优页面置换算法（OPT）：&lt;/strong&gt; 选择在未来最长时间内不会使用的页面进行置换。但是，这种算法需要预测未来的行为，当前技术能力下实际上并没有被广泛使用，一般作为衡量其他置换算法的方法。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;先进先出页面置换算法（FIFO）：&lt;/strong&gt; 选择最早进入内存的页面进行置换。这种算法很简单，但是它没有考虑到页面的重要性和使用频率。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最近最少使用页面置换算法（LRU）：&lt;/strong&gt; 选择最近最少使用的页面进行置换。这种算法需要记录页面&lt;strong&gt;最近一次被使用的时间&lt;/strong&gt;，并在缺页中断时选择最久未使用的页面进行置换。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时钟页面置换算法（Clock）：&lt;/strong&gt; 在一张环形链表上维护页面，用一个指针指向当前扫描到的页面。当需要置换页面时，如果指针当前指向的页面被使用过，则将其修改为“未使用过”状态，并将指针向后移动；否则，选择该页面进行置换。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最不常用页面置换算法（LFU）：&lt;/strong&gt; 选择最近使用次数最少的页面进行置换。这种算法需要记录每个&lt;strong&gt;页面被访问的次数&lt;/strong&gt;，并在缺页中断时选择最少使用的页面进行置换。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;总体而言，不同的页面置换算法适用于不同的场景和应用程序，需要根据具体情况选择合适的算法进行使用。&lt;/p&gt;
+&lt;h2 id=&#34;cpu&#34;&gt;CPU&lt;/h2&gt;
+&lt;h3 id=&#34;cpu-调度算法&#34;&gt;CPU 调度算法&lt;/h3&gt;
+&lt;p&gt;操作系统中的 CPU 调度算法主要有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先来先服务（FCFS）：&lt;/strong&gt; 采用先到先服务的原则，按照作业进入队列的先后顺序进行调度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;短作业优先（SJF）：&lt;/strong&gt; 采用先到先服务的原则，但是优先选择执行时间短的作业。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高优先级优先（HPF）：&lt;/strong&gt; 采用抢占式调度，根据作业的优先级进行调度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间片轮转（RR）：&lt;/strong&gt; 每个作业被分配一个时间片，当时间片用完后，操作系统会调度下一个作业执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这些调度算法各有优劣，没有银弹，只能根据具体场景选择具体的调度算法。因此，&lt;strong&gt;多级队列调度&lt;/strong&gt; （Multilevel Queue） 就诞生了。简单来说就是把&lt;strong&gt;就绪队列（存放待执行进程）分成多个独立队列，每个队列都有自己的调度算法。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;多级队列调度&#34;&gt;多级队列调度&lt;/h3&gt;
+&lt;p&gt;多级队列调度（Multilevel Queue）是一种操作系统中的 CPU 调度算法，是先将就绪队列（存放待执行进程）分成多个独立队列，每个队列都有自己的调度算法。通常情况下，将进程分为几个不同的等级，每个等级会使用不同的调度算法，以保证不同等级的进程有不同的处理优先级。多级队列调度可以根据具体场景选择具体的调度算法。&lt;/p&gt;
+&lt;p&gt;多级队列调度的实现原理如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;将进程分为不同的等级&lt;/strong&gt;。通常情况下，将进程分为多个等级，每个等级都有不同的处理优先级。例如，将进程分为高、中、低三个等级，高优先级的进程会被优先执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为每个等级分配一个独立的就绪队列&lt;/strong&gt;。每个队列都有自己的调度算法，例如，高优先级的队列使用高优先级优先（HPF）算法，中优先级的队列使用时间片轮转（RR）算法，低优先级的队列使用先来先服务（FCFS）算法。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按照进程的优先级将进程放入相应的队列中&lt;/strong&gt;。例如，高优先级的进程会放入高优先级队列中，低优先级的进程会放入低优先级队列中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按照队列的优先级依次调度进程&lt;/strong&gt;。在多级队列调度中，高优先级队列的进程总是先于低优先级队列的进程被调度。在每个队列中，根据相应的调度算法，依次调度进程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;总之，多级队列调度是一种非常灵活的调度算法，可以根据具体场景选择不同的调度算法和队列数量。它可以保证优先级高的进程优先执行，同时可以避免低优先级进程长时间得不到执行的情况。&lt;/p&gt;
 </description>
         </item>
         <item>

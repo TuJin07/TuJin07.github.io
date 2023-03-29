@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Linux on 荼锦</title>
+        <link>https://TuJin07.github.io/categories/linux/</link>
+        <description>Recent content in Linux on 荼锦</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Tue, 13 Dec 2022 20:48:59 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux基础</title>
+        <link>https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/</link>
+        <pubDate>Tue, 13 Dec 2022 20:48:59 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/cover.jpeg" alt="Featured image of post Linux基础" /&gt;&lt;h1 id=&#34;linux-基础&#34;&gt;Linux 基础&lt;/h1&gt;
+&lt;h2 id=&#34;常见的linux发行版&#34;&gt;常见的Linux发行版&lt;/h2&gt;
+&lt;p&gt;Linux发行版大致可以分为两类：商业发行版和社区发行版。&lt;/p&gt;
+&lt;p&gt;商业发行版是由公司或组织开发和维护的，通常有专门的技术支持和服务。常见的商业发行版有Red Hat Enterprise Linux、SUSE Linux Enterprise、Ubuntu LTS等。&lt;/p&gt;
+&lt;p&gt;社区发行版是由志愿者开发和维护的，没有专门的技术支持和服务。常见的社区发行版有Debian、Fedora、Arch Linux等。&lt;/p&gt;
+&lt;h2 id=&#34;操作系统内核&#34;&gt;操作系统内核&lt;/h2&gt;
+&lt;p&gt;操作系统内核是操作系统的核心部分，它是操作系统中最基本的部分，负责管理系统的所有资源，并为其他应用程序提供服务。内核通常包括以下几个方面的功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;进程管理：&lt;/strong&gt; 内核负责创建、执行、调度和终止进程。它也负责进程间通信和同步。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储管理：&lt;/strong&gt; 内核负责管理系统的内存，包括内存分配、内存保护和内存回收。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件系统管理：&lt;/strong&gt; 内核负责管理文件和目录，包括文件和目录的创建、读取、写入和删除。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设备驱动程序：&lt;/strong&gt; 内核负责管理各种设备，包括硬盘、键盘、鼠标、打印机等。它也负责提供接口，使应用程序可以访问这些设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络管理：&lt;/strong&gt; 内核负责管理网络连接，包括网络协议、套接字和网络接口的管理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总之，内核是操作系统的核心，它提供了操作系统的基本功能，是其他应用程序运行的基础。&lt;/p&gt;
+&lt;p&gt;概括两点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;操作系统的内核（Kernel）是操作系统的核心部分，它负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作系统的内核是连接应用程序和硬件的桥梁，决定着操作系统的性能和稳定性。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;中央处理器&#34;&gt;中央处理器&lt;/h2&gt;
+&lt;p&gt;中央处理器（CPU）是一种计算机芯片，是计算机的核心部件之一。它包括以下几个结构：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;运算器（ALU）：&lt;/strong&gt; 运算器是CPU中的一个重要部件，负责执行各种算术和逻辑运算，如加减乘除、位运算和逻辑运算等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制器（CU）：&lt;/strong&gt; 控制器是CPU的另一个重要部件，它负责控制CPU的操作，包括指令的获取、执行和结果的输出等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器（Register）：&lt;/strong&gt; 寄存器是CPU内部的一种高速存储器件，用于暂存指令和数据，以及在运算过程中保存中间结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高速缓存（Cache）：&lt;/strong&gt; 高速缓存是CPU与内存之间的一种高速缓存存储器，用于加速内存访问，减少CPU等待时间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;总线（Bus）：&lt;/strong&gt; 总线是CPU连接其他计算机组件的通道，用于传输指令和数据等信息。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;中央处理器是计算机的核心部件之一，它包括运算器、控制器、寄存器、高速缓存和总线等结构，负责执行各种算术和逻辑运算，控制计算机的操作，以及与其他计算机组件通信等任务。&lt;/p&gt;
+&lt;h2 id=&#34;linux-文件系统&#34;&gt;Linux 文件系统&lt;/h2&gt;
+&lt;p&gt;转载原文来源：&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/cs-basics/operating-system/linux-intro.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux 基础知识总结&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux-文件系统简介&#34;&gt;Linux 文件系统简介&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;在 Linux 操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。&lt;/strong&gt; 也就是说在 Linux 系统中有一个重要的概念：&lt;strong&gt;一切都是文件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;其实这是 UNIX 哲学的一个体现，在 UNIX 系统中，把一切资源都看作是文件，Linux 的文件系统也是借鉴 UNIX 文件系统而来。&lt;/p&gt;
+&lt;h3 id=&#34;node-介绍&#34;&gt;node 介绍&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;inode 是 linux/unix 文件系统的基础。那么，inode 是什么?有什么作用呢?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。&lt;/p&gt;
+&lt;p&gt;虽然，我们将文件存储在了块(block)中，但是我们还需要一个空间来存储文件的 &lt;strong&gt;元信息 metadata&lt;/strong&gt; ：如某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等。这种 &lt;strong&gt;存储文件元信息的区域就叫 inode&lt;/strong&gt;，译为索引节点：&lt;strong&gt;i（index）+node&lt;/strong&gt;。 每个文件都有一个 inode，存储文件的元信息。&lt;/p&gt;
+&lt;p&gt;可以使用 &lt;code&gt;stat&lt;/code&gt; 命令可以查看文件的 inode 信息。每个 inode 都有一个号码，Linux/Unix 操作系统不使用文件名来区分文件，而是使用 inode 号码区分不同的文件。&lt;/p&gt;
+&lt;p&gt;简单来说：inode 就是用来维护某个文件被分成几块、每一块在的地址、文件拥有者，创建时间，权限，大小等信息。&lt;/p&gt;
+&lt;p&gt;简单总结一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;inode&lt;/strong&gt; ：记录文件的属性信息，可以使用 stat 命令查看 inode 信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;block&lt;/strong&gt; ：实际文件的内容，如果一个文件大于一个块时候，那么将占用多个 block，但是一个块只能存放一个文件。（因为数据是由 inode 指向的，如果有两个文件的数据存放在同一个块中，就会乱套了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg.png&#34;
+	width=&#34;728&#34;
+	height=&#34;311&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/inodemsg_hucb10384941d4213a8593d429b41fcd7c_20593_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;234&#34;
+		data-flex-basis=&#34;561px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux-文件类型&#34;&gt;Linux 文件类型&lt;/h3&gt;
+&lt;p&gt;Linux 支持很多文件类型，其中非常重要的文件类型有: &lt;strong&gt;普通文件&lt;/strong&gt;，&lt;strong&gt;目录文件&lt;/strong&gt;，&lt;strong&gt;链接文件&lt;/strong&gt;，&lt;strong&gt;设备文件&lt;/strong&gt;，&lt;strong&gt;管道文件&lt;/strong&gt;，&lt;strong&gt;Socket 套接字文件&lt;/strong&gt;等。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通文件（-）&lt;/strong&gt; ： 用于存储信息和数据， Linux 用户可以根据访问权限对普通文件进行查看、更改和删除。比如：图片、声音、PDF、text、视频、源代码等等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目录文件（d，directory file）&lt;/strong&gt; ：目录也是文件的一种，用于表示和管理系统中的文件，目录文件中包含一些文件名和子目录名。打开目录事实上就是打开目录文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;符号链接文件（l，symbolic link）&lt;/strong&gt; ：保留了指向文件的地址而不是文件本身。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;字符设备（c，char）&lt;/strong&gt; ：用来访问字符设备比如键盘。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设备文件（b，block）&lt;/strong&gt; ： 用来访问块设备比如硬盘、软盘。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管道文件(p,pipe)&lt;/strong&gt; : 一种特殊类型的文件，用于进程之间的通信。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;套接字(s,socket)&lt;/strong&gt; ：用于进程间的网络通信，也可以用于本机之间的非网络通信。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linux-目录树&#34;&gt;Linux 目录树&lt;/h3&gt;
+&lt;p&gt;所有可操作的计算机资源都存在于目录树这个结构中，对计算资源的访问，可以看做是对这棵目录树的访问。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 的目录结构如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux 文件系统的结构层次鲜明，就像一棵倒立的树，最顶层是其根目录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree.png&#34;
+	width=&#34;823&#34;
+	height=&#34;315&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/tree_hu863addf89f7e0e59aff6074195676c0f_9294_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;261&#34;
+		data-flex-basis=&#34;627px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;常见目录说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/bin：&lt;/strong&gt; 存放二进制可执行文件(ls、cat、mkdir 等)，常用命令一般都在这里；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc：&lt;/strong&gt; 存放系统管理和配置文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/home：&lt;/strong&gt; 存放所有用户文件的根目录，是用户主目录的基点，比如用户 user 的主目录就是/home/user，可以用~user 表示；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr ：&lt;/strong&gt; 用于存放系统应用程序；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/opt：&lt;/strong&gt; 额外安装的可选应用程序包所放置的位置。一般情况下，我们可以把 tomcat 等都安装到这里；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc：&lt;/strong&gt; 虚拟文件系统目录，是系统内存的映射。可直接访问这个目录来获取系统信息；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/root：&lt;/strong&gt; 超级用户（系统管理员）的主目录（特权阶级^o^）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/sbin:&lt;/strong&gt; 存放二进制可执行文件，只有 root 才能访问。这里存放的是系统管理员使用的系统级别的管理命令和程序。如 ifconfig 等；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev：&lt;/strong&gt; 用于存放设备文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/mnt：&lt;/strong&gt; 系统管理员安装临时文件系统的安装点，系统提供这个目录是让用户临时挂载其他的文件系统；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/boot：&lt;/strong&gt; 存放用于系统引导时使用的各种文件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/lib ：&lt;/strong&gt; 存放着和系统运行相关的库文件 ；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/tmp：&lt;/strong&gt; 用于存放各种临时文件，是公用的临时文件存储点；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var：&lt;/strong&gt; 用于存放运行时需要改变数据的文件，也是某些大文件的溢出区，比方说各种服务的日志文件（系统启动日志等。）等；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/lost+found：&lt;/strong&gt; 这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows 下叫什么.chk）就在这里。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux-基本命令&#34;&gt;Linux 基本命令&lt;/h2&gt;
+&lt;p&gt;下面只是给出了一些比较常用的命令。 。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.shell.how/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;shell.howopen in new window&lt;/a&gt; 这个网站可以用来解释常见命令的意思，对你学习 Linux 基本命令以及其他常用命令（如 Git、NPM）。&lt;/p&gt;
+&lt;h3 id=&#34;目录切换命令&#34;&gt;目录切换命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd usr&lt;/code&gt;：&lt;/strong&gt; 切换到该目录下 usr 目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd ..（或cd../）&lt;/code&gt;：&lt;/strong&gt; 切换到上一层目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd /&lt;/code&gt;：&lt;/strong&gt; 切换到系统根目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd ~&lt;/code&gt;：&lt;/strong&gt; 切换到用户主目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cd -&lt;/code&gt;：&lt;/strong&gt; 切换到上一个操作所在目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;目录的操作命令增删改查&#34;&gt;目录的操作命令(增删改查)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mkdir 目录名称&lt;/code&gt;：&lt;/strong&gt; 增加目录。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;ls/ll&lt;/code&gt;&lt;/strong&gt;（ll 是 ls -l 的别名，ll 命令可以看到该目录下的所有目录和文件的详细信息）：查看目录信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;find 目录 参数&lt;/code&gt;：&lt;/strong&gt; 寻找目录（查）。示例：① 列出当前目录及子目录下所有文件和文件夹: &lt;code&gt;find .&lt;/code&gt;；② 在&lt;code&gt;/home&lt;/code&gt;目录下查找以.txt 结尾的文件名:&lt;code&gt;find /home -name &amp;quot;*.txt&amp;quot;&lt;/code&gt; ,忽略大小写: &lt;code&gt;find /home -iname &amp;quot;*.txt&amp;quot;&lt;/code&gt; ；③ 当前目录及子目录下查找所有以.txt 和.pdf 结尾的文件:&lt;code&gt;find . \\( -name &amp;quot;*.txt&amp;quot; -o -name &amp;quot;*.pdf&amp;quot; \\)&lt;/code&gt;或&lt;code&gt;find . -name &amp;quot;*.txt&amp;quot; -o -name &amp;quot;*.pdf&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mv 目录名称 新目录名称&lt;/code&gt;：&lt;/strong&gt; 修改目录的名称（改）。注意：mv 的语法不仅可以对目录进行重命名而且也可以对各种文件，压缩包等进行 重命名的操作。mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。后面会介绍到 mv 命令的另一个用法。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mv 目录名称 目录的新位置&lt;/code&gt;：&lt;/strong&gt; 移动目录的位置&amp;mdash;剪切（改）。注意：mv 语法不仅可以对目录进行剪切操作，对文件和压缩包等都可执行剪切操作。另外 mv 与 cp 的结果不同，mv 好像文件“搬家”，文件个数并未增加。而 cp 对文件进行复制，文件个数增加了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cp -r 目录名称 目录拷贝的目标位置&lt;/code&gt;：&lt;/strong&gt; 拷贝目录（改），-r 代表递归拷贝 。注意：cp 命令不仅可以拷贝目录还可以拷贝文件，压缩包等，拷贝文件和压缩包时不 用写-r 递归。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;rm [-rf] 目录&lt;/code&gt; :&lt;/strong&gt; 删除目录（删）。注意：rm 不仅可以删除目录，也可以删除其他文件或压缩包，为了增强大家的记忆， 无论删除任何目录或文件，都直接使用&lt;code&gt;rm -rf&lt;/code&gt; 目录/文件/压缩包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文件的操作命令增删改查&#34;&gt;文件的操作命令(增删改查)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;touch 文件名称&lt;/code&gt;:&lt;/strong&gt; 文件的创建（增）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;cat/more/less/tail 文件名称&lt;/code&gt;&lt;/strong&gt; ：文件的查看（查） 。命令 &lt;code&gt;tail -f 文件&lt;/code&gt; 可以对某个文件进行动态监控，例如 tomcat 的日志文件， 会随着程序的运行，日志会变化，可以使用 &lt;code&gt;tail -f catalina-2016-11-11.log&lt;/code&gt; 监控 文 件的变化 。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;vim 文件&lt;/code&gt;：&lt;/strong&gt; 修改文件的内容（改）。vim 编辑器是 Linux 中的强大组件，是 vi 编辑器的加强版，vim 编辑器的命令和快捷方式有很多，但此处不一一阐述，大家也无需研究的很透彻，使用 vim 编辑修改文件的方式基本会使用就可以了。在实际开发中，使用 vim 编辑器主要作用就是修改配置文件，下面是一般步骤： &lt;code&gt;vim 文件------&amp;gt;进入文件-----&amp;gt;命令模式------&amp;gt;按i进入编辑模式-----&amp;gt;编辑文件 -------&amp;gt;按Esc进入底行模式-----&amp;gt;输入：wq/q!&lt;/code&gt; （输入 wq 代表写入内容并退出，即保存；输入 q!代表强制退出不保存）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;rm -rf 文件&lt;/code&gt;：&lt;/strong&gt; 删除文件（删）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;压缩文件的操作命令&#34;&gt;压缩文件的操作命令&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1）打包并压缩文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux 中的打包文件一般是以.tar 结尾的，压缩的命令一般是以.gz 结尾的。而一般情况下打包和压缩是一起进行的，打包并压缩后的文件的后缀名一般.tar.gz。 命令：&lt;code&gt;tar -zcvf 打包压缩后的文件名 要打包压缩的文件&lt;/code&gt; ，其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;z：调用 gzip 压缩命令进行压缩&lt;/li&gt;
+&lt;li&gt;c：打包文件&lt;/li&gt;
+&lt;li&gt;v：显示运行过程&lt;/li&gt;
+&lt;li&gt;f：指定文件名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如：假如 test 目录下有三个文件分别是：aaa.txt bbb.txt ccc.txt，如果我们要打包 test 目录并指定压缩后的压缩包名称为 test.tar.gz 可以使用命令：&lt;strong&gt;&lt;code&gt;tar -zcvf test.tar.gz aaa.txt bbb.txt ccc.txt&lt;/code&gt; 或 &lt;code&gt;tar -zcvf test.tar.gz /test/&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2）解压压缩包：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;命令：&lt;code&gt;tar [-xvf] 压缩文件&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中：x：代表解压&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将 /test 下的 test.tar.gz 解压到当前目录下可以使用命令：&lt;strong&gt;&lt;code&gt;tar -xvf test.tar.gz&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;将 /test 下的 test.tar.gz 解压到根目录/usr 下:&lt;strong&gt;&lt;code&gt;tar -xvf test.tar.gz -C /usr&lt;/code&gt;&lt;/strong&gt;（- C 代表指定解压的位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linux-的权限命令&#34;&gt;Linux 的权限命令&lt;/h3&gt;
+&lt;p&gt;操作系统中每个文件都拥有特定的权限、所属用户和所属组。权限是操作系统用来限制资源访问的机制，在 Linux 中权限一般分为读(readable)、写(writable)和执行(excutable)，分为三组。分别对应文件的属主(owner)，属组(group)和其他用户(other)，通过这样的机制来限制哪些用户、哪些组可以对特定的文件进行什么样的操作。&lt;/p&gt;
+&lt;p&gt;通过 &lt;strong&gt;&lt;code&gt;ls -l&lt;/code&gt;&lt;/strong&gt; 命令我们可以 查看某个目录下的文件或目录的权限&lt;/p&gt;
+&lt;p&gt;示例：在随意某个目录下&lt;code&gt;ls -l&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40.png&#34;
+	width=&#34;589&#34;
+	height=&#34;228&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/AF09B479-2959-486F-BF16-3B39129DFC40_hub88373ae26fc08143fcdd5a127a243e1_2822_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;258&#34;
+		data-flex-basis=&#34;620px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第一列的内容的信息解释如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod.png&#34;
+	width=&#34;489&#34;
+	height=&#34;209&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/mod_hud858bd6f016f4b2b6bf3431b43b6fd07_14079_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;561px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面将详细讲解文件的类型、Linux 中权限以及文件有所有者、所在组、其它组具体是什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;文件的类型：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;d： 代表目录&lt;/li&gt;
+&lt;li&gt;： 代表文件&lt;/li&gt;
+&lt;li&gt;l： 代表软链接（可以认为是 window 中的快捷方式）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux 中权限分为以下几种：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;r：代表权限是可读，r 也可以用数字 4 表示&lt;/li&gt;
+&lt;li&gt;w：代表权限是可写，w 也可以用数字 2 表示&lt;/li&gt;
+&lt;li&gt;x：代表权限是可执行，x 也可以用数字 1 表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;文件和目录权限的区别：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对文件和目录而言，读写执行表示不同的意义。&lt;/p&gt;
+&lt;p&gt;对于文件：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限名称&lt;/th&gt;
+&lt;th&gt;可执行操作&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;可以使用 cat 查看文件的内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;可以修改文件的内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;可以将其运行为二进制文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;对于目录：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限名称&lt;/th&gt;
+&lt;th&gt;可执行操作&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;可以查看目录下列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;可以创建和删除目录下文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;可以使用 cd 进入目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;需要注意的是： &lt;strong&gt;超级用户可以无视普通用户的权限，即使文件目录权限是 000，依旧可以访问。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在 linux 中的每个用户必须属于一个组，不能独立于组外。在 linux 中每个文件有所有者、所在组、其它组的概念。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;所有者(u)&lt;/strong&gt; ：一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者，用 &lt;code&gt;ls ‐ahl&lt;/code&gt; 命令可以看到文件的所有者 也可以使用 chown 用户名 文件名来修改文件的所有者 。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件所在组(g)&lt;/strong&gt; ：当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用 &lt;code&gt;ls ‐ahl&lt;/code&gt;命令可以看到文件的所有组也可以使用 chgrp 组名 文件名来修改文件所在的组。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;其它组(o)&lt;/strong&gt; ：除开文件的所有者和所在组的用户外，系统的其它用户都是文件的其它组。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们再来看看如何修改文件/目录的权限。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;修改文件/目录的权限的命令：&lt;code&gt;chmod&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;示例：修改/test 下的 aaa.txt 的权限为文件所有者有全部权限，文件所有者所在的组有读写权限，其他用户只有读的权限。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;chmod u=rwx,g=rw,o=r aaa.txt&lt;/code&gt;&lt;/strong&gt; 或者 &lt;strong&gt;&lt;code&gt;chmod 764 aaa.txt&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3.png&#34;
+	width=&#34;525&#34;
+	height=&#34;246&#34;
+	srcset=&#34;https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/linux%E5%9F%BA%E7%A1%80/53DD1859-5C7C-43FA-A249-2574D1B402B3_huf8f852a454ad2500fea5aa05ba6ac63c_1939_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;213&#34;
+		data-flex-basis=&#34;512px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;补充一个比较常用的东西:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假如我们装了一个 zookeeper，我们每次开机到要求其自动启动该怎么办？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;新建一个脚本 zookeeper&lt;/li&gt;
+&lt;li&gt;为新建的脚本 zookeeper 添加可执行权限，命令是:&lt;code&gt;chmod +x zookeeper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;把 zookeeper 这个脚本添加到开机启动项里面，命令是：&lt;code&gt;chkconfig --add zookeeper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果想看看是否添加成功，命令是：&lt;code&gt;chkconfig --list&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;linux-用户管理&#34;&gt;Linux 用户管理&lt;/h3&gt;
+&lt;p&gt;Linux 系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。&lt;/p&gt;
+&lt;p&gt;用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 用户管理相关命令:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;useradd 选项 用户名&lt;/code&gt;:添加用户账号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;userdel 选项 用户名&lt;/code&gt;:删除用户帐号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;usermod 选项 用户名&lt;/code&gt;:修改帐号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd 用户名&lt;/code&gt;:更改或创建用户的密码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd -S 用户名&lt;/code&gt; :显示用户账号密码信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passwd -d 用户名&lt;/code&gt;: 清除用户密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;useradd&lt;/code&gt; 命令用于 Linux 中创建的新的系统用户。&lt;code&gt;useradd&lt;/code&gt;可用来建立用户帐号。帐号建好之后，再用&lt;code&gt;passwd&lt;/code&gt;设定帐号的密码．而可用&lt;code&gt;userdel&lt;/code&gt;删除帐号。使用&lt;code&gt;useradd&lt;/code&gt;指令所建立的帐号，实际上是保存在 &lt;code&gt;/etc/passwd&lt;/code&gt;文本文件中。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;passwd&lt;/code&gt;命令用于设置用户的认证信息，包括用户密码、密码过期时间等。系统管理者则能用它管理系统用户的密码。只有管理者可以指定用户名称，一般用户只能变更自己的密码。&lt;/p&gt;
+&lt;h3 id=&#34;linux-系统用户组的管理&#34;&gt;Linux 系统用户组的管理&lt;/h3&gt;
+&lt;p&gt;每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同 Linux 系统对用户组的规定有所不同，如 Linux 下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。&lt;/p&gt;
+&lt;p&gt;用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对&lt;code&gt;/etc/group&lt;/code&gt;文件的更新。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux 系统用户组的管理相关命令:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;groupadd 选项 用户组&lt;/code&gt; :增加一个新的用户组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;groupdel 用户组&lt;/code&gt;:要删除一个已有的用户组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;groupmod 选项 用户组&lt;/code&gt; : 修改用户组的属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他常用命令&#34;&gt;其他常用命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;pwd&lt;/code&gt;：&lt;/strong&gt; 显示当前所在位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sudo + 其他命令&lt;/code&gt;：以系统管理者的身份执行指令，也就是说，经由 sudo 所执行的指令就好像是 root 亲自执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;grep 要搜索的字符串 要搜索的文件 --color&lt;/code&gt;：&lt;/strong&gt; 搜索命令，&amp;ndash;color 代表高亮显示&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ps -ef&lt;/code&gt;/&lt;code&gt;ps -aux&lt;/code&gt;：&lt;/strong&gt; 这两个命令都是查看当前系统正在运行进程，两者的区别是展示格式不同。如果想要查看特定的进程可以使用这样的格式：&lt;strong&gt;&lt;code&gt;ps aux|grep redis&lt;/code&gt;&lt;/strong&gt; （查看包括 redis 字符串的进程），也可使用 &lt;code&gt;pgrep redis -a&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;注意：如果直接用 ps（（Process Status））命令，会显示所有进程的状态，通常结合 grep 命令查看某进程的状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;kill -9 进程的pid&lt;/code&gt;：&lt;/strong&gt; 杀死进程（-9 表示强制终止。）&lt;/p&gt;
+&lt;p&gt;先用 ps 查找进程，然后用 kill 杀掉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络通信命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看当前系统的网卡信息：ifconfig&lt;/li&gt;
+&lt;li&gt;查看与某台机器的连接情况：ping&lt;/li&gt;
+&lt;li&gt;查看当前系统的端口使用：netstat -an&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;net-tools 和 iproute2 ：&lt;/strong&gt;&lt;code&gt;net-tools&lt;/code&gt;起源于 BSD 的 TCP/IP 工具箱，后来成为老版本 LinuxLinux 中配置网络功能的工具。但自 2001 年起，Linux 社区已经对其停止维护。同时，一些 Linux 发行版比如 Arch Linux 和 CentOS/RHEL 7 则已经完全抛弃了 net-tools，只支持&lt;code&gt;iproute2&lt;/code&gt;。linux ip 命令类似于 ifconfig，但功能更强大，旨在替代它。更多详情请阅读&lt;a class=&#34;link&#34; href=&#34;https://linoxide.com/linux-command/use-ip-command-linux&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何在 Linux 中使用 IP 命令和示例open in new window&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;shutdown&lt;/code&gt;：&lt;/strong&gt; &lt;code&gt;shutdown -h now&lt;/code&gt;： 指定现在立即关机；&lt;code&gt;shutdown +5 &amp;quot;System will shutdown after 5 minutes&amp;quot;&lt;/code&gt;：指定 5 分钟后关机，同时送出警告信息给登入用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;reboot&lt;/code&gt;：&lt;/strong&gt; &lt;strong&gt;&lt;code&gt;reboot&lt;/code&gt;：&lt;/strong&gt; 重开机。&lt;strong&gt;&lt;code&gt;reboot -w&lt;/code&gt;：&lt;/strong&gt; 做个重开机的模拟（只有纪录并不会真的重开机）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux-环境变量&#34;&gt;Linux 环境变量&lt;/h2&gt;
+&lt;p&gt;在 Linux 系统中，环境变量是用来定义系统运行环境的一些参数，比如每个用户不同的主目录（HOME）。&lt;/p&gt;
+&lt;h3 id=&#34;环境变量分类&#34;&gt;环境变量分类&lt;/h3&gt;
+&lt;p&gt;按照作用域来分，环境变量可以简单的分成:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户级别环境变量 : &lt;code&gt;~/.bashrc&lt;/code&gt;、&lt;code&gt;~/.bash_profile&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;系统级别环境变量 : &lt;code&gt;/etc/bashrc&lt;/code&gt;、&lt;code&gt;/etc/environment&lt;/code&gt;、&lt;code&gt;/etc/profile&lt;/code&gt;、&lt;code&gt;/etc/profile.d&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上述配置文件执行先后顺序为：&lt;code&gt;/etc/enviroment&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/profile&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/profile.d&lt;/code&gt; –&amp;gt; &lt;code&gt;~/.bash_profile&lt;/code&gt; –&amp;gt; &lt;code&gt;/etc/bashrc&lt;/code&gt; –&amp;gt; &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果要修改系统级别环境变量文件，需要管理员具备对该文件的写入权限。&lt;/p&gt;
+&lt;p&gt;建议用户级别环境变量在 &lt;code&gt;~/.bash_profile&lt;/code&gt;中配置，系统级别环境变量在 &lt;code&gt;/etc/profile.d&lt;/code&gt; 中配置。&lt;/p&gt;
+&lt;p&gt;按照生命周期来分，环境变量可以简单的分成:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;永久的：需要用户修改相关的配置文件，变量永久生效。&lt;/li&gt;
+&lt;li&gt;临时的：用户利用 &lt;code&gt;export&lt;/code&gt; 命令，在当前终端下声明环境变量，关闭 shell 终端失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;读取环境变量&#34;&gt;读取环境变量&lt;/h3&gt;
+&lt;p&gt;通过 &lt;code&gt;export&lt;/code&gt; 命令可以输出当前系统定义的所有环境变量。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 列出当前的环境变量值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;除了 &lt;code&gt;export&lt;/code&gt; 命令之外， &lt;code&gt;env&lt;/code&gt; 命令也可以列出所有环境变量。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo&lt;/code&gt; 命令可以输出指定环境变量的值。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 输出当前的PATH环境变量的值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo $PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 输出当前的HOME环境变量的值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo $HOME
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;环境变量修改&#34;&gt;环境变量修改&lt;/h3&gt;
+&lt;p&gt;通过 &lt;code&gt;export&lt;/code&gt;命令可以修改指定的环境变量。不过，这种方式修改环境变量仅仅对当前 shell 终端生效，关闭 shell 终端就会失效。修改完成之后，立即生效。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export CLASSPATH=./JAVA_HOME/lib;$JAVA_HOME/jre/lib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过 &lt;code&gt;vim&lt;/code&gt; 命令修改环境变量配置文件。这种方式修改环境变量永久有效。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim ~/.bash_profile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果修改的是系统级别环境变量则对所有用户生效，如果修改的是用户级别环境变量则仅对当前用户生效。&lt;/p&gt;
+&lt;p&gt;修改完成之后，需要 &lt;code&gt;source&lt;/code&gt; 命令让其生效或者关闭 shell 终端重新登录。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;source /etc/profile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

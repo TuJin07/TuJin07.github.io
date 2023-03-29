@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>DataBase on 荼锦</title>
+        <link>https://TuJin07.github.io/categories/database/</link>
+        <description>Recent content in DataBase on 荼锦</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Wed, 29 Mar 2023 15:40:55 +0800</lastBuildDate><atom:link href="https://TuJin07.github.io/categories/database/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>输入SELECT后，数据库发生了什么</title>
+        <link>https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/</link>
+        <pubDate>Wed, 29 Mar 2023 15:40:55 +0800</pubDate>
+        
+        <guid>https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/</guid>
+        <description>&lt;img src="https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover.jpeg" alt="Featured image of post 输入SELECT后，数据库发生了什么" /&gt;&lt;h1 id=&#34;当你输入-select-后数据库发生了什么&#34;&gt;当你输入 SELECT 后，数据库发生了什么&lt;/h1&gt;
+&lt;p&gt;本文章基于&lt;a class=&#34;link&#34; href=&#34;https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;当我们输入一条 SQL 查询语句时，发生了什么？&lt;/a&gt;这篇文章的思路，做进一步的归纳总结和留档。部分引用原文图片与文本。&lt;/p&gt;
+&lt;h2 id=&#34;mysql-的基本架构&#34;&gt;MySQL 的基本架构&lt;/h2&gt;
+&lt;p&gt;首先，在我们分析输入SELECT后DBMS的操作前，我们需要对DBMS的基本架构有一个认识。以MySQL为例，MySQL是一种开源的关系型数据库管理系统（RDBMS），其基本架构由多个组件组成，各组件的作用如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;连接器（Connection Manager）&lt;/strong&gt;：连接器是客户端和服务器端之间的桥梁，它负责建立连接、验证用户身份、维护会话状态等工作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;语法分析器（Parser）&lt;/strong&gt;：将SQL语句进行词法分析和语法分析以及语义分析，生成解析树，以确保语法正确性和安全性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优化器（Optimizer）&lt;/strong&gt;：会在语法分析器完成之后，根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行器（Executor）&lt;/strong&gt;：执行器会根据优化器生成的执行计划，执行具体的操作，如查询、插入、删除、更新等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储引擎（Storage Engine）&lt;/strong&gt;：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎是MySQL中最重要的组件之一，它负责具体的数据存储和管理工作，不同的存储引擎有不同的特点和优缺点，MySQL支持多种存储引擎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些组件一起协同工作，将SQL语句转化成最终的结果集。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8.png&#34;
+	width=&#34;2048&#34;
+	height=&#34;1536&#34;
+	srcset=&#34;https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_480x0_resize_box_3.png 480w, https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图片来源：&lt;a class=&#34;link&#34; href=&#34;https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;当我们输入一条 SQL 查询语句时，发生了什么？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如上图所示，我们可以把上述组件分成两个层面。即MySQL的架构可以分为两层：服务层和存储引擎层。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务层：包括连接器、查询缓存、分析器、优化器和执行器等组件，负责SQL的解析、优化和执行等工作。涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），&lt;strong&gt;所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;存储引擎：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎层支持多种不同的存储引擎，每种存储引擎都有其独特的特点和优缺点。引擎层的架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不同的存储引擎共用一个服务层，也就是从连接器到执行器的部分。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查询全流程&#34;&gt;查询全流程&lt;/h2&gt;
+&lt;h3 id=&#34;连接器connection-manager&#34;&gt;连接器（Connection Manager）&lt;/h3&gt;
+&lt;p&gt;当我们尝试登陆连接到MySQL上时，首先接收客户端的处理连接请求的就是连接器。连接器会根据客户端发来的请求，验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mysql -h &lt;span class=&#34;nv&#34;&gt;$ip&lt;/span&gt; -P &lt;span class=&#34;nv&#34;&gt;$port&lt;/span&gt; -u &lt;span class=&#34;nv&#34;&gt;$user&lt;/span&gt; -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;如果用户名或密码不对，你将会收到一个&amp;quot;Access denied for user&amp;quot;的错误，然后客户端程序结束执行。&lt;/li&gt;
+&lt;li&gt;如果用户名密码认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这就意味着，一个用户成功建立连接后，即使你用管理员账号对这个用户的权限做了修改，也不会影响已经存在连接的权限。修改完成后，只有再新建的连接才会使用新的权限设置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;查询缓存&#34;&gt;查询缓存&lt;/h3&gt;
+&lt;p&gt;MySQL连接器会首先检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。&lt;/p&gt;
+&lt;p&gt;但是，查询缓存并不总是适用的，因为如果表中的任何数据一旦发生变化，缓存的结果就会失效，这时就需要重新执行查询语句，这可能会导致查询缓存带来的性能提升被抵消掉，对于更新压力大的数据库来说，查询缓存的命中率会非常低。&lt;/p&gt;
+&lt;p&gt;MySQL也提供了这种“按需使用”的方式。你可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于你确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定，像下面这个语句一样：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SQL_CACHE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;；&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;MySQL 8.0 版本直接将查询缓存的整块功能删掉了，也就是说 8.0 开始彻底没有这个功能了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;语法分析器parser&#34;&gt;语法分析器（Parser）&lt;/h3&gt;
+&lt;p&gt;如果没有命中查询缓存，就要开始真正执行语句了。&lt;/p&gt;
+&lt;p&gt;语法分析器会对SELECT语句进行词法分析和语法分析，生成解析树。词法分析器会将SELECT语句中的字符序列转换成一个个的单词，然后生成一个个的记号。语法分析器会根据记号序列生成解析树，同时会验证SELECT语句的语法正确性和安全性。&lt;/p&gt;
+&lt;h3 id=&#34;优化器optimizer&#34;&gt;优化器（Optimizer）&lt;/h3&gt;
+&lt;p&gt;经过了分析器，MySQL 就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。&lt;/p&gt;
+&lt;p&gt;优化器会根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。优化器的主要作用是优化查询语句的执行效率，从而提高数据库的性能。为了实现这个目标，优化器会采用多种技术，如索引选择、查询重写、表连接优化等，从而生成最优的执行计划。通过优化器的优化，可以大大提高查询效率，减少数据库的响应时间，提升系统的整体性能。&lt;/p&gt;
+&lt;p&gt;需要注意的是，优化器并不总是能够生成最优的执行计划，因为查询语句的执行效率受到多种因素的影响，如查询语句的复杂度、表的大小、索引的选择等。因此，在实际应用中，需要根据具体情况对优化器的性能进行评估，选择合适的优化策略，从而达到最佳的查询性能。&lt;/p&gt;
+&lt;p&gt;比如你执行下面这样的语句，这个语句是执行两个表的 join：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;既可以先从表 t1 里面取出 c=10 的记录的 ID 值，再根据 ID 值关联到表 t2，再判断 t2 里面 d 的值是否等于 20。&lt;/li&gt;
+&lt;li&gt;也可以先从表 t2 里面取出 d=20 的记录的 ID 值，再根据 ID 值关联到 t1，再判断 t1 里面 c 的值是否等于 10。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两种执行方法的逻辑结果是一样的，但是执行的效率会有不同，而优化器的作用就是决定选择使用哪一个方案。&lt;/p&gt;
+&lt;h3 id=&#34;执行器executor&#34;&gt;执行器（Executor）&lt;/h3&gt;
+&lt;p&gt;MySQL 通过分析器知道了你要做什么，通过优化器知道了该怎么做，于是就进入了执行器阶段，开始执行语句。开始执行的时候，要先判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ERROR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1142&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;42000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;denied&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;to&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;T&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在执行查询操作时，执行器会在存储引擎返回的行数据中进行过滤和排序等操作，然后将结果返回给客户端。在执行插入、删除和更新操作时，执行器会调用存储引擎提供的接口，将操作请求转换成具体存储引擎可以理解的操作，然后存储引擎会执行对应的操作并返回操作结果给执行器。执行器再将操作结果返回给连接器，连接器将结果返回给客户端。&lt;/p&gt;
+&lt;p&gt;执行器和存储引擎是相互依赖的关系，执行器负责处理客户端请求并调用存储引擎提供的接口，存储引擎负责具体的数据存储和管理工作。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;输入SELECT语句后，MySQL会进行以下步骤完成查询：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;连接器：验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。&lt;/li&gt;
+&lt;li&gt;查询缓存：检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。&lt;/li&gt;
+&lt;li&gt;语法分析器：对SELECT语句进行词法分析和语法分析，生成解析树。&lt;/li&gt;
+&lt;li&gt;优化器：根据解析树和表的元数据，生成不同的执行计划，并选择成本最小的执行计划。&lt;/li&gt;
+&lt;li&gt;执行器：执行SQL语句的具体操作，如查询、插入、删除、更新等。执行器会调用存储引擎提供的接口，将查询请求转换成具体存储引擎可以理解的操作，然后存储引擎会返回操作结果给执行器。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

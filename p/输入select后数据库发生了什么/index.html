@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文章基于「当我们输入一条 SQL 查询语句时，发生了什么？」这篇文章的思路，做进一步的归纳总结和留档。'>
+<title>输入SELECT后，数据库发生了什么</title>
+
+<link rel='canonical' href='https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80a1729b5238a24c02f474e9ff545024fbc27937e4583682c6a9374fecd9a4e.css"><meta property='og:title' content='输入SELECT后，数据库发生了什么'>
+<meta property='og:description' content='本文章基于「当我们输入一条 SQL 查询语句时，发生了什么？」这篇文章的思路，做进一步的归纳总结和留档。'>
+<meta property='og:url' content='https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/'>
+<meta property='og:site_name' content='荼锦'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='MySQL' /><meta property='article:published_time' content='2023-03-29T15:40:55&#43;08:00'/><meta property='article:modified_time' content='2023-03-29T15:40:55&#43;08:00'/><meta property='og:image' content='https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover.jpeg' />
+<meta name="twitter:title" content="输入SELECT后，数据库发生了什么">
+<meta name="twitter:description" content="本文章基于「当我们输入一条 SQL 查询语句时，发生了什么？」这篇文章的思路，做进一步的归纳总结和留档。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://TuJin07.github.io/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu989d68d10eb0fdce87c3ec85a57cd5cd_87797_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">☁️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">荼锦</a></h1>
+            <h2 class="site-description">雁引愁心去，山衔好月来</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TuJin07/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:yuxuan.wang2023.work@outlook.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M95.936 255.936a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v512a64 64 0 0 1-64 64h-704a64 64 0 0 1-64-64v-512z m742.336 0H185.6L512 473.472l326.336-217.6z m-678.336 59.776V768h704V315.712L511.936 550.4l-352-234.688z" fill="#bdbfc2" fill-opacity=".9" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#mysql-的基本架构">MySQL 的基本架构</a></li>
+    <li><a href="#查询全流程">查询全流程</a>
+      <ol>
+        <li><a href="#连接器connection-manager">连接器（Connection Manager）</a></li>
+        <li><a href="#查询缓存">查询缓存</a></li>
+        <li><a href="#语法分析器parser">语法分析器（Parser）</a></li>
+        <li><a href="#优化器optimizer">优化器（Optimizer）</a></li>
+        <li><a href="#执行器executor">执行器（Executor）</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">
+                <img src="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover_hucf5fbd6fc7bd1d851f321fc74452d222_2106094_800x0_resize_q75_box.jpeg"
+                        srcset="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover_hucf5fbd6fc7bd1d851f321fc74452d222_2106094_800x0_resize_q75_box.jpeg 800w, /p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/cover_hucf5fbd6fc7bd1d851f321fc74452d222_2106094_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post 输入SELECT后，数据库发生了什么" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/database/" style="background-color: #2a9d8f; color: #fff;">
+                DataBase
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">输入SELECT后，数据库发生了什么</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文章基于「当我们输入一条 SQL 查询语句时，发生了什么？」这篇文章的思路，做进一步的归纳总结和留档。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 29, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="当你输入-select-后数据库发生了什么">当你输入 SELECT 后，数据库发生了什么</h1>
+<p>本文章基于<a class="link" href="https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr"  target="_blank" rel="noopener"
+    >当我们输入一条 SQL 查询语句时，发生了什么？</a>这篇文章的思路，做进一步的归纳总结和留档。部分引用原文图片与文本。</p>
+<h2 id="mysql-的基本架构">MySQL 的基本架构</h2>
+<p>首先，在我们分析输入SELECT后DBMS的操作前，我们需要对DBMS的基本架构有一个认识。以MySQL为例，MySQL是一种开源的关系型数据库管理系统（RDBMS），其基本架构由多个组件组成，各组件的作用如下。</p>
+<ul>
+<li><strong>连接器（Connection Manager）</strong>：连接器是客户端和服务器端之间的桥梁，它负责建立连接、验证用户身份、维护会话状态等工作。</li>
+<li><strong>语法分析器（Parser）</strong>：将SQL语句进行词法分析和语法分析以及语义分析，生成解析树，以确保语法正确性和安全性。</li>
+<li><strong>优化器（Optimizer）</strong>：会在语法分析器完成之后，根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。</li>
+<li><strong>执行器（Executor）</strong>：执行器会根据优化器生成的执行计划，执行具体的操作，如查询、插入、删除、更新等。</li>
+<li><strong>存储引擎（Storage Engine）</strong>：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎是MySQL中最重要的组件之一，它负责具体的数据存储和管理工作，不同的存储引擎有不同的特点和优缺点，MySQL支持多种存储引擎。</li>
+</ul>
+<p>这些组件一起协同工作，将SQL语句转化成最终的结果集。</p>
+<p><img src="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8.png"
+	width="2048"
+	height="1536"
+	srcset="/p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_480x0_resize_box_3.png 480w, /p/%E8%BE%93%E5%85%A5select%E5%90%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/dfff6efbab0d51a715a36f867daeacf8_hu38c01e0b06321ab3ac59bff33a3422d2_458187_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+<p>图片来源：<a class="link" href="https://www.infoq.cn/article/pkzt75bpcrycyj_vuwrr"  target="_blank" rel="noopener"
+    >当我们输入一条 SQL 查询语句时，发生了什么？</a></p>
+<p>如上图所示，我们可以把上述组件分成两个层面。即MySQL的架构可以分为两层：服务层和存储引擎层。</p>
+<ul>
+<li>服务层：包括连接器、查询缓存、分析器、优化器和执行器等组件，负责SQL的解析、优化和执行等工作。涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），<strong>所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。</strong></li>
+<li>存储引擎：负责数据的存储和管理，包括表的创建、索引的维护、事务的处理等。存储引擎层支持多种不同的存储引擎，每种存储引擎都有其独特的特点和优缺点。引擎层的架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎。</li>
+</ul>
+<p><strong>不同的存储引擎共用一个服务层，也就是从连接器到执行器的部分。</strong></p>
+<h2 id="查询全流程">查询全流程</h2>
+<h3 id="连接器connection-manager">连接器（Connection Manager）</h3>
+<p>当我们尝试登陆连接到MySQL上时，首先接收客户端的处理连接请求的就是连接器。连接器会根据客户端发来的请求，验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -h <span class="nv">$ip</span> -P <span class="nv">$port</span> -u <span class="nv">$user</span> -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果用户名或密码不对，你将会收到一个&quot;Access denied for user&quot;的错误，然后客户端程序结束执行。</li>
+<li>如果用户名密码认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。</li>
+</ul>
+<blockquote>
+<p>这就意味着，一个用户成功建立连接后，即使你用管理员账号对这个用户的权限做了修改，也不会影响已经存在连接的权限。修改完成后，只有再新建的连接才会使用新的权限设置。</p>
+</blockquote>
+<h3 id="查询缓存">查询缓存</h3>
+<p>MySQL连接器会首先检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。</p>
+<p>但是，查询缓存并不总是适用的，因为如果表中的任何数据一旦发生变化，缓存的结果就会失效，这时就需要重新执行查询语句，这可能会导致查询缓存带来的性能提升被抵消掉，对于更新压力大的数据库来说，查询缓存的命中率会非常低。</p>
+<p>MySQL也提供了这种“按需使用”的方式。你可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于你确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定，像下面这个语句一样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">SQL_CACHE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">10</span><span class="err">；</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>MySQL 8.0 版本直接将查询缓存的整块功能删掉了，也就是说 8.0 开始彻底没有这个功能了。</p>
+</blockquote>
+<h3 id="语法分析器parser">语法分析器（Parser）</h3>
+<p>如果没有命中查询缓存，就要开始真正执行语句了。</p>
+<p>语法分析器会对SELECT语句进行词法分析和语法分析，生成解析树。词法分析器会将SELECT语句中的字符序列转换成一个个的单词，然后生成一个个的记号。语法分析器会根据记号序列生成解析树，同时会验证SELECT语句的语法正确性和安全性。</p>
+<h3 id="优化器optimizer">优化器（Optimizer）</h3>
+<p>经过了分析器，MySQL 就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。</p>
+<p>优化器会根据表的元数据和SQL语句的解析树，生成不同的执行计划，并选择成本最小的执行计划。优化器的主要作用是优化查询语句的执行效率，从而提高数据库的性能。为了实现这个目标，优化器会采用多种技术，如索引选择、查询重写、表连接优化等，从而生成最优的执行计划。通过优化器的优化，可以大大提高查询效率，减少数据库的响应时间，提升系统的整体性能。</p>
+<p>需要注意的是，优化器并不总是能够生成最优的执行计划，因为查询语句的执行效率受到多种因素的影响，如查询语句的复杂度、表的大小、索引的选择等。因此，在实际应用中，需要根据具体情况对优化器的性能进行评估，选择合适的优化策略，从而达到最佳的查询性能。</p>
+<p>比如你执行下面这样的语句，这个语句是执行两个表的 join：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">using</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">c</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="n">d</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>既可以先从表 t1 里面取出 c=10 的记录的 ID 值，再根据 ID 值关联到表 t2，再判断 t2 里面 d 的值是否等于 20。</li>
+<li>也可以先从表 t2 里面取出 d=20 的记录的 ID 值，再根据 ID 值关联到 t1，再判断 t1 里面 c 的值是否等于 10。</li>
+</ul>
+<p>这两种执行方法的逻辑结果是一样的，但是执行的效率会有不同，而优化器的作用就是决定选择使用哪一个方案。</p>
+<h3 id="执行器executor">执行器（Executor）</h3>
+<p>MySQL 通过分析器知道了你要做什么，通过优化器知道了该怎么做，于是就进入了执行器阶段，开始执行语句。开始执行的时候，要先判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ERROR</span><span class="w"> </span><span class="mi">1142</span><span class="w"> </span><span class="p">(</span><span class="mi">42000</span><span class="p">):</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">denied</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="s1">&#39;T&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在执行查询操作时，执行器会在存储引擎返回的行数据中进行过滤和排序等操作，然后将结果返回给客户端。在执行插入、删除和更新操作时，执行器会调用存储引擎提供的接口，将操作请求转换成具体存储引擎可以理解的操作，然后存储引擎会执行对应的操作并返回操作结果给执行器。执行器再将操作结果返回给连接器，连接器将结果返回给客户端。</p>
+<p>执行器和存储引擎是相互依赖的关系，执行器负责处理客户端请求并调用存储引擎提供的接口，存储引擎负责具体的数据存储和管理工作。</p>
+<h2 id="总结">总结</h2>
+<p>输入SELECT语句后，MySQL会进行以下步骤完成查询：</p>
+<ol>
+<li>连接器：验证客户端的身份信息，包括用户名和密码。如果验证通过，连接器会为客户端分配一个线程，用于处理客户端的请求。</li>
+<li>查询缓存：检查查询缓存，看看之前是否已经执行过相同的SELECT语句，并且缓存结果。如果有缓存结果，连接器会直接返回缓存结果给客户端，不需要再执行查询语句。</li>
+<li>语法分析器：对SELECT语句进行词法分析和语法分析，生成解析树。</li>
+<li>优化器：根据解析树和表的元数据，生成不同的执行计划，并选择成本最小的执行计划。</li>
+<li>执行器：执行SQL语句的具体操作，如查询、插入、删除、更新等。执行器会调用存储引擎提供的接口，将查询请求转换成具体存储引擎可以理解的操作，然后存储引擎会返回操作结果给执行器。</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/mysql/">MySQL</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 荼锦
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Regular.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Light.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts@v1.101/dist/LXGWWenKai-Bold.css" />
+
+
+    </body>
+</html>
